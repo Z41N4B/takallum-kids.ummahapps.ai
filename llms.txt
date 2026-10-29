@@ -1,0 +1,36 @@
+# Takallum Kids (تَكَلُّم)
+
+> Takallum Kids is a free web app that helps children aged about 4 to 11 speak Modern Standard Arabic (fusha). Each unit teaches a handful of words with a picture and audio, then the child says short sentences of two to four words built only from words already learned. No sign-up; progress is saved in the browser.
+
+URL: https://takallum-kids.ummahapps.ai/
+Publisher: Ummah Apps (https://ummahapps.ai/)
+Price: free, no adverts
+Age: about 4 to 11; made for children who can read Arabic letters with vowel marks, using it on their own
+Interface language: English. Practice language: Modern Standard Arabic, fully vowelled.
+Sister app for older learners: Takallum (https://takallum.ummahapps.ai/)
+
+## How it works
+
+1. **Meet the words**: each word card shows a picture, the vowelled Arabic and the English, and plays the audio.
+2. **Say the words**: the child sees the picture, says the Arabic out loud, taps "Show me" to see and hear it, then taps "I said it!" or "Try again". Try-again words come back a little later in the same round.
+3. **Say the sentences**: opens once every word in the unit is learned. Sentences use only words from that unit or earlier ones.
+4. **Practise again**: a mix of up to 8 known words and sentences, weakest and least recently seen first.
+
+Each unit opens once the words in the one before are learned. The child chooses "I'm a boy" or "I'm a girl" at the start; sentences about themselves and the praise (أَحْسَنْتَ / أَحْسَنْتِ) change to match.
+
+## Units (47 words, 42 sentences)
+
+1. My family (عَائِلَتِي): هَذَا، هَذِهِ، أُمِّي، أَبِي، أَخِي، أُخْتِي. Sentences like هَذِهِ أُمِّي (This is my mum).
+2. Hello (التَّحِيَّةُ): السَّلَامُ عَلَيْكُمْ، وَعَلَيْكُمُ السَّلَامُ، أَنَا، وَلَدٌ، بِنْتٌ، يَا، شُكْرًا. Sentences like شُكْرًا يَا أَبِي (Thank you, Dad).
+3. Food (الطَّعَامُ): أُحِبُّ، أُرِيدُ، تُفَّاحَةٌ، مَوْزَةٌ، خُبْزٌ، حَلِيبٌ، مَاءٌ، جَائِعٌ. Sentences like أُرِيدُ مَاءً (I want water) and أَنَا جَائِعٌ / أَنَا جَائِعَةٌ (I am hungry).
+4. Animals (الْحَيَوَانَاتُ): قِطٌّ، كَلْبٌ، فِيلٌ، سَمَكَةٌ، طَائِرٌ، كَبِيرٌ، صَغِيرٌ. Sentences like هَذِهِ سَمَكَةٌ صَغِيرَةٌ (This is a small fish).
+5. Colours (الْأَلْوَانُ): أَحْمَرُ، أَصْفَرُ، أَخْضَرُ، أَزْرَقُ، أَبْيَضُ، أَسْوَدُ, with their feminine forms. Sentences like الْمَوْزَةُ صَفْرَاءُ (The banana is yellow).
+6. At home (الْبَيْتُ): بَيْتٌ، أَيْنَ، فِي، هُنَا، كُرَةٌ، كِتَابٌ، سَرِيرٌ. Sentences like أَيْنَ الْكُرَةُ؟ (Where is the ball?).
+7. Every day (كُلَّ يَوْمٍ): آكُلُ، أَشْرَبُ، أَلْعَبُ، أَنَامُ، أَقْرَأُ، مَعَ. Sentences like أَلْعَبُ مَعَ أَخِي (I play with my brother).
+
+## Features
+
+- A picture (emoji) for every word and sentence
+- Normal and slow audio using the device's Arabic text-to-speech voice, with step-by-step help for adding one
+- Short tips for older children, e.g. why هَذِهِ goes with words ending in ة
+- Works on phones and desktops; light and dark themes; the phone's back button steps back out of a round
