@@ -91,7 +91,8 @@
         "Full vowel marks (harakat) on every word",
         "Boy and girl forms, chosen at the start",
         "Happy and try-again buttons; words that need practice come back sooner",
-        "Units open one by one as the words are learned"
+        "Units open one by one as the words are learned",
+        "Several children on one device, each with their own name, animal and progress"
       ],
       "publisher": {"@id": "https://ummahapps.ai/#org"},
       "isPartOf": {"@id": "https://takallum-kids.ummahapps.ai/#website"}
@@ -109,7 +110,9 @@
         {"@type": "Question", "name": "Which kind of Arabic does Takallum Kids teach?",
          "acceptedAnswer": {"@type": "Answer", "text": "Modern Standard Arabic (fusha), the Arabic of books and school that is understood across the Arab world. Every word is fully vowelled."}},
         {"@type": "Question", "name": "Does it have boy and girl forms?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Yes. The child chooses I am a boy or I am a girl at the start. Sentences about themselves change, for example أَنَا جَائِعٌ for a boy and أَنَا جَائِعَةٌ for a girl, and so do the praise and instructions."}},
+         "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each child picks I am a boy or I am a girl when they add themselves. Sentences about themselves change, for example أَنَا جَائِعٌ for a boy and أَنَا جَائِعَةٌ for a girl, and so do the praise and instructions."}},
+        {"@type": "Question", "name": "Can several children use Takallum Kids on the same device?",
+         "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child. Progress stays in the browser on that device."}},
         {"@type": "Question", "name": "Why is there no sound?",
          "acceptedAnswer": {"@type": "Answer", "text": "The app uses the device's own Arabic text-to-speech voice. Many phones, especially Samsung, have none by default. The home screen has step-by-step instructions for adding one on iPhone, Android, Windows, Mac and Chromebook."}}
       ]
@@ -174,6 +177,30 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .who-btns .emo{font-size:3.2rem}
 .who-btns .ar{font-size:1.7rem;line-height:1.6}
 .who-btns small{color:var(--muted);font-size:.9rem}
+.who-btns button[aria-pressed="true"]{border-color:var(--lapis);background:var(--surface);box-shadow:0 0 0 2px var(--lapis)}
+.who-btns button[aria-pressed="false"]{opacity:.75}
+.field{display:block;text-align:left;margin:4px 0 14px}
+.field span{display:block;font-weight:600;font-size:.95rem;margin:0 0 4px}
+.field input{width:100%;font:inherit;font-size:1.2rem;padding:12px 14px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--lapis)}
+.avatars{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.avatars button{font-size:1.8rem;aspect-ratio:1;border-radius:14px;border:2px solid transparent;background:var(--sunk);padding:0}
+.avatars button[aria-pressed="true"]{border-color:var(--lapis);background:var(--lapis-soft)}
+
+/* children */
+.me{display:inline-flex;align-items:center;gap:6px;max-width:44%;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 6px;min-height:46px;font-weight:600}
+.me .emo{font-size:1.6rem}
+.me .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who-h{text-align:center;font-size:1.4rem;margin:4px 0 14px}
+.kid-list{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:10px}
+.kid-list li{display:flex;gap:8px}
+.kid-pick{flex:1;min-width:0;display:grid;grid-template-columns:auto 1fr;gap:0 12px;align-items:center;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:12px 14px}
+.kid-pick .emo{grid-row:1 / span 2;font-size:2.6rem}
+.kid-pick .nm{font-weight:700;font-size:1.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kid-pick small{color:var(--muted);font-size:.88rem}
+.kid-pick[aria-pressed="true"]{border-color:var(--lapis);background:var(--lapis-soft)}
+.kid-edit{flex:none;width:56px;border-radius:20px;border:2px solid var(--line);background:var(--surface);font-size:1.3rem}
+.btn.del{color:var(--miss);border-color:var(--miss);font-size:1rem;min-height:52px}
 
 /* unit tiles */
 .units{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
@@ -280,6 +307,7 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .seg button{border:0;background:none;padding:8px 14px;border-radius:9px;font-weight:600;font-size:.92rem;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(10,20,40,.12)}
 .reset{background:none;border:1px solid var(--miss);color:var(--miss);border-radius:10px;padding:7px 12px;font-weight:600;font-size:.88rem;flex:none}
+.reset.plain{border-color:var(--lapis);color:var(--lapis)}
 
 /* about */
 .about{padding-top:0;color:var(--muted);font-size:.92rem;line-height:1.6}
@@ -320,9 +348,9 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
   <details><summary>Is it free?</summary><p>Yes. It is free, has no adverts and needs no sign-up. Progress is saved in this browser on this device.</p></details>
   <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
   <details><summary>Which kind of Arabic does it teach?</summary><p>Modern Standard Arabic (fusha), the Arabic of books and school, understood across the Arab world. Every word is fully vowelled.</p></details>
-  <details><summary>Does it have boy and girl forms?</summary><p>Yes. Your child picks <strong>I’m a boy</strong> or <strong>I’m a girl</strong> at the start, and can change it in settings. Sentences about themselves change, like <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعٌ</bdi> and <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعَةٌ</bdi> (I am hungry), and so does the praise: <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتَ</bdi> or <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتِ</bdi>.</p></details>
+  <details><summary>Does it have boy and girl forms?</summary><p>Yes. Each child picks <strong>I’m a boy</strong> or <strong>I’m a girl</strong> when they add themselves, and you can change it by tapping their name at the top. Sentences about themselves change, like <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعٌ</bdi> and <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعَةٌ</bdi> (I am hungry), and so does the praise: <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتَ</bdi> or <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتِ</bdi>.</p></details>
   <details><summary>Why is there no sound?</summary><p>The app speaks with your device’s own Arabic text-to-speech voice, and many phones, especially Samsung, don’t have one until you add it. Tap <strong>No sound? How to add an Arabic voice</strong> on the home screen for steps for your device.</p></details>
-  <details><summary>Can two children share a device?</summary><p>Progress is kept per browser, so each child does best with their own device or browser. To start over, open settings and choose <strong>Start again</strong>.</p></details>
+  <details><summary>Can several children use the same device?</summary><p>Yes. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child or add another. Progress stays in this browser on this device; nothing is sent anywhere. To start one child over, open settings and choose <strong>Start again</strong>.</p></details>
   <p class="credit">Takallum Kids is part of <a href="https://ummahapps.ai/">Ummah Apps</a>. For older learners, try <a href="https://takallum.ummahapps.ai/">Takallum</a>.</p>
 </footer>
 
@@ -459,15 +487,40 @@ const UNITS = [
 ];
 
 /* ---------- state + storage ---------- */
-/* progress.items[id] = {b: level 0–5, l: learned (got it at least once), t: last seen} */
+/* Each child on the device has a profile {id, name, kid: "boy"|"girl", avatar} and their own progress.
+   progress.items[id] = {b: level 0–5, l: learned (got it at least once), t: last seen} */
 let progress = {items:{}};
-let settings = {kid:null, autoplay:true, voiceHelp:true};
-const S = {unit:null, session:null, sheet:false, vgOpen:false};
+let settings = {autoplay:true, voiceHelp:true};
+let profiles = {active:null, list:[]};
+const S = {unit:null, session:null, sheet:false, vgOpen:false, view:null, edit:null};
+const AVATARS = ["🦁","🐱","🐼","🐸","🦊","🐰","🐵","🐧","🐢","🦄","🐝","🐬"];
 
-try { const p = JSON.parse(localStorage.getItem("takallum-kids-progress") || "null"); if (p && p.items) progress = p; } catch(e){}
-try { const s = JSON.parse(localStorage.getItem("takallum-kids-settings") || "null"); if (s) settings = Object.assign(settings, s); } catch(e){}
-function saveProgress(){ try { localStorage.setItem("takallum-kids-progress", JSON.stringify(progress)); } catch(e){} }
-function saveSettings(){ try { localStorage.setItem("takallum-kids-settings", JSON.stringify(settings)); } catch(e){} }
+function load(k){ try { return JSON.parse(localStorage.getItem(k) || "null"); } catch(e){ return null; } }
+function store(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+const progKey = id => "takallum-kids-progress-" + id;
+function loadProgress(id){ const p = load(progKey(id)); return p && p.items ? p : {items:{}}; }
+function saveProgress(){ if (profiles.active) store(progKey(profiles.active), progress); }
+function saveSettings(){ store("takallum-kids-settings", settings); }
+function saveProfiles(){ store("takallum-kids-profiles", profiles); }
+const me = () => profiles.list.find(p => p.id === profiles.active) || null;
+const newId = () => "p" + Date.now().toString(36) + Math.floor(Math.random() * 1296).toString(36);
+
+{ const s = load("takallum-kids-settings"); if (s) settings = Object.assign(settings, s); }
+{ const p = load("takallum-kids-profiles"); if (p && Array.isArray(p.list)) profiles = p; }
+/* Move progress saved before profiles existed into a first profile. */
+if (!profiles.list.length){
+  const old = load("takallum-kids-progress");
+  if ((old && old.items && Object.keys(old.items).length) || settings.kid){
+    const p = {id:newId(), name:"Learner 1", kid:settings.kid || "boy", avatar:"🦁"};
+    profiles = {active:p.id, list:[p]};
+    store(progKey(p.id), old && old.items ? old : {items:{}});
+    saveProfiles();
+  }
+  try { localStorage.removeItem("takallum-kids-progress"); } catch(e){}
+}
+delete settings.kid;
+if (!me() && profiles.list.length) profiles.active = profiles.list[0].id;
+if (profiles.active) progress = loadProgress(profiles.active);
 
 /* ---------- speech ---------- */
 let arVoice = null, voiceState = "unknown";
@@ -502,7 +555,7 @@ function hush(){ if ("speechSynthesis" in window) speechSynthesis.cancel(); }
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function noteHTML(s){ return esc(s).replace(/\[\[(.+?)\]\]/g, '<bdi class="ari" dir="rtl" lang="ar">$1</bdi>'); }
 function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-const girl = () => settings.kid === "girl";
+const girl = () => { const p = me(); return !!p && p.kid === "girl"; };
 /* Pick the girl's version of a word or sentence when there is one. */
 function gv(o){
   if (!girl()) return o;
@@ -582,17 +635,13 @@ function voiceGuideHTML(){
 
 /* ---------- home ---------- */
 function headerHTML(){
+  const p = me();
   return '<header class="top"><h1 class="mark" lang="ar">تَكَلُّم</h1><span class="kids">Kids</span><span class="sp"></span>' +
+         (p ? '<button class="me" data-act="who" aria-label="Who is learning: ' + esc(p.name) + '. Change"><span class="emo" aria-hidden="true">' + p.avatar + '</span><span class="nm">' + esc(p.name) + '</span></button>' : "") +
          '<button class="icon-btn" data-act="settings" aria-label="Settings">' + ICON_GEAR + '</button></header>';
-}
-function whoHTML(){
-  return '<section class="who"><h2>Hello! Who is learning?</h2><p>Some Arabic words change for a boy or a girl.</p><div class="who-btns">' +
-    '<button data-act="kid" data-v="boy"><span class="emo" aria-hidden="true">🧒</span><span class="ar" lang="ar">أَنَا وَلَدٌ</span><small>I’m a boy</small></button>' +
-    '<button data-act="kid" data-v="girl"><span class="emo" aria-hidden="true">👧🏽</span><span class="ar" lang="ar">أَنَا بِنْتٌ</span><small>I’m a girl</small></button></div></section>';
 }
 function renderHome(){
   let h = headerHTML();
-  if (!settings.kid) return h + whoHTML() + voiceGuideHTML();
   h += voiceGuideHTML() + '<ul class="units">';
   const known = learnedItems().length;
   if (known >= 3) h += '<li><button class="unit review" data-act="review"><span class="emo" aria-hidden="true">⭐</span><span class="t">Practise again</span>' +
@@ -608,6 +657,63 @@ function renderHome(){
   });
   h += '</ul><p class="sync">Progress saves on this device.</p>';
   return h;
+}
+
+/* ---------- children ---------- */
+function renderWho(){
+  let h = '<div class="bar"><button class="link" data-act="back">‹ Back</button></div><h2 class="who-h">Who is learning?</h2><ul class="kid-list">';
+  profiles.list.forEach(p => {
+    const pr = loadProgress(p.id), n = id => pr.items[id] && pr.items[id].l;
+    const w = Object.keys(WORDS).filter(n).length, s = ALL.filter(x => x.kind === "sent" && n(x.id)).length;
+    h += '<li><button class="kid-pick" data-act="pick" data-v="' + p.id + '" aria-pressed="' + (p.id === profiles.active) + '">' +
+      '<span class="emo" aria-hidden="true">' + p.avatar + '</span><span class="nm">' + esc(p.name) + '</span>' +
+      '<small>' + w + ' words · ' + s + ' sentences</small></button>' +
+      '<button class="kid-edit" data-act="editkid" data-v="' + p.id + '" aria-label="Change ' + esc(p.name) + '"><span class="emo" aria-hidden="true">✏️</span></button></li>';
+  });
+  return h + '</ul><div class="actions"><button class="btn ghost" data-act="addkid">➕ Add a child</button></div>' +
+    '<p class="sync">Each child keeps their own progress on this device.</p>';
+}
+function renderEdit(){
+  const e = S.edit, first = !profiles.list.length, isNew = !e.id;
+  let h = first ? headerHTML() : '<div class="bar"><button class="link" data-act="cancelkid">‹ Back</button></div>';
+  h += '<section class="who"><h2>' + (first ? "Hello! Who is learning?" : isNew ? "Add a child" : "Change " + esc(e.orig)) + '</h2>' +
+    '<label class="field"><span>Name</span><input data-field="name" maxlength="20" autocomplete="off" value="' + esc(e.name) + '" placeholder="Your name"></label>' +
+    '<p>Some Arabic words change for a boy or a girl.</p><div class="who-btns" role="group" aria-label="Boy or girl">' +
+    '<button data-act="kid" data-v="boy" aria-pressed="' + (e.kid === "boy") + '"><span class="emo" aria-hidden="true">🧒</span><span class="ar" lang="ar">أَنَا وَلَدٌ</span><small>I’m a boy</small></button>' +
+    '<button data-act="kid" data-v="girl" aria-pressed="' + (e.kid === "girl") + '"><span class="emo" aria-hidden="true">👧🏽</span><span class="ar" lang="ar">أَنَا بِنْتٌ</span><small>I’m a girl</small></button></div>' +
+    '<p style="margin-top:14px">Pick your animal:</p><div class="avatars" role="group" aria-label="Animal">' +
+    AVATARS.map(a => '<button class="emo" data-act="avatar" data-v="' + a + '" aria-pressed="' + (e.avatar === a) + '">' + a + '</button>').join("") + '</div></section>' +
+    '<div class="actions"><button class="btn primary" data-act="savekid"' + (e.kid ? "" : " disabled") + '>' + (isNew ? "Let’s go! 🚀" : "Save") + '</button>' +
+    (!isNew ? '<button class="btn ghost del" data-act="delkid">Remove ' + esc(e.orig) + '</button>' : "") + '</div>';
+  return h + (first ? voiceGuideHTML() : "");
+}
+function editState(id){
+  const p = profiles.list.find(x => x.id === id);
+  return p ? {id:p.id, orig:p.name, name:p.name, kid:p.kid, avatar:p.avatar}
+           : {id:null, name:"", kid:null, avatar:AVATARS.find(a => !profiles.list.some(x => x.avatar === a)) || AVATARS[0]};
+}
+function editKid(id){ S.edit = editState(id); S.view = "edit"; render(); window.scrollTo(0, 0); }
+function switchTo(id){
+  profiles.active = id; saveProfiles(); progress = loadProgress(id);
+}
+function saveKid(){
+  const e = S.edit; if (!e || !e.kid) return;
+  const name = e.name.trim().slice(0, 20) || "Learner " + (profiles.list.length + (e.id ? 0 : 1));
+  if (e.id) Object.assign(profiles.list.find(x => x.id === e.id), {name, kid:e.kid, avatar:e.avatar});
+  else { const p = {id:newId(), name, kid:e.kid, avatar:e.avatar}; profiles.list.push(p); store(progKey(p.id), {items:{}}); switchTo(p.id); }
+  saveProfiles(); S.edit = null;
+  if (S.view === "edit" && history.state && history.state.tk) goBack();
+  else { S.view = null; render(); }
+}
+function deleteKid(){
+  const e = S.edit; if (!e || !e.id) return;
+  if (!confirm("Remove " + e.orig + " and all their progress on this device?")) return;
+  profiles.list = profiles.list.filter(x => x.id !== e.id);
+  try { localStorage.removeItem(progKey(e.id)); } catch(err){}
+  if (profiles.active === e.id){ profiles.active = null; progress = {items:{}}; if (profiles.list.length) switchTo(profiles.list[0].id); }
+  saveProfiles(); S.edit = null;
+  if (!profiles.list.length){ S.view = null; try { history.replaceState(null, ""); } catch(err){} render(); }
+  else { S.view = "who"; render(); }
 }
 
 /* ---------- unit screen ---------- */
@@ -700,13 +806,12 @@ function confetti(){
 
 function settingsHTML(){
   const opt = (k, t, sub) => '<label class="opt"><span>' + t + '<small>' + sub + '</small></span><input type="checkbox" data-set="' + k + '"' + (settings[k] ? " checked" : "") + '></label>';
-  const kid = settings.kid || "boy";
+  const p = me(), name = p ? esc(p.name) : "this child";
   return '<div class="sheet-bg" data-act="close"><div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">' +
     '<h2>Settings</h2><p class="for">For grown-ups.</p>' + voiceNotice() +
-    '<div class="opt"><span>Who is learning?<small>Changes sentences like “I am hungry” and the praise.</small></span>' +
-    '<div class="seg" role="group" aria-label="Who is learning"><button data-act="kid" data-v="boy" aria-pressed="' + (kid === "boy") + '">A boy</button><button data-act="kid" data-v="girl" aria-pressed="' + (kid === "girl") + '">A girl</button></div></div>' +
+    '<div class="opt"><span>Children<small>Add a child, or change a name, boy or girl, or animal. Each child has their own progress.</small></span><button class="reset plain" data-act="who">Manage</button></div>' +
     opt("autoplay", "Play on reveal", "Speak the Arabic automatically when a word or sentence is shown.") +
-    '<div class="opt"><span>Start again<small>Clears this device’s progress, so all units lock again.</small></span><button class="reset" data-act="reset">Start again</button></div>' +
+    (p ? '<div class="opt"><span>Start again<small>Clears ' + name + '’s progress, so all units lock again.</small></span><button class="reset" data-act="reset">Start again</button></div>' : "") +
     '<div class="actions" style="margin-top:14px"><button class="btn primary" data-act="close">Done</button></div></div></div>';
 }
 
@@ -716,19 +821,23 @@ const about = document.getElementById("about");
 function render(){
   const s = S.session;
   let h;
-  if (!s) h = S.unit ? renderUnit(S.unit) : renderHome();
+  if (!profiles.list.length){ if (!S.edit) S.edit = editState(null); S.view = "edit"; h = renderEdit(); }
+  else if (S.view === "edit") h = renderEdit();
+  else if (S.view === "who") h = renderWho();
+  else if (!s) h = S.unit ? renderUnit(S.unit) : renderHome();
   else if (s.done) h = renderDone(s);
   else if (s.type === "learn") h = renderLearn(s);
   else h = renderSay(s);
   app.innerHTML = h + (S.sheet ? settingsHTML() : "");
-  about.hidden = !!(s || S.unit);
+  about.hidden = !!(s || S.unit || (S.view && profiles.list.length));
 }
 
 /* ---------- navigation ---------- */
-/* Each screen deeper than home pushes a history entry, so the phone's back button steps back out. */
-const depth = () => (S.unit ? 1 : 0) + (S.session ? 1 : 0);
+/* Each screen deeper than home pushes a history entry, so the phone's back button steps back out.
+   The children screens (picker, add, change) count as one level. */
+const depth = () => (S.view ? 1 : 0) + (S.unit ? 1 : 0) + (S.session ? 1 : 0);
 function enter(fn){ try { history.pushState({tk:depth() + 1}, ""); } catch(e){} fn(); }
-function popOne(){ hush(); if (S.session) S.session = null; else S.unit = null; }
+function popOne(){ hush(); if (S.view){ S.view = null; S.edit = null; } else if (S.session) S.session = null; else S.unit = null; }
 function goBack(){
   if (history.state && history.state.tk) history.back();
   else { popOne(); render(); window.scrollTo(0, 0); }
@@ -776,7 +885,20 @@ document.addEventListener("click", e => {
   const act = el.dataset.act, v = el.dataset.v;
   if (act === "close"){ if (e.target === el || el.tagName === "BUTTON"){ S.sheet = false; render(); } return; }
   switch (act){
-    case "kid": settings.kid = v; saveSettings(); render(); { const b = document.querySelector('.sheet [data-act="kid"][data-v="' + v + '"]'); if (b) b.focus(); } break;
+    case "kid": case "avatar":
+      if (!S.edit) break;
+      S.edit[act] = v; render(); { const b = document.querySelector('[data-act="' + act + '"][data-v="' + v + '"]'); if (b) b.focus(); } break;
+    case "who":
+      S.sheet = false;
+      if (S.session || S.unit){ hush(); S.session = null; S.unit = null; try { history.replaceState(null, ""); } catch(err){} }
+      enter(() => { S.view = "who"; render(); window.scrollTo(0, 0); });
+      break;
+    case "pick": switchTo(v); goBack(); break;
+    case "editkid": editKid(v); break;
+    case "addkid": editKid(null); break;
+    case "cancelkid": S.edit = null; S.view = "who"; render(); break;
+    case "savekid": saveKid(); break;
+    case "delkid": deleteKid(); break;
     case "unit": {
       const i = UNITS.findIndex(u => u.id === v);
       if (!unitOpen(i)) break;
@@ -798,7 +920,7 @@ document.addEventListener("click", e => {
     case "back": goBack(); break;
     case "settings": S.sheet = true; render(); break;
     case "reset":
-      if (confirm("Clear all progress on this device and start again?")){ progress = {items:{}}; saveProgress(); S.sheet = false; S.session = null; S.unit = null; try { history.replaceState(null, ""); } catch(err){} render(); }
+      if (confirm("Clear " + (me() ? me().name + "’s" : "all") + " progress and start again?")){ progress = {items:{}}; saveProgress(); S.sheet = false; S.session = null; S.unit = null; try { history.replaceState(null, ""); } catch(err){} render(); }
       break;
     case "vgdev": vgDev = v; render(); { const b = document.querySelector('[data-act="vgdev"][data-v="' + v + '"]'); if (b) b.focus(); } break;
     case "vgtest": speak("السَّلَامُ عَلَيْكُمْ"); break;
@@ -806,6 +928,10 @@ document.addEventListener("click", e => {
     case "vghide": S.vgOpen = false; settings.voiceHelp = false; saveSettings(); render(); { const b = document.querySelector(".vg-show"); if (b) b.focus(); } break;
   }
 });
+document.addEventListener("input", e => {
+  if (e.target.dataset && e.target.dataset.field === "name" && S.edit) S.edit.name = e.target.value;
+});
+document.addEventListener("submit", e => e.preventDefault());
 document.addEventListener("change", e => {
   const k = e.target.dataset && e.target.dataset.set;
   if (!k) return;
@@ -813,6 +939,7 @@ document.addEventListener("change", e => {
 });
 document.addEventListener("keydown", e => {
   if (S.sheet){ if (e.key === "Escape"){ S.sheet = false; render(); } return; }
+  if (S.view === "edit" && e.key === "Enter" && e.target.dataset && e.target.dataset.field){ e.preventDefault(); saveKid(); return; }
   const s = S.session; if (!s || s.done) return;
   if (e.target.closest && e.target.closest("button") && (e.key === " " || e.key === "Enter")) return;
   if (s.type === "learn"){
