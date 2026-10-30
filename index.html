@@ -206,6 +206,7 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .units{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .unit{width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:2px 14px;align-items:center}
 .unit .emo{grid-row:1 / span 3;font-size:2.8rem;width:3.4rem;text-align:center}
+.unit .emo.two{font-size:1.65rem;letter-spacing:-.05em}
 .unit .ar{font-size:1.6rem;line-height:1.5;text-align:left}
 .unit .t{font-weight:600;font-size:1.02rem}
 .unit .s{color:var(--muted);font-size:.88rem}
@@ -359,18 +360,18 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 /* Each unit: words first, then sentences that use only words from this unit or earlier ones (listed in `w`).
    Words and sentences can carry an `f` override used when the child is a girl. `her` is the form used with “her” words. */
 const UNITS = [
-  {id:"family", emoji:"👨‍👩‍👧‍👦", en:"My family", ar:"عَائِلَتِي",
+  {id:"family", emoji:"🧔🧕", en:"My family", ar:"عَائِلَتِي",
    words:[
     {id:"hadha", pic:"👉🧒", en:"this (for him)", ar:"هَذَا", tip:"Use [[هَذَا]] for a boy, a man or a “him” word."},
     {id:"hadhihi", pic:"👉👧", en:"this (for her)", ar:"هَذِهِ", tip:"Use [[هَذِهِ]] for a girl, a woman or a “her” word. Lots of “her” words end in [[ة]]."},
-    {id:"ummi", pic:"👩", en:"my mum", ar:"أُمِّي"},
-    {id:"abi", pic:"👨", en:"my dad", ar:"أَبِي"},
+    {id:"ummi", pic:"🧕", en:"my mum", ar:"أُمِّي"},
+    {id:"abi", pic:"🧔", en:"my dad", ar:"أَبِي"},
     {id:"akhi", pic:"👦", en:"my brother", ar:"أَخِي"},
     {id:"ukhti", pic:"👧", en:"my sister", ar:"أُخْتِي", tip:"The [[ي]] at the end means “my”: [[أُخْتِي]] is “my sister”."}
    ],
    sents:[
-    {id:"fa1", pic:"👉👩", en:"This is my mum.", ar:"هَذِهِ أُمِّي.", w:["hadhihi","ummi"], tip:"Mum is a “her” word, so we say [[هَذِهِ]]."},
-    {id:"fa2", pic:"👉👨", en:"This is my dad.", ar:"هَذَا أَبِي.", w:["hadha","abi"], tip:"No word for “is”: Arabic just says “this my dad”."},
+    {id:"fa1", pic:"👉🧕", en:"This is my mum.", ar:"هَذِهِ أُمِّي.", w:["hadhihi","ummi"], tip:"Mum is a “her” word, so we say [[هَذِهِ]]."},
+    {id:"fa2", pic:"👉🧔", en:"This is my dad.", ar:"هَذَا أَبِي.", w:["hadha","abi"], tip:"No word for “is”: Arabic just says “this my dad”."},
     {id:"fa3", pic:"👉👦", en:"This is my brother.", ar:"هَذَا أَخِي.", w:["hadha","akhi"]},
     {id:"fa4", pic:"👉👧", en:"This is my sister.", ar:"هَذِهِ أُخْتِي.", w:["hadhihi","ukhti"]}
    ]},
@@ -385,9 +386,9 @@ const UNITS = [
     {id:"shukran", pic:"🙏", en:"thank you", ar:"شُكْرًا"}
    ],
    sents:[
-    {id:"he1", pic:"👋👩", en:"Hello, Mum!", ar:"السَّلَامُ عَلَيْكُمْ يَا أُمِّي.", w:["salam","ya","ummi"]},
+    {id:"he1", pic:"👋🧕", en:"Hello, Mum!", ar:"السَّلَامُ عَلَيْكُمْ يَا أُمِّي.", w:["salam","ya","ummi"]},
     {id:"he2", pic:"😊💬👦", en:"Hello back, brother!", ar:"وَعَلَيْكُمُ السَّلَامُ يَا أَخِي.", w:["wsalam","ya","akhi"]},
-    {id:"he3", pic:"🙏👨", en:"Thank you, Dad!", ar:"شُكْرًا يَا أَبِي.", w:["shukran","ya","abi"]},
+    {id:"he3", pic:"🙏🧔", en:"Thank you, Dad!", ar:"شُكْرًا يَا أَبِي.", w:["shukran","ya","abi"]},
     {id:"he4", pic:"🙋🧒", en:"I am a boy.", ar:"أَنَا وَلَدٌ.", w:["ana","walad"],
      f:{pic:"🙋👧🏽", en:"I am a girl.", ar:"أَنَا بِنْتٌ.", w:["ana","bint"]}, tip:"No word for “am”: Arabic just says “I a boy”.", ftip:"No word for “am”: Arabic just says “I a girl”."},
     {id:"he5", pic:"👉🧒", en:"This is a boy.", ar:"هَذَا وَلَدٌ.", w:["hadha","walad"]},
@@ -411,8 +412,8 @@ const UNITS = [
     {id:"fo4", pic:"❤️🍞", en:"I love bread.", ar:"أُحِبُّ الْخُبْزَ.", w:["uhibbu","khubz"]},
     {id:"fo5", pic:"👉🍌", en:"This is a banana.", ar:"هَذِهِ مَوْزَةٌ.", w:["hadhihi","mawza"], tip:"[[مَوْزَةٌ]] ends in [[ة]], so it’s a “her” word: [[هَذِهِ]]."},
     {id:"fo6", pic:"🙋😋", en:"I am hungry.", ar:"أَنَا جَائِعٌ.", w:["ana","jaai"], f:{ar:"أَنَا جَائِعَةٌ."}, tip:"A girl says [[أَنَا جَائِعَةٌ]]."},
-    {id:"fo7", pic:"🤲🍞👩", en:"I want bread, Mum.", ar:"أُرِيدُ خُبْزًا يَا أُمِّي.", w:["uridu","khubz","ya","ummi"]},
-    {id:"fo8", pic:"❤️👩", en:"I love my mum.", ar:"أُحِبُّ أُمِّي.", w:["uhibbu","ummi"]}
+    {id:"fo7", pic:"🤲🍞🧕", en:"I want bread, Mum.", ar:"أُرِيدُ خُبْزًا يَا أُمِّي.", w:["uridu","khubz","ya","ummi"]},
+    {id:"fo8", pic:"❤️🧕", en:"I love my mum.", ar:"أُحِبُّ أُمِّي.", w:["uhibbu","ummi"]}
    ]},
   {id:"animals", emoji:"🐱", en:"Animals", ar:"الْحَيَوَانَاتُ",
    words:[
@@ -460,12 +461,12 @@ const UNITS = [
     {id:"sarir", pic:"🛏️", en:"a bed", ar:"سَرِيرٌ"}
    ],
    sents:[
-    {id:"ho1", pic:"❓👩", en:"Where is my mum?", ar:"أَيْنَ أُمِّي؟", w:["ayna","ummi"], tip:"The Arabic question mark faces the other way: [[؟]]"},
+    {id:"ho1", pic:"❓🧕", en:"Where is my mum?", ar:"أَيْنَ أُمِّي؟", w:["ayna","ummi"], tip:"The Arabic question mark faces the other way: [[؟]]"},
     {id:"ho2", pic:"❓⚽", en:"Where is the ball?", ar:"أَيْنَ الْكُرَةُ؟", w:["ayna","kura"]},
-    {id:"ho3", pic:"👩🏠", en:"My mum is at home.", ar:"أُمِّي فِي الْبَيْتِ.", w:["ummi","fi","bayt"], tip:"After [[فِي]] the ending changes to [[ـِ]]: [[الْبَيْتِ]]."},
+    {id:"ho3", pic:"🧕🏠", en:"My mum is at home.", ar:"أُمِّي فِي الْبَيْتِ.", w:["ummi","fi","bayt"], tip:"After [[فِي]] the ending changes to [[ـِ]]: [[الْبَيْتِ]]."},
     {id:"ho4", pic:"🐱🛏️", en:"The cat is in the bed.", ar:"الْقِطُّ فِي السَّرِيرِ.", w:["qitt","fi","sarir"]},
     {id:"ho5", pic:"📖📍", en:"The book is here.", ar:"الْكِتَابُ هُنَا.", w:["kitab","huna"]},
-    {id:"ho6", pic:"🙋📍👨", en:"I’m here, Dad!", ar:"أَنَا هُنَا يَا أَبِي.", w:["ana","huna","ya","abi"]}
+    {id:"ho6", pic:"🙋📍🧔", en:"I’m here, Dad!", ar:"أَنَا هُنَا يَا أَبِي.", w:["ana","huna","ya","abi"]}
    ]},
   {id:"day", emoji:"☀️", en:"Every day", ar:"كُلَّ يَوْمٍ",
    words:[
@@ -556,11 +557,12 @@ function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&l
 function noteHTML(s){ return esc(s).replace(/\[\[(.+?)\]\]/g, '<bdi class="ari" dir="rtl" lang="ar">$1</bdi>'); }
 function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 const girl = () => { const p = me(); return !!p && p.kid === "girl"; };
-/* Pick the girl's version of a word or sentence when there is one. */
+/* Pick the girl's version of a word or sentence when there is one.
+   🙋 in a picture stands for “I” and shows as the child's own animal. */
 function gv(o){
-  if (!girl()) return o;
-  const r = o.f ? Object.assign({}, o, o.f) : Object.assign({}, o);
-  if (o.ftip) r.tip = o.ftip;
+  const r = girl() && o.f ? Object.assign({}, o, o.f) : Object.assign({}, o);
+  if (girl() && o.ftip) r.tip = o.ftip;
+  if (r.pic) r.pic = r.pic.replace("🙋", me() ? me().avatar : "🙋");
   return r;
 }
 const T = {
@@ -651,7 +653,7 @@ function renderHome(){
     const sub = !open ? "🔒 Learn the words in " + UNITS[i - 1].en + " first"
       : countLearned(u.words) + " of " + u.words.length + " words · " + countLearned(u.sents) + " of " + u.sents.length + " sentences";
     h += '<li><button class="unit' + (open ? "" : " locked") + (n === total ? " all-done" : "") + '" data-act="unit" data-v="' + u.id + '"' + (open ? "" : ' aria-disabled="true"') + '>' +
-      '<span class="emo" aria-hidden="true">' + u.emoji + '</span><span class="ar" lang="ar">' + esc(u.ar) + '</span>' +
+      '<span class="emo' + ([...u.emoji.replace(/️/g, "")].length > 1 ? " two" : "") + '" aria-hidden="true">' + u.emoji + '</span><span class="ar" lang="ar">' + esc(u.ar) + '</span>' +
       '<span class="t">' + (i + 1) + '. ' + esc(u.en) + '</span><span class="s">' + sub + '</span>' +
       '<span class="meter"><i style="width:' + Math.round(n / total * 100) + '%"></i></span></button></li>';
   });
