@@ -264,6 +264,18 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .btn.miss{background:var(--surface);border-color:var(--brass);color:var(--brass)}
 .btn.got{background:var(--good);color:var(--surface)}
 .btn.ghost{grid-column:1 / -1;background:none;border-color:var(--line)}
+/* build a sentence */
+.line{direction:rtl;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 10px;min-height:3.4rem;align-items:center}
+.line .slot{font-family:"Amiri",serif;font-size:2rem;line-height:1.6}
+.line .gap{display:inline-block;width:3.2rem;border-bottom:3px dashed var(--line);height:2.2rem}
+.tiles{direction:rtl;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 14px}
+.tile{font-family:"Amiri",serif;font-size:1.8rem;line-height:1.5;min-height:60px;min-width:72px;padding:4px 16px;border-radius:18px;border:2px solid var(--lapis);background:var(--lapis-soft);color:var(--ink)}
+.tile.used{visibility:hidden}
+.tile.bad{animation:wig .4s ease;border-color:var(--miss)}
+@keyframes wig{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.mode-btns .emo{font-size:2.4rem}
+.grownup{margin:18px 0 0;padding:12px 14px;background:var(--lapis-soft);border-radius:14px;font-size:.92rem;text-align:left}
+.grownup a{color:var(--lapis);font-weight:600}
 .keys{display:none;text-align:center;color:var(--muted);font-size:.8rem;margin-top:12px}
 @media (hover:hover) and (pointer:fine){.keys{display:block}}
 
@@ -324,7 +336,22 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .about details p{margin:4px 0 6px}
 .about .credit{text-align:center;font-size:.82rem;margin-top:18px}
 .about a{color:var(--lapis)}
-@media (prefers-reduced-motion: reduce){.prog i{transition:none}.confetti{display:none}}
+/* Ummah Apps family strip: the same in all four apps */
+.ua-fam{--f-card:#FFFFFF;--f-ink:#15233F;--f-muted:#56637D;--f-line:#D3DBE6;--f-lapis:#1E4FA0;--f-soft:#DCE6F7;margin:24px 0 0;padding-top:20px;border-top:1px solid var(--f-line)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ua-fam{--f-card:#162035;--f-ink:#E6EBF4;--f-muted:#9AA6BD;--f-line:#2A3753;--f-lapis:#8DB0EC;--f-soft:#1D2D4D}}
+:root[data-theme="dark"] .ua-fam{--f-card:#162035;--f-ink:#E6EBF4;--f-muted:#9AA6BD;--f-line:#2A3753;--f-lapis:#8DB0EC;--f-soft:#1D2D4D}
+.ua-fam h2{font-size:1.05rem;margin:0 0 10px;padding:0;border:0;color:var(--f-ink)}
+.ua-fam ul{list-style:none;margin:0 0 10px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.ua-fam li{margin:0}
+.ua-app{display:grid;grid-template-columns:auto 1fr;gap:0 12px;align-items:center;height:100%;padding:10px 14px;border:1px solid var(--f-line);border-radius:16px;background:var(--f-card);color:var(--f-ink);text-decoration:none;line-height:1.35}
+a.ua-app:hover{border-color:var(--f-lapis)}
+.ua-app .ua-ar{grid-row:1 / span 2;font-family:"Amiri",serif;font-size:1.6rem;font-weight:700;line-height:1.3;color:var(--f-lapis)}
+.ua-app b{font-weight:700;font-size:.98rem}
+.ua-app small{grid-column:2;color:var(--f-muted);font-size:.84rem}
+.ua-app.here{background:var(--f-soft);border-color:transparent}
+.ua-app.here b::after{content:" · you are here";font-weight:400;color:var(--f-muted)}
+.ua-fam p{margin:0;color:var(--f-muted);font-size:.84rem}
+@media (prefers-reduced-motion: reduce){.prog i{transition:none}.confetti{display:none}.tile.bad{animation:none}}
 </style>
 </head>
 <body>
@@ -341,7 +368,9 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
     <li><strong>Meet the words.</strong> Each unit starts with 5 to 8 words. Your child sees the picture, the vowelled Arabic and the English, and hears it.</li>
     <li><strong>Say the words.</strong> Your child sees the picture, says the Arabic out loud, taps <strong>Show me</strong> to see and hear it, then taps <strong>I said it!</strong> or <strong>Try again</strong>. Words to try again come back a little later.</li>
     <li><strong>Say the sentences.</strong> Once all the words are learned, two to four word sentences open, like <bdi class="ari" dir="rtl" lang="ar">هَذَا قِطٌّ</bdi> (this is a cat), <bdi class="ari" dir="rtl" lang="ar">أُحِبُّ أُمِّي</bdi> (I love my mum) and <bdi class="ari" dir="rtl" lang="ar">أَيْنَ الْكُرَةُ؟</bdi> (where is the ball?).</li>
+    <li><strong>Build the sentences.</strong> Your child taps the words of each sentence in the right order, hearing each word as they tap it.</li>
     <li><strong>Practise again.</strong> Mixes the words and sentences that need it most, so they stay fresh.</li>
+    <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
   <h3>Seven units</h3>
   <p>My family, Hello, Food, Animals, Colours, At home and Every day: 47 words and 42 sentences in all. Each unit opens once the words in the one before are learned.</p>
@@ -353,8 +382,19 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
   <details><summary>Why is there no sound?</summary><p>The app speaks with your device’s own Arabic text-to-speech voice, and many phones, especially Samsung, don’t have one until you add it. Tap <strong>No sound? How to add an Arabic voice</strong> on the home screen for steps for your device.</p></details>
   <details><summary>Can several children use the same device?</summary><p>Yes. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child or add another. Progress stays in this browser on this device; nothing is sent anywhere. To start one child over, open settings and choose <strong>Start again</strong>.</p></details>
   <p class="credit">Takallum Kids is part of <a href="https://ummahapps.ai/">Ummah Apps</a>. For older learners, try <a href="https://takallum.ummahapps.ai/">Takallum</a>.</p>
+  <nav class="ua-fam" aria-labelledby="ua-fam-h">
+    <h2 id="ua-fam-h">Four free Arabic apps that work together</h2>
+    <ul>
+      <li><span class="ua-app here" aria-current="page"><span class="ua-ar" lang="ar" dir="rtl">تَكَلُّم</span><b>Takallum Kids</b><small>Ages 4 to 11: first words and short sentences to say out loud</small></span></li>
+      <li><a class="ua-app" href="https://kalimat.ummahapps.ai/"><span class="ua-ar" lang="ar" dir="rtl">كَلِمَات</span><b>Kalimat</b><small>Beginners: over 400 everyday words and Qur’an words, with pictures and games</small></a></li>
+      <li><a class="ua-app" href="https://kalimat-plus.ummahapps.ai/"><span class="ua-ar" lang="ar" dir="rtl">كَلِمَات</span><b>Kalimat Plus</b><small>Next step: words for worship, tarbiyyah, character and the environment</small></a></li>
+      <li><a class="ua-app" href="https://takallum.ummahapps.ai/"><span class="ua-ar" lang="ar" dir="rtl">تَكَلُّم</span><b>Takallum</b><small>Speaking drills, sentence chains and role-plays for older learners</small></a></li>
+    </ul>
+    <p>On the same device, the four apps share their learners and the words each learner knows.</p>
+  </nav>
 </footer>
 
+<script src="ummah.js"></script>
 <script>
 /* ---------- content ---------- */
 /* Each unit: words first, then sentences that use only words from this unit or earlier ones (listed in `w`).
@@ -488,7 +528,8 @@ const UNITS = [
 ];
 
 /* ---------- state + storage ---------- */
-/* Each child on the device has a profile {id, name, kid: "boy"|"girl", avatar} and their own progress.
+/* Each child on the device has a profile {id, name, kid: "boy"|"girl", avatar, mode: "read"|"echo"} and their own progress.
+   Echo mode is for children who can't read Arabic yet: each word or sentence is spoken first and the child says it back.
    progress.items[id] = {b: level 0–5, l: learned (got it at least once), t: last seen} */
 let progress = {items:{}};
 let settings = {autoplay:true, voiceHelp:true};
@@ -520,6 +561,25 @@ if (!profiles.list.length){
   try { localStorage.removeItem("takallum-kids-progress"); } catch(e){}
 }
 delete settings.kid;
+/* Share the children with the other Ummah Apps on this device (ummah.js). A child added in another app
+   comes in without boy or girl when that app doesn't ask, and picks it the first time they open this one. */
+const toG = kid => kid === "girl" ? "f" : kid === "boy" ? "m" : null;
+const freeAvatar = () => AVATARS.find(a => !profiles.list.some(p => p.avatar === a)) || AVATARS[0];
+if (window.UA){
+  const locals = profiles.list.map(p => ({ua:p.ua, name:p.name, g:toG(p.kid), avatar:p.avatar}));
+  const r = UA.sync(locals);
+  locals.forEach((l, i) => {
+    const p = profiles.list[i];
+    p.ua = l.ua; p.name = l.name;
+    if (l.g) p.kid = l.g === "f" ? "girl" : "boy";
+    if (AVATARS.includes(l.avatar)) p.avatar = l.avatar;
+  });
+  r.extra.forEach(x => profiles.list.push({id:newId(), ua:x.ua, name:x.name, kid:x.g === "f" ? "girl" : x.g === "m" ? "boy" : null, avatar:AVATARS.includes(x.avatar) ? x.avatar : freeAvatar()}));
+  const cur = profiles.list.find(p => p.ua && p.ua === r.cur);
+  if (cur) profiles.active = cur.id;
+  if (profiles.list.length) saveProfiles();
+}
+function shareKid(p){ if (window.UA && p) p.ua = UA.save({ua:p.ua, name:p.name, g:toG(p.kid), avatar:p.avatar}); }
 if (!me() && profiles.list.length) profiles.active = profiles.list[0].id;
 if (profiles.active) progress = loadProgress(profiles.active);
 
@@ -557,6 +617,7 @@ function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&l
 function noteHTML(s){ return esc(s).replace(/\[\[(.+?)\]\]/g, '<bdi class="ari" dir="rtl" lang="ar">$1</bdi>'); }
 function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 const girl = () => { const p = me(); return !!p && p.kid === "girl"; };
+const echo = () => { const p = me(); return !!p && p.mode === "echo"; };
 /* Pick the girl's version of a word or sentence when there is one.
    🙋 in a picture stands for “I” and shows as the child's own animal. */
 function gv(o){
@@ -568,7 +629,8 @@ function gv(o){
 const T = {
   praise: () => girl() ? "أَحْسَنْتِ!" : "أَحْسَنْتَ!",
   tryAgain: () => girl() ? "حَاوِلِي مَرَّةً أُخْرَى" : "حَاوِلْ مَرَّةً أُخْرَى",
-  sayIt: () => girl() ? "قُولِي بِالْعَرَبِيَّةِ" : "قُلْ بِالْعَرَبِيَّةِ"
+  sayIt: () => girl() ? "قُولِي بِالْعَرَبِيَّةِ" : "قُلْ بِالْعَرَبِيَّةِ",
+  echo: () => girl() ? "اسْمَعِي وَكَرِّرِي" : "اسْمَعْ وَكَرِّرْ"
 };
 const WORDS = {};
 UNITS.forEach((u, ui) => u.words.forEach(w => { WORDS[w.id] = Object.assign({kind:"word", ui}, w); }));
@@ -581,6 +643,11 @@ const countLearned = list => list.filter(x => learned(x.id)).length;
 const wordsDone = u => u.words.every(w => learned(w.id));
 const unitOpen = i => i === 0 || wordsDone(UNITS[i - 1]);
 function learnedItems(){ return ALL.filter(x => learned(x.id)); }
+/* Learned words go into the shared word bank, so Kalimat and Kalimat Plus can show them as known. */
+function shareWords(list){
+  const p = me();
+  if (window.UA && p && p.ua) UA.addKnown(p.ua, list.flatMap(w => [w.ar, w.f && w.f.ar, w.her]));
+}
 
 /* Development check: every sentence uses only words taught in its unit or earlier. */
 UNITS.forEach((u, ui) => u.sents.forEach(s => [s.w, s.f && s.f.w].filter(Boolean).flat().forEach(id => {
@@ -669,7 +736,7 @@ function renderWho(){
     const w = Object.keys(WORDS).filter(n).length, s = ALL.filter(x => x.kind === "sent" && n(x.id)).length;
     h += '<li><button class="kid-pick" data-act="pick" data-v="' + p.id + '" aria-pressed="' + (p.id === profiles.active) + '">' +
       '<span class="emo" aria-hidden="true">' + p.avatar + '</span><span class="nm">' + esc(p.name) + '</span>' +
-      '<small>' + w + ' words · ' + s + ' sentences</small></button>' +
+      '<small>' + w + ' words · ' + s + ' sentences' + (p.mode === "echo" ? " · 👂 Echo" : "") + '</small></button>' +
       '<button class="kid-edit" data-act="editkid" data-v="' + p.id + '" aria-label="Change ' + esc(p.name) + '"><span class="emo" aria-hidden="true">✏️</span></button></li>';
   });
   return h + '</ul><div class="actions"><button class="btn ghost" data-act="addkid">➕ Add a child</button></div>' +
@@ -684,25 +751,29 @@ function renderEdit(){
     '<button data-act="kid" data-v="boy" aria-pressed="' + (e.kid === "boy") + '"><span class="emo" aria-hidden="true">🧒</span><span class="ar" lang="ar">أَنَا وَلَدٌ</span><small>I’m a boy</small></button>' +
     '<button data-act="kid" data-v="girl" aria-pressed="' + (e.kid === "girl") + '"><span class="emo" aria-hidden="true">👧🏽</span><span class="ar" lang="ar">أَنَا بِنْتٌ</span><small>I’m a girl</small></button></div>' +
     '<p style="margin-top:14px">Pick your animal:</p><div class="avatars" role="group" aria-label="Animal">' +
-    AVATARS.map(a => '<button class="emo" data-act="avatar" data-v="' + a + '" aria-pressed="' + (e.avatar === a) + '">' + a + '</button>').join("") + '</div></section>' +
+    AVATARS.map(a => '<button class="emo" data-act="avatar" data-v="' + a + '" aria-pressed="' + (e.avatar === a) + '">' + a + '</button>').join("") + '</div>' +
+    '<p style="margin-top:14px">How do you practise?</p><div class="who-btns mode-btns" role="group" aria-label="How do you practise">' +
+    '<button data-act="mode" data-v="read" aria-pressed="' + (e.mode !== "echo") + '"><span class="emo" aria-hidden="true">📖</span><b>I read it</b><small>I can read Arabic with vowel marks</small></button>' +
+    '<button data-act="mode" data-v="echo" aria-pressed="' + (e.mode === "echo") + '"><span class="emo" aria-hidden="true">👂</span><b>I listen</b><small>Echo: hear it, then say it back</small></button></div></section>' +
     '<div class="actions"><button class="btn primary" data-act="savekid"' + (e.kid ? "" : " disabled") + '>' + (isNew ? "Let’s go! 🚀" : "Save") + '</button>' +
     (!isNew ? '<button class="btn ghost del" data-act="delkid">Remove ' + esc(e.orig) + '</button>' : "") + '</div>';
   return h + (first ? voiceGuideHTML() : "");
 }
 function editState(id){
   const p = profiles.list.find(x => x.id === id);
-  return p ? {id:p.id, orig:p.name, name:p.name, kid:p.kid, avatar:p.avatar}
-           : {id:null, name:"", kid:null, avatar:AVATARS.find(a => !profiles.list.some(x => x.avatar === a)) || AVATARS[0]};
+  return p ? {id:p.id, orig:p.name, name:p.name, kid:p.kid, avatar:p.avatar, mode:p.mode || "read"}
+           : {id:null, name:"", kid:null, avatar:AVATARS.find(a => !profiles.list.some(x => x.avatar === a)) || AVATARS[0], mode:"read"};
 }
 function editKid(id){ S.edit = editState(id); S.view = "edit"; render(); window.scrollTo(0, 0); }
 function switchTo(id){
   profiles.active = id; saveProfiles(); progress = loadProgress(id);
+  if (window.UA && me()){ UA.setCurrent(me().ua); shareWords(Object.values(WORDS).filter(w => learned(w.id))); }
 }
 function saveKid(){
   const e = S.edit; if (!e || !e.kid) return;
   const name = e.name.trim().slice(0, 20) || "Learner " + (profiles.list.length + (e.id ? 0 : 1));
-  if (e.id) Object.assign(profiles.list.find(x => x.id === e.id), {name, kid:e.kid, avatar:e.avatar});
-  else { const p = {id:newId(), name, kid:e.kid, avatar:e.avatar}; profiles.list.push(p); store(progKey(p.id), {items:{}}); switchTo(p.id); }
+  if (e.id) shareKid(Object.assign(profiles.list.find(x => x.id === e.id), {name, kid:e.kid, avatar:e.avatar, mode:e.mode}));
+  else { const p = {id:newId(), name, kid:e.kid, avatar:e.avatar, mode:e.mode}; shareKid(p); profiles.list.push(p); store(progKey(p.id), {items:{}}); switchTo(p.id); }
   saveProfiles(); S.edit = null;
   if (S.view === "edit" && history.state && history.state.tk) goBack();
   else { S.view = null; render(); }
@@ -710,6 +781,8 @@ function saveKid(){
 function deleteKid(){
   const e = S.edit; if (!e || !e.id) return;
   if (!confirm("Remove " + e.orig + " and all their progress on this device?")) return;
+  const gone = profiles.list.find(x => x.id === e.id);
+  if (window.UA && gone) UA.remove(gone.ua);
   profiles.list = profiles.list.filter(x => x.id !== e.id);
   try { localStorage.removeItem(progKey(e.id)); } catch(err){}
   if (profiles.active === e.id){ profiles.active = null; progress = {items:{}}; if (profiles.list.length) switchTo(profiles.list[0].id); }
@@ -730,6 +803,7 @@ function renderUnit(u){
     step("learn", "👀", "1. Meet the words", "See and hear " + u.words.length + " new words") +
     step("words", "🗣️", "2. Say the words", wd + " of " + u.words.length + " learned") +
     step("sents", "💬", "3. Say the sentences", done ? sd + " of " + u.sents.length + " learned" : "🔒 Opens when you know all the words", !done) +
+    step("build", "🧩", "4. Build the sentences", done ? "Put the words in the right order" : "🔒 Opens when you know all the words", !done) +
     '</ul><h3 class="grid-h">Tap a word to hear it</h3><ul class="wgrid">';
   u.words.forEach(w0 => {
     const w = gv(w0);
@@ -750,8 +824,45 @@ function startSay(kind, u){
   if (kind === "words") items = shuffle(u.words.map(w => WORDS[w.id]));
   else if (kind === "sents") items = shuffle(u.sents.slice());
   else items = shuffle(learnedItems().sort((a, b) => rec(a.id).b - rec(b.id).b || rec(a.id).t - rec(b.id).t).slice(0, 8));
-  S.session = {type:"say", kind, unit:u, queue:items.map(it => ({it, tries:0})), idx:0, revealed:false, first:0, missed:new Set(), total:items.length};
-  render(); window.scrollTo(0, 0);
+  S.session = {type:"say", kind, unit:u, queue:items.map(it => ({it, tries:0})), idx:0, revealed:echo(), first:0, missed:new Set(), total:items.length};
+  render(); window.scrollTo(0, 0); echoPlay();
+}
+/* Echo mode: the Arabic is shown and spoken straight away, and the child says it back. */
+function echoPlay(){
+  const s = S.session;
+  if (s && s.type === "say" && !s.done && echo()) setTimeout(() => { if (S.session === s && !s.done) speak(gv(s.queue[s.idx].it).ar); }, 250);
+}
+/* Build a sentence: tap the words in order. One extra word from the unit is mixed in. */
+const bare = t => t.replace(/[.؟!،]/g, "");
+function startBuild(u){
+  S.session = {type:"build", kind:"build", unit:u, items:shuffle(u.sents.slice()), idx:0, first:0, missed:new Set(), total:u.sents.length};
+  buildItem(); render(); window.scrollTo(0, 0);
+}
+function buildItem(){
+  const s = S.session, words = gv(s.items[s.idx]).ar.split(/\s+/).map(bare);
+  const spare = shuffle(s.unit.words.map(w => bare(gv(w).ar)).filter(a => !words.includes(a) && !a.includes(" ")))[0];
+  Object.assign(s, {words, placed:0, bad:null, slip:false, complete:false,
+    tiles:shuffle(words.map(t => ({t, used:false})).concat(spare ? [{t:spare, used:false}] : []))});
+}
+function tapTile(i){
+  const s = S.session; if (!s || s.type !== "build" || s.complete) return;
+  const tile = s.tiles[i]; if (!tile || tile.used) return;
+  speak(tile.t);
+  if (tile.t === s.words[s.placed]){
+    tile.used = true; s.placed++; s.bad = null;
+    if (s.placed === s.words.length){
+      s.complete = true;
+      if (s.slip) s.missed.add(s.items[s.idx].id); else s.first++;
+      setTimeout(() => { if (S.session === s) speak(gv(s.items[s.idx]).ar); }, 700);
+    }
+  } else { s.bad = i; s.slip = true; }
+  render();
+}
+function buildNext(){
+  const s = S.session; if (!s || s.type !== "build" || !s.complete) return;
+  s.idx++;
+  if (s.idx >= s.items.length){ s.done = true; render(); window.scrollTo(0, 0); speak(T.praise()); confetti(); return; }
+  buildItem(); render();
 }
 function sayCurrent(){
   const s = S.session; if (!s || !settings.autoplay) return;
@@ -774,29 +885,49 @@ function renderSay(s){
   const title = s.kind === "review" ? "Practise again" : s.unit.en;
   let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">' + esc(title) + ' · ' + (s.idx + 1) + ' / ' + s.queue.length + '</span></div>' +
     progHTML(s.idx, s.queue.length) + '<section class="card">' + picHTML(it.pic) +
-    '<p class="cue">' + esc(it.en) + '</p><p class="ask">Say it in Arabic! <bdi class="ari" dir="rtl" lang="ar">' + esc(T.sayIt()) + '</bdi></p><div class="answer">';
-  if (s.revealed) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + herHTML(it) + sayButtons(it.ar) + tipHTML(it);
+    '<p class="cue">' + esc(it.en) + '</p>' + (echo() ? '<p class="ask">👂 Listen, then say it back! <bdi class="ari" dir="rtl" lang="ar">' + esc(T.echo()) + '</bdi></p>'
+      : '<p class="ask">Say it in Arabic! <bdi class="ari" dir="rtl" lang="ar">' + esc(T.sayIt()) + '</bdi></p>') + '<div class="answer">';
+  if (s.revealed && echo()) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + sayButtons(it.ar);
+  else if (s.revealed) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + herHTML(it) + sayButtons(it.ar) + tipHTML(it);
   else h += '<p class="ask" aria-hidden="true" style="font-size:2.2rem">🗣️</p>';
   h += '</div></section><div class="actions">';
   if (!s.revealed) h += '<button class="btn primary" data-act="reveal">👀 Show me</button>';
   else h += '<button class="btn miss" data-act="mark" data-v="0">🔁 Try again<span class="ar" lang="ar">' + esc(T.tryAgain()) + '</span></button>' +
             '<button class="btn got" data-act="mark" data-v="1">😊 I said it!</button>';
-  return h + '</div><p class="keys">Space: show me · 1: try again · 2: I said it</p>';
+  return h + '</div><p class="keys">' + (echo() ? "Space: hear it again" : "Space: show me") + ' · 1: try again · 2: I said it</p>';
+}
+function renderBuild(s){
+  const it = gv(s.items[s.idx]);
+  let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">' + esc(s.unit.en) + ' · ' + (s.idx + 1) + ' / ' + s.items.length + '</span></div>' +
+    progHTML(s.idx, s.items.length) + '<section class="card">' + picHTML(it.pic) + '<p class="cue">' + esc(it.en) + '</p>' +
+    '<p class="ask">🧩 Tap the words in the right order.</p><div class="answer">';
+  if (s.complete) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + sayButtons(it.ar) + tipHTML(it);
+  else h += '<div class="line" lang="ar">' + s.words.map((w, i) => i < s.placed ? '<span class="slot">' + esc(w) + '</span>' : '<span class="gap" aria-hidden="true"></span>').join("") + '</div>';
+  h += '</div></section>';
+  if (s.complete) return h + '<div class="actions"><button class="btn got" style="grid-column:1 / -1" data-act="bnext">' + (s.slip ? "😊 " : "🌟 ") + (s.idx < s.items.length - 1 ? "Next ›" : "Finish") + '</button></div>';
+  return h + '<div class="tiles" role="group" aria-label="Words">' + s.tiles.map((t, i) =>
+    '<button class="tile' + (t.used ? " used" : "") + (s.bad === i ? " bad" : "") + '" lang="ar" data-act="tile" data-v="' + i + '"' + (t.used ? ' tabindex="-1" aria-hidden="true"' : "") + '>' + esc(t.t) + '</button>').join("") + '</div>';
 }
 function renderDone(s){
   const pct = s.total ? s.first / s.total : 1, stars = pct >= .9 ? 3 : pct >= .5 ? 2 : 1;
   const u = s.unit, missed = [...s.missed].map(byId).map(gv);
   let next = "";
   if (s.kind === "words" && wordsDone(u)) next = '<button class="btn primary" data-act="sents">Say the sentences 💬</button>';
-  else if (s.kind === "sents"){ const i = UNITS.indexOf(u); if (UNITS[i + 1]) next = '<button class="btn primary" data-act="unit" data-v="' + UNITS[i + 1].id + '">Next: ' + esc(UNITS[i + 1].en) + ' ' + UNITS[i + 1].emoji + '</button>'; }
+  else if (s.kind === "sents" || s.kind === "build"){
+    const i = UNITS.indexOf(u);
+    next = '<button class="btn primary" data-act="' + (s.kind === "sents" ? 'build">Build the sentences 🧩' : 'sents">Say the sentences 💬') + '</button>';
+    if (UNITS[i + 1]) next += '<button class="btn ghost" data-act="unit" data-v="' + UNITS[i + 1].id + '">Next: ' + esc(UNITS[i + 1].en) + ' ' + UNITS[i + 1].emoji + '</button>';
+  }
+  const last = (s.kind === "sents" || s.kind === "build") && UNITS.indexOf(u) === UNITS.length - 1;
   let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button></div><section class="done">' +
     '<p class="stars emo" aria-label="' + stars + ' stars">' + "⭐".repeat(stars) + '<span style="opacity:.25">' + "⭐".repeat(3 - stars) + '</span></p>' +
     '<p class="ar praise" lang="ar">' + esc(T.praise()) + '</p><p class="score">' + (stars === 3 ? "Brilliant! " : stars === 2 ? "Well done! " : "Good try! ") +
     s.first + ' of ' + s.total + ' right the first time.</p>';
-  if (missed.length) h += '<p class="score" style="margin-bottom:8px">Say these once more:</p><ul class="again-list">' + missed.map(m =>
+  if (missed.length) h += '<p class="score" style="margin-bottom:8px">' + (s.kind === "build" ? "Listen to these once more:" : "Say these once more:") + '</p><ul class="again-list">' + missed.map(m =>
       '<li><span class="emo" aria-hidden="true">' + m.pic + '</span><span class="ar" lang="ar">' + esc(m.ar) + '</span><button data-act="say" data-ar="' + esc(m.ar) + '" aria-label="Listen"><span class="emo">🔊</span></button></li>').join("") + '</ul>';
   h += '<div class="actions">' + next + '<button class="btn ' + (next ? "ghost" : "primary") + '" data-act="again">Play again 🔁</button>' +
-       '<button class="btn ghost" data-act="back">' + (u ? "Back to " + esc(u.en) : "Back home") + '</button></div></section>';
+       '<button class="btn ghost" data-act="back">' + (u ? "Back to " + esc(u.en) : "Back home") + '</button></div>' +
+       (last ? '<p class="grownup">For grown-ups: ready for more? <a href="https://kalimat.ummahapps.ai/">Kalimat</a> has over 400 more words with pictures, and the words learned here show up there as words you already know.</p>' : "") + '</section>';
   return h;
 }
 function confetti(){
@@ -811,7 +942,7 @@ function settingsHTML(){
   const p = me(), name = p ? esc(p.name) : "this child";
   return '<div class="sheet-bg" data-act="close"><div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">' +
     '<h2>Settings</h2><p class="for">For grown-ups.</p>' + voiceNotice() +
-    '<div class="opt"><span>Children<small>Add a child, or change a name, boy or girl, or animal. Each child has their own progress.</small></span><button class="reset plain" data-act="who">Manage</button></div>' +
+    '<div class="opt"><span>Children<small>Add a child, or change a name, boy or girl, animal, or Echo mode (for children who can’t read Arabic yet). Each child has their own progress.</small></span><button class="reset plain" data-act="who">Manage</button></div>' +
     opt("autoplay", "Play on reveal", "Speak the Arabic automatically when a word or sentence is shown.") +
     (p ? '<div class="opt"><span>Start again<small>Clears ' + name + '’s progress, so all units lock again.</small></span><button class="reset" data-act="reset">Start again</button></div>' : "") +
     '<div class="actions" style="margin-top:14px"><button class="btn primary" data-act="close">Done</button></div></div></div>';
@@ -823,12 +954,14 @@ const about = document.getElementById("about");
 function render(){
   const s = S.session;
   let h;
+  if (me() && !me().kid && S.view !== "edit"){ S.edit = editState(me().id); S.view = "edit"; }
   if (!profiles.list.length){ if (!S.edit) S.edit = editState(null); S.view = "edit"; h = renderEdit(); }
   else if (S.view === "edit") h = renderEdit();
   else if (S.view === "who") h = renderWho();
   else if (!s) h = S.unit ? renderUnit(S.unit) : renderHome();
   else if (s.done) h = renderDone(s);
   else if (s.type === "learn") h = renderLearn(s);
+  else if (s.type === "build") h = renderBuild(s);
   else h = renderSay(s);
   app.innerHTML = h + (S.sheet ? settingsHTML() : "");
   about.hidden = !!(s || S.unit || (S.view && profiles.list.length));
@@ -854,7 +987,8 @@ function openUnit(u){ hush(); S.session = null; S.unit = u; render(); window.scr
 
 /* ---------- actions ---------- */
 function reveal(){
-  const s = S.session; if (!s || s.type !== "say" || s.done || s.revealed) return;
+  const s = S.session; if (!s || s.type !== "say" || s.done) return;
+  if (s.revealed){ if (echo()) speak(gv(s.queue[s.idx].it).ar); return; }
   s.revealed = true;
   if (settings.autoplay) speak(gv(s.queue[s.idx].it).ar);
   render();
@@ -862,15 +996,15 @@ function reveal(){
 function mark(ok){
   const s = S.session; if (!s || s.type !== "say" || s.done || !s.revealed) return;
   const cur = s.queue[s.idx], id = cur.it.id, r = rec(id);
-  if (ok){ if (!s.missed.has(id)){ r.b = Math.min(r.b + 1, 5); s.first++; } r.l = true; }
+  if (ok){ if (!s.missed.has(id)){ r.b = Math.min(r.b + 1, 5); s.first++; } if (!r.l && cur.it.kind === "word") shareWords([cur.it]); r.l = true; }
   else {
     r.b = Math.max(r.b - 1, 0); s.missed.add(id);
     if (cur.tries < 2) s.queue.splice(Math.min(s.idx + 3, s.queue.length), 0, {it:cur.it, tries:cur.tries + 1});
   }
   r.t = Date.now(); progress.items[id] = r; saveProgress();
-  s.idx++; s.revealed = false;
+  s.idx++; s.revealed = echo();
   if (s.idx >= s.queue.length){ s.done = true; render(); window.scrollTo(0, 0); speak(T.praise()); confetti(); return; }
-  render();
+  render(); echoPlay();
 }
 function learnStep(d){
   const s = S.session, n = s.unit.words.length;
@@ -887,7 +1021,7 @@ document.addEventListener("click", e => {
   const act = el.dataset.act, v = el.dataset.v;
   if (act === "close"){ if (e.target === el || el.tagName === "BUTTON"){ S.sheet = false; render(); } return; }
   switch (act){
-    case "kid": case "avatar":
+    case "kid": case "avatar": case "mode":
       if (!S.edit) break;
       S.edit[act] = v; render(); { const b = document.querySelector('[data-act="' + act + '"][data-v="' + v + '"]'); if (b) b.focus(); } break;
     case "who":
@@ -912,13 +1046,16 @@ document.addEventListener("click", e => {
     case "learn": enter(() => startLearn(S.unit)); break;
     case "words": enter(() => startSay("words", S.unit)); break;
     case "sents": if (S.session) startSay("sents", S.session.unit); else enter(() => startSay("sents", S.unit)); break;
+    case "build": if (S.session) startBuild(S.session.unit); else enter(() => startBuild(S.unit)); break;
+    case "tile": tapTile(+v); break;
+    case "bnext": buildNext(); break;
     case "review": enter(() => startSay("review", null)); break;
     case "lnext": learnStep(1); break;
     case "lprev": learnStep(-1); break;
     case "reveal": reveal(); break;
     case "mark": mark(v === "1"); break;
     case "say": speak(el.dataset.ar, el.dataset.slow === "1"); break;
-    case "again": { const s = S.session; if (s.kind === "review" && learnedItems().length < 1) goBack(); else startSay(s.kind, s.unit); break; }
+    case "again": { const s = S.session; if (s.kind === "build") startBuild(s.unit); else if (s.kind === "review" && learnedItems().length < 1) goBack(); else startSay(s.kind, s.unit); break; }
     case "back": goBack(); break;
     case "settings": S.sheet = true; render(); break;
     case "reset":
@@ -944,17 +1081,19 @@ document.addEventListener("keydown", e => {
   if (S.view === "edit" && e.key === "Enter" && e.target.dataset && e.target.dataset.field){ e.preventDefault(); saveKid(); return; }
   const s = S.session; if (!s || s.done) return;
   if (e.target.closest && e.target.closest("button") && (e.key === " " || e.key === "Enter")) return;
+  if (s.type === "build"){ if (s.complete && (e.key === " " || e.key === "Enter")){ e.preventDefault(); buildNext(); } return; }
   if (s.type === "learn"){
     if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter"){ e.preventDefault(); learnStep(1); }
     else if (e.key === "ArrowLeft") learnStep(-1);
     return;
   }
-  if (e.key === " " || e.key === "Enter"){ if (!s.revealed){ e.preventDefault(); reveal(); } }
+  if (e.key === " " || e.key === "Enter"){ if (!s.revealed || echo()){ e.preventDefault(); reveal(); } }
   else if (s.revealed && e.key === "1") mark(false);
   else if (s.revealed && e.key === "2") mark(true);
 });
 
 try { history.replaceState(null, ""); } catch(e){}
+if (window.UA && me()){ UA.setCurrent(me().ua); shareWords(Object.values(WORDS).filter(w => learned(w.id))); }
 render();
 </script>
 </body>
