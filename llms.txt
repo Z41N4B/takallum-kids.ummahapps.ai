@@ -21,7 +21,7 @@ Children who can't read Arabic yet can use Echo mode: each word and sentence is 
 
 Each unit opens once the words in the one before are learned. Several children can share one device: each adds themselves with a name, an animal and "I'm a boy" or "I'm a girl", and keeps their own progress (tap the name at the top to switch). The boy/girl choice means sentences about themselves and the praise (أَحْسَنْتَ / أَحْسَنْتِ) match the child.
 
-## Units (47 words, 42 sentences)
+## Units (97 words, 104 sentences)
 
 1. My family (عَائِلَتِي): هَذَا، هَذِهِ، أُمِّي، أَبِي، أَخِي، أُخْتِي. Sentences like هَذِهِ أُمِّي (This is my mum).
 2. Hello (التَّحِيَّةُ): السَّلَامُ عَلَيْكُمْ، وَعَلَيْكُمُ السَّلَامُ، أَنَا، وَلَدٌ، بِنْتٌ، يَا، شُكْرًا. Sentences like شُكْرًا يَا أَبِي (Thank you, Dad).
@@ -30,6 +30,16 @@ Each unit opens once the words in the one before are learned. Several children c
 5. Colours (الْأَلْوَانُ): أَحْمَرُ، أَصْفَرُ، أَخْضَرُ، أَزْرَقُ، أَبْيَضُ، أَسْوَدُ, with their feminine forms. Sentences like الْمَوْزَةُ صَفْرَاءُ (The banana is yellow).
 6. At home (الْبَيْتُ): بَيْتٌ، أَيْنَ، فِي، هُنَا، كُرَةٌ، كِتَابٌ، سَرِيرٌ. Sentences like أَيْنَ الْكُرَةُ؟ (Where is the ball?).
 7. Every day (كُلَّ يَوْمٍ): آكُلُ، أَشْرَبُ، أَلْعَبُ، أَنَامُ، أَقْرَأُ، مَعَ. Sentences like أَلْعَبُ مَعَ أَخِي (I play with my brother).
+8. Yes, no and who (نَعَمْ وَلَا): نَعَمْ، لَا، هُوَ، هِيَ، مَا، مَنْ. Sentences like مَا هَذَا؟ (What is this?).
+9. People I love (أَحْبَابِي): جَدِّي، جَدَّتِي، صَدِيقٌ، رَضِيعٌ، مُدَرِّسَةٌ. Sentences like أُحِبُّ جَدَّتِي (I love my grandma).
+10. My body (جِسْمِي): رَأْسٌ، عَيْنٌ، أُذُنٌ، أَنْفٌ، فَمٌ، يَدٌ، رِجْلٌ. Sentences like هَذِهِ يَدِي (This is my hand).
+11. School and things (الْمَدْرَسَةُ): مَدْرَسَةٌ، قَلَمٌ، حَقِيبَةٌ، كُرْسِيٌّ، سَيَّارَةٌ، عَلَى، تَحْتَ، إِلَى، أَذْهَبُ. Sentences like أَذْهَبُ إِلَى الْمَدْرَسَةِ (I go to school).
+12. Yummy food (طَعَامٌ لَذِيذٌ): عَصِيرٌ، أَرُزٌّ، بَيْضٌ، دَجَاجٌ، كَعْكَةٌ، عِنَبٌ، لَذِيذٌ. Sentences like الْكَعْكَةُ لَذِيذَةٌ (The cake is delicious).
+13. Outside (فِي الْحَدِيقَةِ): شَمْسٌ، قَمَرٌ، نَجْمٌ، شَجَرَةٌ، زَهْرَةٌ، حَدِيقَةٌ، جَمِيلٌ. Sentences like أَلْعَبُ فِي الْحَدِيقَةِ (I play in the garden).
+14. More animals (حَيَوَانَاتٌ أُخْرَى): أَسَدٌ، حِصَانٌ، أَرْنَبٌ، بَقَرَةٌ. Sentences like أُرِيدُ أَرْنَبًا (I want a rabbit).
+15. How I feel (مَشَاعِرِي): سَعِيدٌ، حَزِينٌ، خَائِفٌ، مُتْعَبٌ، عَطْشَانُ, each with a girl's form. Sentences like أَنَا سَعِيدٌ / أَنَا سَعِيدَةٌ (I am happy).
+
+Units 8 to 15 add 50 words children use most from Kalimat (https://kalimat.ummahapps.ai/). Use Kalimat to practise words with games and Takallum Kids to make them into sentences.
 
 ## Features
 

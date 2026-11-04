@@ -84,7 +84,7 @@
       ],
       "about": {"@type": "Language", "name": "Arabic", "alternateName": "ar"},
       "featureList": [
-        "7 units, 47 first words, 42 short sentences",
+        "15 units, 97 first words, 104 short sentences",
         "Every sentence uses only words the child has already learned",
         "A picture for every word and sentence",
         "Normal and slow Arabic audio",
@@ -372,8 +372,8 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <li><strong>Practise again.</strong> Mixes the words and sentences that need it most, so they stay fresh.</li>
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
-  <h3>Seven units</h3>
-  <p>My family, Hello, Food, Animals, Colours, At home and Every day: 47 words and 42 sentences in all. Each unit opens once the words in the one before are learned.</p>
+  <h3>Fifteen units</h3>
+  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals and How I feel: 97 words and 104 sentences in all. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences. Each unit opens once the words in the one before are learned.</p>
   <h3>Questions</h3>
   <details><summary>Is it free?</summary><p>Yes. It is free, has no adverts and needs no sign-up. Progress is saved in this browser on this device.</p></details>
   <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
@@ -524,6 +524,158 @@ const UNITS = [
     {id:"da4", pic:"😴🛏️", en:"I sleep in the bed.", ar:"أَنَامُ فِي السَّرِيرِ.", w:["anamu","fi","sarir"]},
     {id:"da5", pic:"🧐📖", en:"I read a book.", ar:"أَقْرَأُ كِتَابًا.", w:["aqrau","kitab"]},
     {id:"da6", pic:"🧸🏠", en:"I play at home.", ar:"أَلْعَبُ فِي الْبَيْتِ.", w:["alabu","fi","bayt"]}
+   ]},
+  {id:"little", emoji:"✅", en:"Yes, no and who", ar:"نَعَمْ وَلَا",
+   words:[
+    {id:"naam", pic:"✅", en:"yes", ar:"نَعَمْ"},
+    {id:"la", pic:"❌", en:"no", ar:"لَا"},
+    {id:"huwa", pic:"👆🧒", en:"he", ar:"هُوَ"},
+    {id:"hiya", pic:"👆👧", en:"she", ar:"هِيَ"},
+    {id:"ma", pic:"🤔", en:"what?", ar:"مَا"},
+    {id:"man", pic:"👤❓", en:"who?", ar:"مَنْ"}
+   ],
+   sents:[
+    {id:"li1", pic:"✅🐱", en:"Yes, this is a cat.", ar:"نَعَمْ، هَذَا قِطٌّ.", w:["naam","hadha","qitt"]},
+    {id:"li2", pic:"❌🐶", en:"No, this is a dog.", ar:"لَا، هَذَا كَلْبٌ.", w:["la","hadha","kalb"]},
+    {id:"li3", pic:"🤔👉", en:"What is this?", ar:"مَا هَذَا؟", w:["ma","hadha"]},
+    {id:"li4", pic:"👤❓👉", en:"Who is this? (a boy or man)", ar:"مَنْ هَذَا؟", w:["man","hadha"]},
+    {id:"li5", pic:"👆🧒", en:"He is my brother.", ar:"هُوَ أَخِي.", w:["huwa","akhi"]},
+    {id:"li6", pic:"👆👧", en:"She is my sister.", ar:"هِيَ أُخْتِي.", w:["hiya","ukhti"]},
+    {id:"li7", pic:"👆🧕", en:"She is my mum.", ar:"هِيَ أُمِّي.", w:["hiya","ummi"]}
+   ]},
+  {id:"people", emoji:"👶", en:"People I love", ar:"أَحْبَابِي",
+   words:[
+    {id:"jaddi", pic:"🧔🏻", en:"my grandad", ar:"جَدِّي", k:"جَدّ"},
+    {id:"jaddati", pic:"🧕🏻", en:"my grandma", ar:"جَدَّتِي", k:"جَدَّة"},
+    {id:"sadiq", pic:"🧒🧒", en:"a friend", ar:"صَدِيقٌ"},
+    {id:"radi", pic:"👶", en:"a baby", ar:"رَضِيعٌ"},
+    {id:"mudarrisa", pic:"🧕✏️", en:"a teacher (a woman)", ar:"مُدَرِّسَةٌ"}
+   ],
+   sents:[
+    {id:"pe1", pic:"👉🧔🏻", en:"This is my grandad.", ar:"هَذَا جَدِّي.", w:["hadha","jaddi"]},
+    {id:"pe2", pic:"👉🧕🏻", en:"This is my grandma.", ar:"هَذِهِ جَدَّتِي.", w:["hadhihi","jaddati"]},
+    {id:"pe3", pic:"❤️🧕🏻", en:"I love my grandma.", ar:"أُحِبُّ جَدَّتِي.", w:["uhibbu","jaddati"]},
+    {id:"pe4", pic:"❓🧔🏻", en:"Where is my grandad?", ar:"أَيْنَ جَدِّي؟", w:["ayna","jaddi"]},
+    {id:"pe5", pic:"👶", en:"The baby is small.", ar:"الرَّضِيعُ صَغِيرٌ.", w:["radi","saghir"]},
+    {id:"pe6", pic:"🧸🧒🧒", en:"I play with a friend.", ar:"أَلْعَبُ مَعَ صَدِيقٍ.", w:["alabu","maa2","sadiq"], tip:"After [[مَعَ]] the ending changes: [[صَدِيقٌ]] becomes [[صَدِيقٍ]]."},
+    {id:"pe7", pic:"👆🧕✏️", en:"She is a teacher.", ar:"هِيَ مُدَرِّسَةٌ.", w:["hiya","mudarrisa"]},
+    {id:"pe8", pic:"🧕✏️📍", en:"The teacher is here.", ar:"الْمُدَرِّسَةُ هُنَا.", w:["mudarrisa","huna"]}
+   ]},
+  {id:"body", emoji:"✋", en:"My body", ar:"جِسْمِي",
+   words:[
+    {id:"ras", pic:"🙂", en:"a head", ar:"رَأْسٌ"},
+    {id:"ayn", pic:"👁️", en:"an eye", ar:"عَيْنٌ"},
+    {id:"udhun", pic:"👂", en:"an ear", ar:"أُذُنٌ"},
+    {id:"anf", pic:"👃", en:"a nose", ar:"أَنْفٌ"},
+    {id:"fam", pic:"👄", en:"a mouth", ar:"فَمٌ"},
+    {id:"yad", pic:"✋", en:"a hand", ar:"يَدٌ"},
+    {id:"rijl", pic:"🦵", en:"a leg", ar:"رِجْلٌ"}
+   ],
+   sents:[
+    {id:"bo1", pic:"👉🙂", en:"This is my head.", ar:"هَذَا رَأْسِي.", w:["hadha","ras"], tip:"Add [[ي]] for “my”: [[رَأْسٌ]] becomes [[رَأْسِي]]."},
+    {id:"bo2", pic:"👉👁️", en:"This is my eye.", ar:"هَذِهِ عَيْنِي.", w:["hadhihi","ayn"], tip:"Body parts that come in twos are “her” words, so we say [[هَذِهِ]]."},
+    {id:"bo3", pic:"👉👂", en:"This is my ear.", ar:"هَذِهِ أُذُنِي.", w:["hadhihi","udhun"]},
+    {id:"bo4", pic:"👉👃", en:"This is my nose.", ar:"هَذَا أَنْفِي.", w:["hadha","anf"]},
+    {id:"bo5", pic:"👉👄", en:"This is my mouth.", ar:"هَذَا فَمِي.", w:["hadha","fam"]},
+    {id:"bo6", pic:"👉✋", en:"This is my hand.", ar:"هَذِهِ يَدِي.", w:["hadhihi","yad"]},
+    {id:"bo7", pic:"👉🦵", en:"This is my leg.", ar:"هَذِهِ رِجْلِي.", w:["hadhihi","rijl"]},
+    {id:"bo8", pic:"❓👃", en:"Where is my nose?", ar:"أَيْنَ أَنْفِي؟", w:["ayna","anf"]},
+    {id:"bo9", pic:"✋🐜", en:"My hand is small.", ar:"يَدِي صَغِيرَةٌ.", w:["yad","saghir"], tip:"Hand is a “her” word, so small is [[صَغِيرَةٌ]]."}
+   ]},
+  {id:"school", emoji:"🏫", en:"School and things", ar:"الْمَدْرَسَةُ",
+   words:[
+    {id:"madrasa", pic:"🏫", en:"a school", ar:"مَدْرَسَةٌ"},
+    {id:"qalam", pic:"✏️", en:"a pen", ar:"قَلَمٌ"},
+    {id:"haqiba", pic:"🎒", en:"a bag", ar:"حَقِيبَةٌ"},
+    {id:"kursi", pic:"🪑", en:"a chair", ar:"كُرْسِيٌّ"},
+    {id:"sayyara", pic:"🚗", en:"a car", ar:"سَيَّارَةٌ"},
+    {id:"ala", pic:"🔝", en:"on", ar:"عَلَى"},
+    {id:"taht", pic:"⬇️", en:"under", ar:"تَحْتَ"},
+    {id:"ila", pic:"➡️", en:"to", ar:"إِلَى"},
+    {id:"adhhabu", pic:"👟", en:"I go", ar:"أَذْهَبُ", k:"ذَهَبَ"}
+   ],
+   sents:[
+    {id:"sc1", pic:"👟🏫", en:"I go to school.", ar:"أَذْهَبُ إِلَى الْمَدْرَسَةِ.", w:["adhhabu","ila","madrasa"], tip:"After [[إِلَى]] the ending changes to [[ـِ]]: [[الْمَدْرَسَةِ]]."},
+    {id:"sc2", pic:"✏️🎒", en:"The pen is in the bag.", ar:"الْقَلَمُ فِي الْحَقِيبَةِ.", w:["qalam","fi","haqiba"]},
+    {id:"sc3", pic:"⚽⬇️🛏️", en:"The ball is under the bed.", ar:"الْكُرَةُ تَحْتَ السَّرِيرِ.", w:["kura","taht","sarir"]},
+    {id:"sc4", pic:"🐱🔝🪑", en:"The cat is on the chair.", ar:"الْقِطُّ عَلَى الْكُرْسِيِّ.", w:["qitt","ala","kursi"]},
+    {id:"sc5", pic:"❓🎒", en:"Where is the bag?", ar:"أَيْنَ الْحَقِيبَةُ؟", w:["ayna","haqiba"]},
+    {id:"sc6", pic:"🤲✏️", en:"I want a pen.", ar:"أُرِيدُ قَلَمًا.", w:["uridu","qalam"]},
+    {id:"sc7", pic:"🚗🔴", en:"The car is red.", ar:"السَّيَّارَةُ حَمْرَاءُ.", w:["sayyara","ahmar"]},
+    {id:"sc8", pic:"📖🔝🪑", en:"The book is on the chair.", ar:"الْكِتَابُ عَلَى الْكُرْسِيِّ.", w:["kitab","ala","kursi"]},
+    {id:"sc9", pic:"🤲🚗", en:"I want a big car.", ar:"أُرِيدُ سَيَّارَةً كَبِيرَةً.", w:["uridu","sayyara","kabir"], tip:"Car is a “her” word, so big is [[كَبِيرَةً]]."}
+   ]},
+  {id:"yummy", emoji:"🍰", en:"Yummy food", ar:"طَعَامٌ لَذِيذٌ",
+   words:[
+    {id:"asir", pic:"🧃", en:"juice", ar:"عَصِيرٌ"},
+    {id:"aruzz", pic:"🍚", en:"rice", ar:"أَرُزٌّ"},
+    {id:"bayd", pic:"🥚", en:"eggs", ar:"بَيْضٌ"},
+    {id:"dajaj", pic:"🍗", en:"chicken", ar:"دَجَاجٌ"},
+    {id:"kaka", pic:"🍰", en:"a cake", ar:"كَعْكَةٌ"},
+    {id:"inab", pic:"🍇", en:"grapes", ar:"عِنَبٌ"},
+    {id:"ladhidh", pic:"🤤", en:"delicious", ar:"لَذِيذٌ", her:"لَذِيذَةٌ"}
+   ],
+   sents:[
+    {id:"yu1", pic:"🤲🧃", en:"I want juice.", ar:"أُرِيدُ عَصِيرًا.", w:["uridu","asir"]},
+    {id:"yu2", pic:"❤️🍚", en:"I love rice.", ar:"أُحِبُّ الْأَرُزَّ.", w:["uhibbu","aruzz"]},
+    {id:"yu3", pic:"🍽️🥚", en:"I eat eggs.", ar:"آكُلُ بَيْضًا.", w:["akulu","bayd"]},
+    {id:"yu4", pic:"🥤🧃", en:"I drink juice.", ar:"أَشْرَبُ عَصِيرًا.", w:["ashrabu","asir"]},
+    {id:"yu5", pic:"🍰🤤", en:"The cake is delicious.", ar:"الْكَعْكَةُ لَذِيذَةٌ.", w:["kaka","ladhidh"], tip:"[[كَعْكَةٌ]] ends in [[ة]], so delicious is [[لَذِيذَةٌ]]."},
+    {id:"yu6", pic:"🍇🤤", en:"The grapes are delicious.", ar:"الْعِنَبُ لَذِيذٌ.", w:["inab","ladhidh"]},
+    {id:"yu7", pic:"🍗🍚", en:"I eat the chicken with the rice.", ar:"آكُلُ الدَّجَاجَ مَعَ الْأَرُزِّ.", w:["akulu","dajaj","maa2","aruzz"]}
+   ]},
+  {id:"outside", emoji:"🌳", en:"Outside", ar:"فِي الْحَدِيقَةِ",
+   words:[
+    {id:"shams", pic:"☀️", en:"the sun", ar:"شَمْسٌ"},
+    {id:"qamar", pic:"🌙", en:"the moon", ar:"قَمَرٌ"},
+    {id:"najm", pic:"⭐", en:"a star", ar:"نَجْمٌ"},
+    {id:"shajara", pic:"🌳", en:"a tree", ar:"شَجَرَةٌ"},
+    {id:"zahra", pic:"🌸", en:"a flower", ar:"زَهْرَةٌ"},
+    {id:"hadiqa", pic:"🏡", en:"a garden", ar:"حَدِيقَةٌ"},
+    {id:"jamil", pic:"🌈", en:"beautiful", ar:"جَمِيلٌ", her:"جَمِيلَةٌ"}
+   ],
+   sents:[
+    {id:"ou1", pic:"☀️🐋", en:"The sun is big.", ar:"الشَّمْسُ كَبِيرَةٌ.", w:["shams","kabir"], tip:"The sun is a “her” word, even with no [[ة]]."},
+    {id:"ou2", pic:"👉🌹", en:"This is a red flower.", ar:"هَذِهِ زَهْرَةٌ حَمْرَاءُ.", w:["hadhihi","zahra","ahmar"]},
+    {id:"ou3", pic:"🌳🟢", en:"The tree is green.", ar:"الشَّجَرَةُ خَضْرَاءُ.", w:["shajara","akhdar"]},
+    {id:"ou4", pic:"🧸🏡", en:"I play in the garden.", ar:"أَلْعَبُ فِي الْحَدِيقَةِ.", w:["alabu","fi","hadiqa"]},
+    {id:"ou5", pic:"❓🌙", en:"Where is the moon?", ar:"أَيْنَ الْقَمَرُ؟", w:["ayna","qamar"]},
+    {id:"ou6", pic:"👉⭐", en:"This is a beautiful star.", ar:"هَذَا نَجْمٌ جَمِيلٌ.", w:["hadha","najm","jamil"]},
+    {id:"ou7", pic:"🏡🌈", en:"The garden is beautiful.", ar:"الْحَدِيقَةُ جَمِيلَةٌ.", w:["hadiqa","jamil"]}
+   ]},
+  {id:"animals2", emoji:"🐴", en:"More animals", ar:"حَيَوَانَاتٌ أُخْرَى",
+   words:[
+    {id:"asad", pic:"🦁", en:"a lion", ar:"أَسَدٌ"},
+    {id:"hisan", pic:"🐴", en:"a horse", ar:"حِصَانٌ"},
+    {id:"arnab", pic:"🐰", en:"a rabbit", ar:"أَرْنَبٌ"},
+    {id:"baqara", pic:"🐄", en:"a cow", ar:"بَقَرَةٌ"}
+   ],
+   sents:[
+    {id:"am1", pic:"👉🦁", en:"This is a big lion.", ar:"هَذَا أَسَدٌ كَبِيرٌ.", w:["hadha","asad","kabir"]},
+    {id:"am2", pic:"👉🐄", en:"This is a cow.", ar:"هَذِهِ بَقَرَةٌ.", w:["hadhihi","baqara"]},
+    {id:"am3", pic:"🐰⚪", en:"The rabbit is white.", ar:"الْأَرْنَبُ أَبْيَضُ.", w:["arnab","abyad"]},
+    {id:"am4", pic:"❤️🐴", en:"I love the horse.", ar:"أُحِبُّ الْحِصَانَ.", w:["uhibbu","hisan"]},
+    {id:"am5", pic:"🤲🐰", en:"I want a rabbit.", ar:"أُرِيدُ أَرْنَبًا.", w:["uridu","arnab"]},
+    {id:"am6", pic:"🐄🐋", en:"The cow is big.", ar:"الْبَقَرَةُ كَبِيرَةٌ.", w:["baqara","kabir"]},
+    {id:"am7", pic:"🐴⚫", en:"The horse is black.", ar:"الْحِصَانُ أَسْوَدُ.", w:["hisan","aswad"]}
+   ]},
+  {id:"feelings", emoji:"😊", en:"How I feel", ar:"مَشَاعِرِي",
+   words:[
+    {id:"said", pic:"😊", en:"happy", ar:"سَعِيدٌ", f:{ar:"سَعِيدَةٌ"}, tip:"A boy says [[سَعِيدٌ]]. A girl says [[سَعِيدَةٌ]]."},
+    {id:"hazin", pic:"😢", en:"sad", ar:"حَزِينٌ", f:{ar:"حَزِينَةٌ"}, tip:"A boy says [[حَزِينٌ]]. A girl says [[حَزِينَةٌ]]."},
+    {id:"khaif", pic:"😨", en:"scared", ar:"خَائِفٌ", f:{ar:"خَائِفَةٌ"}, tip:"A boy says [[خَائِفٌ]]. A girl says [[خَائِفَةٌ]]."},
+    {id:"mutab", pic:"🥱", en:"tired", ar:"مُتْعَبٌ", f:{ar:"مُتْعَبَةٌ"}, tip:"A boy says [[مُتْعَبٌ]]. A girl says [[مُتْعَبَةٌ]]."},
+    {id:"atshan", pic:"🥵", en:"thirsty", ar:"عَطْشَانُ", f:{ar:"عَطْشَى"}, tip:"A boy says [[عَطْشَانُ]]. A girl says [[عَطْشَى]]."}
+   ],
+   sents:[
+    {id:"fe1", pic:"🙋😊", en:"I am happy.", ar:"أَنَا سَعِيدٌ.", w:["ana","said"], f:{ar:"أَنَا سَعِيدَةٌ."}},
+    {id:"fe2", pic:"🙋😢", en:"I am sad.", ar:"أَنَا حَزِينٌ.", w:["ana","hazin"], f:{ar:"أَنَا حَزِينَةٌ."}},
+    {id:"fe3", pic:"🙋😨", en:"I am scared.", ar:"أَنَا خَائِفٌ.", w:["ana","khaif"], f:{ar:"أَنَا خَائِفَةٌ."}},
+    {id:"fe4", pic:"🙋🥱", en:"I am tired.", ar:"أَنَا مُتْعَبٌ.", w:["ana","mutab"], f:{ar:"أَنَا مُتْعَبَةٌ."}},
+    {id:"fe5", pic:"🙋🥵", en:"I am thirsty.", ar:"أَنَا عَطْشَانُ.", w:["ana","atshan"], f:{ar:"أَنَا عَطْشَى."}},
+    {id:"fe6", pic:"🧕😊", en:"My mum is happy.", ar:"أُمِّي سَعِيدَةٌ.", w:["ummi","said"]},
+    {id:"fe7", pic:"🧔🥱", en:"My dad is tired.", ar:"أَبِي مُتْعَبٌ.", w:["abi","mutab"]},
+    {id:"fe8", pic:"🙋😊🧔🏻", en:"I am happy with my grandad.", ar:"أَنَا سَعِيدٌ مَعَ جَدِّي.", w:["ana","said","maa2","jaddi"], f:{ar:"أَنَا سَعِيدَةٌ مَعَ جَدِّي."}}
    ]}
 ];
 
@@ -646,7 +798,7 @@ function learnedItems(){ return ALL.filter(x => learned(x.id)); }
 /* Learned words go into the shared word bank, so Kalimat and Kalimat Plus can show them as known. */
 function shareWords(list){
   const p = me();
-  if (window.UA && p && p.ua) UA.addKnown(p.ua, list.flatMap(w => [w.ar, w.f && w.f.ar, w.her]));
+  if (window.UA && p && p.ua) UA.addKnown(p.ua, list.flatMap(w => [w.k || w.ar, w.f && w.f.ar, w.her]));
 }
 
 /* Development check: every sentence uses only words taught in its unit or earlier. */
@@ -810,7 +962,7 @@ function renderUnit(u){
     h += '<li><button class="wcell' + (learned(w.id) ? " ok" : "") + '" data-act="say" data-ar="' + esc(w.ar) + '"><span class="emo" aria-hidden="true">' + w.pic + '</span>' +
       '<span class="ar" lang="ar">' + esc(w.ar) + '</span><small>' + esc(w.en) + '</small></button></li>';
   });
-  return h + '</ul>';
+  return h + '</ul><p class="grownup">More word games: practise words in <a href="https://kalimat.ummahapps.ai/">Kalimat</a>, then make sentences here.</p>';
 }
 
 /* ---------- sessions ---------- */
