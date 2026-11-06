@@ -1,6 +1,6 @@
 # Takallum Kids (تَكَلُّم)
 
-> Takallum Kids is a free web app that helps children aged about 4 to 11 speak Modern Standard Arabic (fusha). Each unit teaches a handful of words with a picture and audio, then the child says short sentences of two to four words built from them. A daily warm-up brings them back over days and weeks until they are solid. No sign-up; progress is saved in the browser.
+> Takallum Kids is a free web app that helps children aged about 4 to 11 speak Modern Standard Arabic (fusha). Each unit teaches a handful of words with a picture and audio, then the child says short sentences built from them, mostly two to four words. A daily warm-up brings them back over days and weeks until they are solid. No sign-up; progress is saved in the browser.
 
 URL: https://takallum-kids.ummahapps.ai/
 Publisher: Ummah Apps (https://ummahapps.ai/)
@@ -13,7 +13,7 @@ Sister app for older learners: Takallum (https://takallum.ummahapps.ai/)
 
 1. **Meet the words**: each word card shows a picture, the vowelled Arabic and the English, and plays the audio.
 2. **Say the words**: the child sees the picture, says the Arabic out loud, taps "Show me" to see and hear it, then taps "I said it!" or "Try again". Try-again words come back a little later in the same round.
-3. **Say the sentences**: sentences use only words from that unit or earlier ones.
+3. **Say the sentences**: in units 1 to 21, sentences use only words from that unit or earlier ones.
 4. **Build the sentences**: the child taps the words of each sentence in the right order.
 5. **Warm-up**: once a day, up to 8 words and sentences come back. The child hears a word and picks its picture, or builds a sentence. Each one returns after 1, 3, 7, 14 and 30 days, and is solid once it has been right on 3 separate days.
 6. **Three stars for each unit**: words learned, sentences built, everything solid. The third star takes about two weeks and can fade if warm-ups are skipped.
@@ -23,7 +23,7 @@ Children who can't read Arabic yet can use Echo mode: each word and sentence is 
 
 Every unit is open from the start. Several children can share one device: each adds themselves with a name, an animal and "I'm a boy" or "I'm a girl", and keeps their own progress (tap the name at the top to switch). The boy/girl choice means sentences about themselves and the praise (أَحْسَنْتَ / أَحْسَنْتِ) match the child.
 
-## Units (150 words, 152 sentences)
+## Units (177 words, 184 sentences)
 
 1. My family (عَائِلَتِي): هَذَا، هَذِهِ، أُمِّي، أَبِي، أَخِي، أُخْتِي. Sentences like هَذِهِ أُمِّي (This is my mum).
 2. Hello (التَّحِيَّةُ): السَّلَامُ عَلَيْكُمْ، وَعَلَيْكُمُ السَّلَامُ، أَنَا، وَلَدٌ، بِنْتٌ، يَا، شُكْرًا. Sentences like شُكْرًا يَا أَبِي (Thank you, Dad).
@@ -47,6 +47,13 @@ Every unit is open from the start. Several children can share one device: each a
 19. Bedtime (وَقْتُ النَّوْمِ): sentences like حَانَ وَقْتُ النَّوْمِ (It's bedtime).
 20. Playing together (هَيَّا نَلْعَبْ): sentences like هَذَا دَوْرِي (It's my turn).
 21. Kind words (كَلِمَاتٌ طَيِّبَةٌ): sentences like أُحِبُّكِ يَا أُمِّي (I love you, Mum).
+
+From the ahadith. Each phrase keeps the wording of the hadith and shows its Sahih al-Bukhari or Sahih Muslim number. The English is a simple meaning, not a formal translation.
+
+22. Asking and answering (سُؤَالٌ وَجَوَابٌ): phrases like مَا اسْمُكَ؟ (What's your name?).
+23. Good manners (آدَابٌ جَمِيلَةٌ): phrases like يَا غُلَامُ، سَمِّ اللَّهَ (Young boy, say Bismillah).
+24. Duas and remembering Allah (أَدْعِيَةٌ وَأَذْكَارٌ): phrases like اللَّهُمَّ اغْفِرْ لِي (O Allah, forgive me).
+25. Good character (خُلُقٌ حَسَنٌ): phrases like كُلُّ مَعْرُوفٍ صَدَقَةٌ (Every good deed is charity).
 
 Units 8 to 15 add 50 words children use most from Kalimat (https://kalimat.ummahapps.ai/). Use Kalimat to practise words with games and Takallum Kids to make them into sentences.
 

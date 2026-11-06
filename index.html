@@ -84,8 +84,8 @@
       ],
       "about": {"@type": "Language", "name": "Arabic", "alternateName": "ar"},
       "featureList": [
-        "21 units, 150 first words, 152 short sentences",
-        "Every sentence uses only words taught in its unit or an earlier one",
+        "25 units, 177 first words, 184 short sentences, with phrases from the ahadith and their hadith numbers",
+        "Sentences in units 1 to 21 use only words taught in that unit or an earlier one",
         "A picture for every word and sentence",
         "Normal and slow Arabic audio",
         "Full vowel marks (harakat) on every word",
@@ -272,6 +272,9 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .say{display:flex;gap:10px;justify-content:center;margin-top:10px}
 .say button{border:2px solid var(--line);background:var(--sunk);border-radius:999px;padding:8px 18px;font-weight:600;font-size:.95rem;display:inline-flex;align-items:center;gap:6px;min-height:44px}
 .say .emo{font-size:1.1rem}
+.ref{margin:2px 0 8px;color:var(--muted);font-size:.84rem;text-align:center}
+.again-list .ref{display:block;margin:0;font-family:inherit;text-align:right;line-height:1.3}
+.sec-h h3{margin:14px 0 0;font-size:1.1rem}
 .tip{margin:14px 0 0;padding:10px 12px;background:var(--brass-soft);border-radius:12px;font-size:.92rem;text-align:left;width:100%}
 .actions{display:grid;gap:10px;grid-template-columns:1fr 1fr}
 .btn{border-radius:20px;padding:14px 10px;font-weight:700;font-size:1.1rem;border:3px solid transparent;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;line-height:1.25}
@@ -400,8 +403,8 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <li><strong>Practise again.</strong> Extra practice with the words and sentences that need it most, any time.</li>
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
-  <h3>Twenty-one units</h3>
-  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals, How I feel, Getting ready, At the table, Helping at home, Bedtime, Playing together and Kind words: 150 words and 152 sentences in all. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences. Each unit opens once the words in the one before are learned.</p>
+  <h3>Twenty-five units</h3>
+  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals, How I feel, Getting ready, At the table, Helping at home, Bedtime, Playing together and Kind words, then four units from the ahadith: Asking and answering, Good manners, Duas and remembering Allah, and Good character. That makes 177 words and 184 sentences in all. The hadith units keep the wording of Sahih al-Bukhari and Sahih Muslim, show each hadith number, and do not change for a boy or a girl. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences.</p>
   <h3>Questions</h3>
   <details><summary>Is it free?</summary><p>Yes. It is free, has no adverts and needs no sign-up. Progress is saved in this browser on this device.</p></details>
   <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
@@ -428,6 +431,8 @@ a.ua-app:hover{border-color:var(--f-lapis)}
 /* ---------- content ---------- */
 /* Each unit: words first, then sentences that use only words from this unit or earlier ones (listed in `w`).
    Words and sentences can carry an `f` override used when the child is a girl. `her` is the form used with “her” words. */
+/* From the ahadith: the Arabic of each sentence is copied from the numbered hadith on sunnah.com. Never edit it or give it a boy or girl form. */
+const HADITH_NOTE = "For grown-ups: the Arabic of each sentence is the wording of the hadith, and its number is shown with it. Some are a part of a longer hadith. The wording stays the same for boys and girls. The English is a simple meaning, not a formal translation.";
 const UNITS = [
   {id:"family", emoji:"🧔🧕", en:"My family", ar:"عَائِلَتِي",
    words:[
@@ -837,6 +842,85 @@ const UNITS = [
     {id:"ki8", pic:"💛🧔", en:"I love you, Dad.", ar:"أُحِبُّكَ يَا أَبِي.", w:["uhibbuka","ya","abi"]},
     {id:"ki9", pic:"😋🧕", en:"Mum, I’m hungry.", ar:"يَا أُمِّي، أَنَا جَائِعٌ.", w:["ya","ummi","ana","jaai"], f:{ar:"يَا أُمِّي، أَنَا جَائِعَةٌ."}},
     {id:"ki10", pic:"🥵🧕", en:"Mum, I’m thirsty.", ar:"يَا أُمِّي، أَنَا عَطْشَانُ.", w:["ya","ummi","ana","atshan"], f:{ar:"يَا أُمِّي، أَنَا عَطْشَى."}}
+   ]},
+  {id:"h_ask", emoji:"💬", en:"Asking and answering", ar:"سُؤَالٌ وَجَوَابٌ", sec:"From the ahadith", note:HADITH_NOTE,
+   words:[
+    {id:"ismuka", pic:"📛👉", en:"your name (to him)", ar:"اسْمُكَ"},
+    {id:"ismuhu", pic:"📛👦", en:"his name", ar:"اسْمُهُ"},
+    {id:"sabi", pic:"🧒🏽", en:"a young boy", ar:"صَبِيٌّ"},
+    {id:"laka", pic:"🎁👉", en:"for you, yours (to him)", ar:"لَكَ"},
+    {id:"lam", pic:"🚫⏪", en:"did not", ar:"لَمْ"},
+    {id:"nughayr", pic:"🐤", en:"a little bird", ar:"نُغَيْرٌ"}
+   ],
+   sents:[
+    {id:"ha1", pic:"🚪❓", en:"Who is it?", ar:"مَنْ ذَا؟", ref:"Sahih al-Bukhari 6250", tip:"When someone knocked and answered only “It’s me”, the Prophet ﷺ disliked it, so give your name.", w:["man"]},
+    {id:"ha2", pic:"📛❓", en:"What’s your name? (to him)", ar:"مَا اسْمُكَ؟", ref:"Sahih al-Bukhari 6190", w:["ma","ismuka"]},
+    {id:"ha3", pic:"❓🧒🏽", en:"Where is the boy?", ar:"أَيْنَ الصَّبِيُّ؟", ref:"Sahih al-Bukhari 6191", w:["ayna","sabi"]},
+    {id:"ha4", pic:"❓📛👦", en:"What is his name?", ar:"مَا اسْمُهُ؟", ref:"Sahih al-Bukhari 6191", w:["ma","ismuhu"]},
+    {id:"ha5", pic:"🤔😟", en:"What’s the matter? (to him)", ar:"مَا لَكَ؟", ref:"Sahih al-Bukhari 6148", w:["ma","laka"]},
+    {id:"ha6", pic:"🧠✅", en:"I didn’t forget.", ar:"لَمْ أَنْسَ.", ref:"Sahih al-Bukhari 6051", tip:"After [[لَمْ]], the verb [[أَنْسَى]] loses its last vowel.", w:["lam"]},
+    {id:"ha7", pic:"🎁🤫", en:"I kept this for you. (to him)", ar:"خَبَأْتُ هَذَا لَكَ.", ref:"Sahih al-Bukhari 6132", w:["hadha","laka"]},
+    {id:"ha8", pic:"👦🐤", en:"Abu Umayr, what did the little bird do?", ar:"يَا أَبَا عُمَيْرٍ، مَا فَعَلَ النُّغَيْرُ؟", ref:"Sahih al-Bukhari 6129", tip:"Said playfully to a little boy who had a pet bird.", w:["ya","ma","nughayr"]}
+   ]},
+  {id:"h_adab", emoji:"🤝", en:"Good manners", ar:"آدَابٌ جَمِيلَةٌ", sec:"From the ahadith", note:HADITH_NOTE,
+   words:[
+    {id:"ghulam", pic:"👦🏻", en:"a boy, a young lad", ar:"غُلَامٌ"},
+    {id:"samm", pic:"🍽️🗣️", en:"say Allah’s name!", ar:"سَمِّ", tip:"To a boy: [[سَمِّ]]. To a girl: [[سَمِّي]]."},
+    {id:"ayman", pic:"➡️👤", en:"the one on the right", ar:"الْأَيْمَنُ"},
+    {id:"ithnan", pic:"✌️", en:"two", ar:"اثْنَانِ"},
+    {id:"thalatha", pic:"3️⃣", en:"three", ar:"ثَلَاثَةٌ"},
+    {id:"salamw", pic:"🕊️", en:"peace", ar:"سَلَامٌ"},
+    {id:"rahma", pic:"💗", en:"mercy", ar:"رَحْمَةٌ"},
+    {id:"matar", pic:"🌧️", en:"rain", ar:"مَطَرٌ"}
+   ],
+   sents:[
+    {id:"hb1", pic:"👦🏻🍽️", en:"Young boy, say Bismillah.", ar:"يَا غُلَامُ، سَمِّ اللَّهَ.", ref:"Sahih al-Bukhari 5376", tip:"Said to a boy at the table. The hadith goes on: [[وَكُلْ بِيَمِينِكَ وَكُلْ مِمَّا يَلِيكَ]], eat with your right hand and eat what is near you.", w:["ya","ghulam","samm"]},
+    {id:"hb2", pic:"🥤➡️", en:"The one on the right, then the next on the right.", ar:"الْأَيْمَنَ فَالْأَيْمَنَ.", ref:"Sahih al-Bukhari 5612", tip:"For passing round a drink.", w:["ayman"]},
+    {id:"hb3", pic:"🍲✌️", en:"Food for two is enough for three.", ar:"طَعَامُ الِاثْنَيْنِ كَافِي الثَّلَاثَةِ.", ref:"Sahih al-Bukhari 5392", w:["taam","ithnan","thalatha"]},
+    {id:"hb4", pic:"🕊️👥", en:"Spread the greeting of peace among yourselves.", ar:"أَفْشُوا السَّلَامَ بَيْنَكُمْ.", ref:"Sahih Muslim 54 a", w:["salamw"]},
+    {id:"hb5", pic:"👋🧓", en:"The young greet the old.", ar:"يُسَلِّمُ الصَّغِيرُ عَلَى الْكَبِيرِ.", ref:"Sahih al-Bukhari 6231", w:["saghir","ala","kabir"]},
+    {id:"hb6", pic:"🤧💗", en:"May Allah have mercy on you. (to him, after a sneeze)", ar:"يَرْحَمُكَ اللَّهُ.", ref:"Sahih al-Bukhari 6224", tip:"The one who sneezes says [[الْحَمْدُ لِلَّهِ]].", w:["rahma"]},
+    {id:"hb7", pic:"🤧🤲", en:"May Allah guide you and set your affairs right.", ar:"يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ.", ref:"Sahih al-Bukhari 6224", tip:"The reply from the one who sneezed.", w:[]},
+    {id:"hb8", pic:"🌧️🤲", en:"We have been given rain by the kindness and mercy of Allah.", ar:"مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ.", ref:"Sahih al-Bukhari 1038", w:["rahma"]}
+   ]},
+  {id:"h_dua", emoji:"🤲", en:"Duas and remembering Allah", ar:"أَدْعِيَةٌ وَأَذْكَارٌ", sec:"From the ahadith", note:HADITH_NOTE,
+   words:[
+    {id:"allahumma", pic:"🤲☝️", en:"O Allah", ar:"اللَّهُمَّ"},
+    {id:"kathir", pic:"🔢", en:"a lot, many", ar:"كَثِيرٌ"},
+    {id:"tayyib", pic:"🌿", en:"good, pure", ar:"طَيِّبٌ"},
+    {id:"nas", pic:"👥", en:"people", ar:"النَّاسُ"},
+    {id:"quwwa", pic:"💪", en:"strength", ar:"قُوَّةٌ"}
+   ],
+   sents:[
+    {id:"hc1", pic:"🤲😴", en:"In Your name, O Allah, I die and I live.", ar:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.", ref:"Sahih al-Bukhari 6324", tip:"Before sleeping.", w:["allahumma"]},
+    {id:"hc2", pic:"🤲💧", en:"O Allah, forgive me.", ar:"اللَّهُمَّ اغْفِرْ لِي.", ref:"Sahih Muslim 2679 a", w:["allahumma","li"]},
+    {id:"hc3", pic:"🤲🧭", en:"O Allah, guide me and keep me on the right path.", ar:"اللَّهُمَّ اهْدِنِي وَسَدِّدْنِي.", ref:"Sahih Muslim 2725 a", w:["allahumma"]},
+    {id:"hc4", pic:"✨🤲", en:"Glory be to Allah, and praise be to Him.", ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.", ref:"Sahih al-Bukhari 6405", w:[]},
+    {id:"hc5", pic:"💪🤲", en:"There is no power and no strength except through Allah.", ar:"لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.", ref:"Sahih al-Bukhari 6384", w:["la","quwwa"]},
+    {id:"hc6", pic:"🤒🤲", en:"Take away the harm, Lord of mankind.", ar:"أَذْهِبِ الْبَاسَ رَبَّ النَّاسِ.", ref:"Sahih al-Bukhari 5675", tip:"For someone who is ill.", w:["nas"]},
+    {id:"hc7", pic:"🍽️🌿", en:"Praise be to Allah, much praise, good and blessed.", ar:"الْحَمْدُ لِلَّهِ كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ.", ref:"Sahih al-Bukhari 5458", tip:"Said after eating.", w:["kathir","tayyib"]}
+   ]},
+  {id:"h_good", emoji:"🌟", en:"Good character", ar:"خُلُقٌ حَسَنٌ", sec:"From the ahadith", note:HADITH_NOTE,
+   words:[
+    {id:"taghdab", pic:"😠", en:"you get angry (to him)", ar:"تَغْضَبْ", tip:"After [[لَا]], [[تَغْضَبْ]] means “don’t get angry”."},
+    {id:"maruf", pic:"🤗", en:"a good deed", ar:"مَعْرُوفٌ"},
+    {id:"sadaqa", pic:"🎁💛", en:"charity, a good gift", ar:"صَدَقَةٌ"},
+    {id:"sidq", pic:"🗣️✅", en:"telling the truth", ar:"صِدْقٌ"},
+    {id:"rifq", pic:"🐣", en:"gentleness", ar:"رِفْقٌ"},
+    {id:"khulq", pic:"🌟", en:"character, manners", ar:"خُلُقٌ"},
+    {id:"khayr", pic:"✨", en:"something good", ar:"خَيْرٌ"},
+    {id:"quran", pic:"📖✨", en:"the Qur’an", ar:"قُرْآنٌ"}
+   ],
+   sents:[
+    {id:"hd1", pic:"😠🚫", en:"Don’t get angry. (to him)", ar:"لَا تَغْضَبْ.", ref:"Sahih al-Bukhari 6116", w:["la","taghdab"]},
+    {id:"hd2", pic:"🤗🎁", en:"Every good deed is charity.", ar:"كُلُّ مَعْرُوفٍ صَدَقَةٌ.", ref:"Sahih al-Bukhari 6021", w:["maruf","sadaqa"]},
+    {id:"hd3", pic:"💗🔁", en:"Whoever does not show mercy will not be shown mercy.", ar:"مَنْ لَا يَرْحَمُ لَا يُرْحَمُ.", ref:"Sahih al-Bukhari 5997", tip:"[[يَرْحَمُ]] is “he shows mercy” and [[يُرْحَمُ]] is “he is shown mercy”.", w:["man","la","rahma"]},
+    {id:"hd4", pic:"🗣️✅👥", en:"Hold fast to telling the truth. (to a group)", ar:"عَلَيْكُمْ بِالصِّدْقِ.", ref:"Sahih Muslim 2607 c", w:["sidq"]},
+    {id:"hd5", pic:"🐣🧕", en:"Be gentle. (to her)", ar:"عَلَيْكِ بِالرِّفْقِ.", ref:"Sahih Muslim 2594 b", w:["rifq"]},
+    {id:"hd6", pic:"🌟💛", en:"Being good is good character.", ar:"الْبِرُّ حُسْنُ الْخُلُقِ.", ref:"Sahih Muslim 2553 a", w:["khulq"]},
+    {id:"hd7", pic:"🧼✨", en:"Cleanliness is half of faith.", ar:"الطُّهُورُ شَطْرُ الْإِيمَانِ.", ref:"Sahih Muslim 223", w:[]},
+    {id:"hd8", pic:"🤐✨", en:"Let him say something good or stay silent.", ar:"فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ.", ref:"Sahih al-Bukhari 6018", w:["khayr"]},
+    {id:"hd9", pic:"📖🎓", en:"The best of you are those who learn the Qur’an and teach it.", ar:"خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ.", ref:"Sahih al-Bukhari 5027", w:["man","quran"]}
    ]}
 ];
 
@@ -1064,6 +1148,7 @@ function renderHome(){
   if (known >= 3) h += '<li><button class="unit review" data-act="review"><span class="emo" aria-hidden="true">⭐</span><span class="t">Practise again</span>' +
     '<span class="s">A mix of ' + Math.min(8, known) + ' words and sentences you know</span></button></li>';
   UNITS.forEach((u, i) => {
+    if (u.sec && u.sec !== (UNITS[i - 1] || {}).sec) h += '<li class="sec-h"><h3>' + esc(u.sec) + '</h3></li>';
     const st = unitStars(u), sub = countLearned(u.words) + " of " + u.words.length + " words · " + countLearned(u.sents) + " of " + u.sents.length + " sentences";
     h += '<li><button class="unit' + (st[2] ? " all-done" : "") + '" data-act="unit" data-v="' + u.id + '">' + starsHTML(st) +
       '<span class="emo' + ([...u.emoji.replace(/️/g, "")].length > 1 ? " two" : "") + '" aria-hidden="true">' + u.emoji + '</span><span class="ar" lang="ar">' + esc(u.ar) + '</span>' +
@@ -1163,7 +1248,7 @@ function renderUnit(u){
     h += '<li><button class="wcell' + (learned(w.id) ? " ok" : "") + (isSolid(w.id) ? " solid" : "") + '" data-act="say" data-ar="' + esc(w.ar) + '"><span class="emo" aria-hidden="true">' + w.pic + '</span>' +
       '<span class="ar" lang="ar">' + esc(w.ar) + '</span><small>' + esc(w.en) + '</small></button></li>';
   });
-  return h + '</ul><p class="grownup">More word games: practise words in <a href="https://kalimat.ummahapps.ai/">Kalimat</a>, then make sentences here.</p>';
+  return h + '</ul>' + (u.note ? '<p class="grownup">' + esc(u.note) + '</p>' : "") + '<p class="grownup">More word games: practise words in <a href="https://kalimat.ummahapps.ai/">Kalimat</a>, then make sentences here.</p>';
 }
 
 /* ---------- sessions ---------- */
@@ -1283,6 +1368,7 @@ function sayCurrent(){
 }
 function progHTML(i, n){ return '<div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="' + n + '" aria-valuenow="' + i + '"><i style="width:' + Math.round(i / n * 100) + '%"></i></div>'; }
 function herHTML(it){ return it.her ? '<p class="her">For a “her” word: <bdi class="ari" dir="rtl" lang="ar">' + esc(it.her) + '</bdi></p>' : ""; }
+function refHTML(it){ return it.ref ? '<p class="ref">📖 ' + esc(it.ref) + '</p>' : ""; }
 function tipHTML(it){ return it.tip ? '<p class="tip">💡 ' + noteHTML(it.tip) + '</p>' : ""; }
 
 function renderLearn(s){
@@ -1300,8 +1386,8 @@ function renderSay(s){
     progHTML(s.idx, s.queue.length) + '<section class="card">' + picHTML(it.pic) +
     '<p class="cue">' + esc(it.en) + '</p>' + (echo() ? '<p class="ask">👂 Listen, then say it back! <bdi class="ari" dir="rtl" lang="ar">' + esc(T.echo()) + '</bdi></p>'
       : '<p class="ask">Say it in Arabic! <bdi class="ari" dir="rtl" lang="ar">' + esc(T.sayIt()) + '</bdi></p>') + '<div class="answer">';
-  if (s.revealed && echo()) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + sayButtons(it.ar);
-  else if (s.revealed) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + herHTML(it) + sayButtons(it.ar) + tipHTML(it);
+  if (s.revealed && echo()) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + refHTML(it) + sayButtons(it.ar);
+  else if (s.revealed) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + refHTML(it) + herHTML(it) + sayButtons(it.ar) + tipHTML(it);
   else h += '<p class="ask" aria-hidden="true" style="font-size:2.2rem">🗣️</p>';
   h += '</div></section><div class="actions">';
   if (!s.revealed) h += '<button class="btn primary" data-act="reveal">👀 Show me</button>';
@@ -1312,7 +1398,7 @@ function renderSay(s){
 function renderPick(s){
   const cur = s.queue[s.idx], it = gv(cur.it), shown = s.complete || !echo() || voiceState !== "ok";
   let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">🔥 Warm-up · ' + (s.idx + 1) + ' / ' + s.queue.length + '</span></div>' +
-    progHTML(s.idx, s.queue.length) + '<section class="card">' + (shown ? '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' : '<p class="ask" aria-hidden="true" style="font-size:2.2rem">👂</p>') + sayButtons(it.ar) +
+    progHTML(s.idx, s.queue.length) + '<section class="card">' + (shown ? '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + (s.complete ? refHTML(it) : "") : '<p class="ask" aria-hidden="true" style="font-size:2.2rem">👂</p>') + sayButtons(it.ar) +
     '<p class="ask" style="margin-top:10px">Which picture is it?</p></section><div class="picks" role="group" aria-label="Pictures">' + s.opts.map((o, i) => {
       const right = o.id === cur.it.id, cls = !s.complete ? "" : right ? " right" : s.chosen === i ? " wrong" : " faded";
       return '<button class="choice' + cls + '" data-act="choose" data-v="' + i + '"' + (s.complete ? " disabled" : "") + '><span class="emo' + ([...o.pic].length > 4 ? " long" : "") + '" aria-hidden="true">' + o.pic + '</span><small>' + esc(o.en) + '</small></button>';
@@ -1325,7 +1411,7 @@ function renderBuild(s){
   let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">' + (warm ? "🔥 Warm-up" : esc(s.unit.en)) + ' · ' + (s.idx + 1) + ' / ' + n + '</span></div>' +
     progHTML(s.idx, n) + '<section class="card">' + picHTML(it.pic) + '<p class="cue">' + esc(it.en) + '</p>' +
     '<p class="ask">🧩 Tap the words in the right order.</p><div class="answer">';
-  if (s.complete) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + sayButtons(it.ar) + tipHTML(it);
+  if (s.complete) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + refHTML(it) + sayButtons(it.ar) + tipHTML(it);
   else h += '<div class="line" lang="ar">' + s.words.map((w, i) => i < s.placed ? '<span class="slot">' + esc(w) + '</span>' : '<span class="gap" aria-hidden="true"></span>').join("") + '</div>';
   h += '</div></section>';
   if (s.complete) return h + '<div class="actions"><button class="btn got" style="grid-column:1 / -1" data-act="bnext">' + (s.slip ? "😊 " : "🌟 ") + (s.idx < n - 1 ? "Next ›" : "Finish") + '</button></div>';
@@ -1351,7 +1437,7 @@ function renderDone(s){
     s.first + ' of ' + s.total + ' right the first time.</p>' +
     (s.solid ? '<p class="solid-note">💪 ' + s.solid + (s.solid === 1 ? " more is" : " more are") + ' solid now!</p>' : "");
   if (missed.length) h += '<p class="score" style="margin-bottom:8px">' + (s.kind === "warm" ? "These come back tomorrow:" : s.kind === "build" ? "Listen to these once more:" : "Say these once more:") + '</p><ul class="again-list">' + missed.map(m =>
-      '<li><span class="emo" aria-hidden="true">' + m.pic + '</span><span class="ar" lang="ar">' + esc(m.ar) + '</span><button data-act="say" data-ar="' + esc(m.ar) + '" aria-label="Listen"><span class="emo">🔊</span></button></li>').join("") + '</ul>';
+      '<li><span class="emo" aria-hidden="true">' + m.pic + '</span><span class="ar" lang="ar">' + esc(m.ar) + (m.ref ? '<small class="ref" lang="en">' + esc(m.ref) + '</small>' : "") + '</span><button data-act="say" data-ar="' + esc(m.ar) + '" aria-label="Listen"><span class="emo">🔊</span></button></li>').join("") + '</ul>';
   if (s.kind === "warm" && !moreDue) h += '<p class="score">Come back tomorrow for your next warm-up.</p>';
   h += '<div class="actions">' + next + (s.kind === "warm" ? "" : '<button class="btn ' + (next ? "ghost" : "primary") + '" data-act="again">Play again 🔁</button>') +
        '<button class="btn ' + (s.kind === "warm" && !moreDue ? "primary" : "ghost") + '" data-act="back">' + (u ? "Back to " + esc(u.en) : "Back home") + '</button></div>' +

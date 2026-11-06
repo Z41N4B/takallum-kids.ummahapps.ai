@@ -2,7 +2,7 @@
 
 A free Arabic speaking app for children aged about 4 to 11, and the children's version of [Takallum](https://takallum.ummahapps.ai/). Live at https://takallum-kids.ummahapps.ai/
 
-**Content:** 21 units, 150 words and 152 sentences of two to four words, all in fully vowelled Modern Standard Arabic. Units 8 to 15 add 50 of the words children use most from Kalimat: use Kalimat to practise words and Takallum Kids to make sentences. Units 16 to 21 are for home and family, adapted for young children from Takallum's At home with children group: commands use the child's own form (boy or girl), and the "several children" forms are left out.
+**Content:** 25 units, 177 words and 184 sentences, mostly two to four words, all in fully vowelled Modern Standard Arabic. Units 8 to 15 add 50 of the words children use most from Kalimat: use Kalimat to practise words and Takallum Kids to make sentences. Units 16 to 21 are for home and family, adapted for young children from Takallum's At home with children group: commands use the child's own form (boy or girl), and the "several children" forms are left out. Units 22 to 25 hold 32 short phrases from the ahadith, chosen from Takallum's From the ahadith group: each keeps the wording and the Sahih al-Bukhari or Sahih Muslim number and has no boy or girl form. One is the opening part of a longer hadith. No scholar has reviewed them.
 
 ## How it works
 - **Meet the words:** picture, vowelled Arabic, English and audio for each word in the unit.
