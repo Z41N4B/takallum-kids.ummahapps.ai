@@ -85,13 +85,14 @@
       "about": {"@type": "Language", "name": "Arabic", "alternateName": "ar"},
       "featureList": [
         "15 units, 97 first words, 104 short sentences",
-        "Every sentence uses only words the child has already learned",
+        "Every sentence uses only words taught in its unit or an earlier one",
         "A picture for every word and sentence",
         "Normal and slow Arabic audio",
         "Full vowel marks (harakat) on every word",
         "Boy and girl forms, chosen at the start",
         "Happy and try-again buttons; words that need practice come back sooner",
-        "Units open one by one as the words are learned",
+        "Every unit is open from the start",
+        "A daily warm-up brings words and sentences back over days and weeks until they are solid, with three stars for each unit",
         "Several children on one device, each with their own name, animal and progress"
       ],
       "publisher": {"@id": "https://ummahapps.ai/#org"},
@@ -106,7 +107,9 @@
         {"@type": "Question", "name": "What age is Takallum Kids for?",
          "acceptedAnswer": {"@type": "Answer", "text": "Children aged about 4 to 11 who can read Arabic letters with vowel marks. Younger children can lean on the pictures and the audio."}},
         {"@type": "Question", "name": "How does Takallum Kids teach speaking?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Each unit starts with a handful of words, each with a picture and audio. The child then says each word from its picture, taps Show me to see and hear the Arabic, and taps the happy button or Try again. Once the words are learned, the unit's short sentences open, and they use only words the child already knows."}},
+         "acceptedAnswer": {"@type": "Answer", "text": "Each unit starts with a handful of words, each with a picture and audio. The child then says each word from its picture, taps Show me to see and hear the Arabic, and taps the happy button or Try again. Then come the unit's short sentences, which use only words from that unit or earlier ones, and a game of building them word by word."}},
+        {"@type": "Question", "name": "How does Takallum Kids make sure words stick?",
+         "acceptedAnswer": {"@type": "Answer", "text": "All units are open from the start, so children can explore freely. A daily warm-up of about three minutes brings back up to eight words and sentences. The child hears a word and picks its picture, or builds a sentence word by word. Each one comes back after 1, 3, 7, 14 and 30 days, and it counts as solid once it has been right on three separate days. Each unit shows three stars: words learned, sentences built, and everything solid."}},
         {"@type": "Question", "name": "Which kind of Arabic does Takallum Kids teach?",
          "acceptedAnswer": {"@type": "Answer", "text": "Modern Standard Arabic (fusha), the Arabic of books and school that is understood across the Arab world. Every word is fully vowelled."}},
         {"@type": "Question", "name": "Does it have boy and girl forms?",
@@ -213,7 +216,13 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .unit .s{color:var(--muted);font-size:.88rem}
 .unit .meter{grid-column:2;height:8px;background:var(--sunk);border-radius:8px;overflow:hidden;margin-top:4px}
 .unit .meter i{display:block;height:100%;background:var(--brass);border-radius:8px}
-.unit.locked{opacity:.55;cursor:default}
+.unit{position:relative}
+.unit .ustars{position:absolute;top:12px;right:14px;font-size:.95rem;width:auto;letter-spacing:.04em;line-height:1}
+.ustars i,.goal i{font-style:normal}
+.ustars i.off,.goal:not(.on) i{filter:grayscale(1);opacity:.28}
+.unit.warm{background:var(--lapis-soft);border:2px solid var(--lapis)}
+.unit.warm .t{font-size:1.15rem;font-weight:700}
+.unit.warm.idle{background:var(--surface);border:1px solid var(--line)}
 .unit.review{background:var(--brass-soft);border-color:transparent}
 .unit.all-done .meter i{background:var(--good)}
 .sync{color:var(--muted);font-size:.82rem;text-align:center;margin-top:22px}
@@ -233,7 +242,12 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .step .s{grid-column:2;color:var(--muted);font-size:.88rem}
 .step .go{grid-row:1 / span 2;grid-column:3;font-size:1.4rem;color:var(--lapis)}
 .step.next{border-color:var(--lapis);background:var(--lapis-soft)}
-.step:disabled{opacity:.55;cursor:default}
+.goals{list-style:none;margin:0 0 14px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;gap:8px}
+.goal{display:grid;grid-template-columns:auto 1fr auto;gap:0 10px;align-items:center}
+.goal i{font-size:1.25rem;grid-row:1 / span 2}
+.goal b{font-size:.98rem}
+.goal .c{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.goal small{grid-column:2 / -1;color:var(--muted);font-size:.84rem;line-height:1.3}
 .grid-h{font-size:.95rem;font-weight:600;color:var(--muted);margin:0 2px 8px}
 .wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px;margin:0 0 8px;padding:0;list-style:none}
 .wcell{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
@@ -241,6 +255,7 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .wcell .ar{font-size:1.35rem;line-height:1.6}
 .wcell small{color:var(--muted);font-size:.78rem;line-height:1.2;text-align:center}
 .wcell.ok::after{content:"⭐";position:absolute;top:4px;right:6px;font-size:.8rem}
+.wcell.solid::after{content:"💪"}
 
 /* cards */
 .prog{height:8px;background:var(--sunk);border-radius:8px;overflow:hidden;margin-bottom:14px}
@@ -274,6 +289,16 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .tile.used{visibility:hidden}
 .tile.bad{animation:wig .4s ease;border-color:var(--miss)}
 @keyframes wig{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+/* warm-up: pick the right picture */
+.picks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
+.choice{background:var(--surface);border:3px solid var(--line);border-radius:20px;padding:10px 6px;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--ink)}
+.choice .emo{font-size:2.7rem;line-height:1.2}
+.choice .emo.long{font-size:1.9rem}
+.choice small{font-size:.9rem;line-height:1.25;text-align:center}
+.choice.right{border-color:var(--good);background:var(--surface)}
+.choice.wrong{border-color:var(--miss);animation:wig .4s ease}
+.choice.faded{opacity:.45}
+.done .solid-note{font-weight:700;margin:0 0 14px}
 .mode-btns .emo{font-size:2.4rem}
 .grownup{margin:18px 0 0;padding:12px 14px;background:var(--lapis-soft);border-radius:14px;font-size:.92rem;text-align:left}
 .grownup a{color:var(--lapis);font-weight:600}
@@ -363,14 +388,16 @@ a.ua-app:hover{border-color:var(--f-lapis)}
 
 <footer class="wrap about" id="about">
   <h2>About Takallum Kids (for grown-ups)</h2>
-  <p><strong>Takallum Kids</strong> (<bdi class="ari" dir="rtl" lang="ar">تَكَلُّم</bdi>, “speaking”) is a free Arabic speaking app for children aged about 4 to 11. It is the children’s version of <a href="https://takallum.ummahapps.ai/">Takallum</a>. Children learn a handful of words first, each with a picture and audio, and then say short sentences built only from words they already know.</p>
+  <p><strong>Takallum Kids</strong> (<bdi class="ari" dir="rtl" lang="ar">تَكَلُّم</bdi>, “speaking”) is a free Arabic speaking app for children aged about 4 to 11. It is the children’s version of <a href="https://takallum.ummahapps.ai/">Takallum</a>. Children learn a handful of words first, each with a picture and audio, and then say short sentences built from those words.</p>
   <h3>How it works</h3>
   <ul>
     <li><strong>Meet the words.</strong> Each unit starts with 5 to 8 words. Your child sees the picture, the vowelled Arabic and the English, and hears it.</li>
     <li><strong>Say the words.</strong> Your child sees the picture, says the Arabic out loud, taps <strong>Show me</strong> to see and hear it, then taps <strong>I said it!</strong> or <strong>Try again</strong>. Words to try again come back a little later.</li>
-    <li><strong>Say the sentences.</strong> Once all the words are learned, two to four word sentences open, like <bdi class="ari" dir="rtl" lang="ar">هَذَا قِطٌّ</bdi> (this is a cat), <bdi class="ari" dir="rtl" lang="ar">أُحِبُّ أُمِّي</bdi> (I love my mum) and <bdi class="ari" dir="rtl" lang="ar">أَيْنَ الْكُرَةُ؟</bdi> (where is the ball?).</li>
+    <li><strong>Say the sentences.</strong> Two to four word sentences made from the words, like <bdi class="ari" dir="rtl" lang="ar">هَذَا قِطٌّ</bdi> (this is a cat), <bdi class="ari" dir="rtl" lang="ar">أُحِبُّ أُمِّي</bdi> (I love my mum) and <bdi class="ari" dir="rtl" lang="ar">أَيْنَ الْكُرَةُ؟</bdi> (where is the ball?).</li>
     <li><strong>Build the sentences.</strong> Your child taps the words of each sentence in the right order, hearing each word as they tap it.</li>
-    <li><strong>Practise again.</strong> Mixes the words and sentences that need it most, so they stay fresh.</li>
+    <li><strong>Warm-up.</strong> Once a day, up to eight words and sentences come back. Your child hears a word and picks its picture, or builds a sentence, so it can’t just be tapped through. Each one returns after 1, 3, 7, 14 and 30 days.</li>
+    <li><strong>Three stars.</strong> Every unit is open from the start. Each one shows a star for learning the words, one for building the sentences, and one for making everything solid, which means right on three separate days. The third star takes about two weeks and can fade if warm-ups are skipped.</li>
+    <li><strong>Practise again.</strong> Extra practice with the words and sentences that need it most, any time.</li>
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
   <h3>Fifteen units</h3>
@@ -380,6 +407,7 @@ a.ua-app:hover{border-color:var(--f-lapis)}
   <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
   <details><summary>Which kind of Arabic does it teach?</summary><p>Modern Standard Arabic (fusha), the Arabic of books and school, understood across the Arab world. Every word is fully vowelled.</p></details>
   <details><summary>Does it have boy and girl forms?</summary><p>Yes. Each child picks <strong>I’m a boy</strong> or <strong>I’m a girl</strong> when they add themselves, and you can change it by tapping their name at the top. Sentences about themselves change, like <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعٌ</bdi> and <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعَةٌ</bdi> (I am hungry), and so does the praise: <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتَ</bdi> or <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتِ</bdi>.</p></details>
+  <details><summary>How do I know my child really knows the words?</summary><p>Look for the third star on each unit. All units are open, so a child can move on whenever they like, but the third star only comes from getting every word and sentence right in the warm-up on three separate days. There is no microphone check, because phones often mishear children, so saying a word out loud is on trust and the warm-up does the checking.</p></details>
   <details><summary>Why is there no sound?</summary><p>The app speaks with your device’s own Arabic text-to-speech voice, and many phones, especially Samsung, don’t have one until you add it. Tap <strong>No sound? How to add an Arabic voice</strong> on the home screen for steps for your device.</p></details>
   <details><summary>Can several children use the same device?</summary><p>Yes. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child or add another. Progress stays in this browser on this device; nothing is sent anywhere. To start one child over, open settings and choose <strong>Start again</strong>.</p></details>
   <p class="credit">Takallum Kids is part of <a href="https://ummahapps.ai/">Ummah Apps</a>. For older learners, try <a href="https://takallum.ummahapps.ai/">Takallum</a>.</p>
@@ -683,7 +711,8 @@ const UNITS = [
 /* ---------- state + storage ---------- */
 /* Each child on the device has a profile {id, name, kid: "boy"|"girl", avatar, mode: "read"|"echo"} and their own progress.
    Echo mode is for children who can't read Arabic yet: each word or sentence is spoken first and the child says it back.
-   progress.items[id] = {b: level 0–5, l: learned (got it at least once), t: last seen} */
+   progress.items[id] = {b: level 0–5, l: learned (got it at least once), t: last seen,
+     n: warm-up checks passed on separate days (0–5), due: day number it comes back, u: sentence built with no wrong taps} */
 let progress = {items:{}};
 let settings = {autoplay:true, voiceHelp:true};
 let profiles = {active:null, list:[]};
@@ -796,7 +825,26 @@ function rec(id){ return progress.items[id] || {b:0, l:false, t:0}; }
 const learned = id => rec(id).l;
 const countLearned = list => list.filter(x => learned(x.id)).length;
 const wordsDone = u => u.words.every(w => learned(w.id));
-const unitOpen = i => i === 0 || wordsDone(UNITS[i - 1]);
+/* Solid learning. Nothing is ever locked; what grows slowly is r.n, which only a warm-up check can raise, and only
+   when the item is due, so at most once a day. After n checks an item waits GAP[n] days. Passed SOLID times it is
+   solid, until it has been overdue for more than RUSTY_AFTER days. "I said it!" never raises r.n. */
+const GAP = [1, 3, 7, 14, 30, 30], SOLID = 3, RUSTY_AFTER = 7;
+const today = () => Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 864e5);
+const nOf = id => rec(id).n || 0;
+const dueOf = id => rec(id).due || 0;
+const isDue = id => learned(id) && dueOf(id) <= today();
+const isSolid = id => nOf(id) >= SOLID && today() - dueOf(id) <= RUSTY_AFTER;
+const isRusty = id => nOf(id) >= SOLID && !isSolid(id);
+function firstLearned(r){ if (!r.l){ r.l = true; r.due = today() + GAP[0]; } }
+/* Children in Echo mode can't read the tiles, so saying the sentences stands in for building them. */
+const sentDone = id => echo() ? learned(id) : !!rec(id).u;
+const unitItems = u => [...u.words, ...u.sents];
+const unitStars = u => [wordsDone(u), u.sents.every(x => sentDone(x.id)), unitItems(u).every(x => isSolid(x.id))];
+function unitMeter(u){
+  const all = unitItems(u), got = all.reduce((t, x) => t + (learned(x.id) ? 1 : 0) + (isSolid(x.id) ? SOLID : Math.min(nOf(x.id), SOLID - 1)), 0);
+  return Math.round(got / (all.length * (SOLID + 1)) * 100);
+}
+function dueItems(){ return ALL.filter(x => isDue(x.id)).sort((a, b) => nOf(a.id) - nOf(b.id) || dueOf(a.id) - dueOf(b.id)); }
 function learnedItems(){ return ALL.filter(x => learned(x.id)); }
 /* Learned words go into the shared word bank, so Kalimat and Kalimat Plus can show them as known. */
 function shareWords(list){
@@ -864,20 +912,31 @@ function headerHTML(){
          (p ? '<button class="me" data-act="who" aria-label="Who is learning: ' + esc(p.name) + '. Change"><span class="emo" aria-hidden="true">' + p.avatar + '</span><span class="nm">' + esc(p.name) + '</span></button>' : "") +
          '<button class="icon-btn" data-act="settings" aria-label="Settings">' + ICON_GEAR + '</button></header>';
 }
+function starsHTML(st){
+  return '<span class="ustars emo" role="img" aria-label="' + st.filter(Boolean).length + ' of 3 stars">' + st.map(on => '<i' + (on ? "" : ' class="off"') + '>⭐</i>').join("") + '</span>';
+}
+function warmCardHTML(){
+  if (!learnedItems().length) return "";
+  const due = dueItems().length, again = progress.warmDay === today();
+  if (due) return '<li><button class="unit warm" data-act="warm"><span class="emo" aria-hidden="true">🔥</span><span class="t">' + (again ? "More warm-up" : "Warm-up") + '</span>' +
+    '<span class="s">' + (again ? due + " more waiting, if you like" : "Make your words solid · " + Math.min(8, due) + " to check") + '</span></button></li>';
+  const days = Math.min(...learnedItems().map(x => dueOf(x.id))) - today();
+  return '<li><div class="unit warm idle"><span class="emo" aria-hidden="true">✅</span><span class="t">' + (again ? "Warm-up done!" : "No warm-up today") + '</span>' +
+    '<span class="s">The next one is ' + (days === 1 ? "tomorrow" : "in " + days + " days") + '</span></div></li>';
+}
 function renderHome(){
   let h = headerHTML();
   h += voiceGuideHTML() + '<ul class="units">';
   const known = learnedItems().length;
+  h += warmCardHTML();
   if (known >= 3) h += '<li><button class="unit review" data-act="review"><span class="emo" aria-hidden="true">⭐</span><span class="t">Practise again</span>' +
     '<span class="s">A mix of ' + Math.min(8, known) + ' words and sentences you know</span></button></li>';
   UNITS.forEach((u, i) => {
-    const open = unitOpen(i), total = u.words.length + u.sents.length, n = countLearned(u.words) + countLearned(u.sents);
-    const sub = !open ? "🔒 Learn the words in " + UNITS[i - 1].en + " first"
-      : countLearned(u.words) + " of " + u.words.length + " words · " + countLearned(u.sents) + " of " + u.sents.length + " sentences";
-    h += '<li><button class="unit' + (open ? "" : " locked") + (n === total ? " all-done" : "") + '" data-act="unit" data-v="' + u.id + '"' + (open ? "" : ' aria-disabled="true"') + '>' +
+    const st = unitStars(u), sub = countLearned(u.words) + " of " + u.words.length + " words · " + countLearned(u.sents) + " of " + u.sents.length + " sentences";
+    h += '<li><button class="unit' + (st[2] ? " all-done" : "") + '" data-act="unit" data-v="' + u.id + '">' + starsHTML(st) +
       '<span class="emo' + ([...u.emoji.replace(/️/g, "")].length > 1 ? " two" : "") + '" aria-hidden="true">' + u.emoji + '</span><span class="ar" lang="ar">' + esc(u.ar) + '</span>' +
       '<span class="t">' + (i + 1) + '. ' + esc(u.en) + '</span><span class="s">' + sub + '</span>' +
-      '<span class="meter"><i style="width:' + Math.round(n / total * 100) + '%"></i></span></button></li>';
+      '<span class="meter"><i style="width:' + unitMeter(u) + '%"></i></span></button></li>';
   });
   h += '</ul><p class="sync">Progress saves on this device.</p>';
   return h;
@@ -948,21 +1007,28 @@ function deleteKid(){
 
 /* ---------- unit screen ---------- */
 function renderUnit(u){
-  const wd = countLearned(u.words), sd = countLearned(u.sents), done = wordsDone(u);
+  const wd = countLearned(u.words), sd = countLearned(u.sents), done = wordsDone(u), bd = u.sents.filter(x => rec(x.id).u).length;
   const seen = u.words.some(w => rec(w.id).t);
-  const next = !seen ? "learn" : !done ? "words" : "sents";
-  const step = (act, emo, t, s, dis) => '<li><button class="step' + (act === next ? " next" : "") + '" data-act="' + act + '"' + (dis ? " disabled" : "") + '>' +
+  const next = !seen ? "learn" : !done ? "words" : sd < u.sents.length ? "sents" : !echo() && bd < u.sents.length ? "build" : "";
+  const all = unitItems(u), st = unitStars(u), sentGoal = u.sents.filter(x => sentDone(x.id)).length;
+  const goal = (on, t, c, sub) => '<li class="goal' + (on ? " on" : "") + '"><i class="emo" aria-hidden="true">⭐</i><b>' + t + '</b><span class="c">' + c + '</span>' + (sub ? '<small>' + sub + '</small>' : "") + '</li>';
+  const step = (act, emo, t, s) => '<li><button class="step' + (act === next ? " next" : "") + '" data-act="' + act + '">' +
     '<span class="emo" aria-hidden="true">' + emo + '</span><span class="t">' + t + '</span><span class="go" aria-hidden="true">›</span><span class="s">' + s + '</span></button></li>';
   let h = '<div class="bar"><button class="link" data-act="back">‹ All units</button></div>' +
-    '<div class="uhead"><div class="emo" aria-hidden="true">' + u.emoji + '</div><h2 class="ar" lang="ar">' + esc(u.ar) + '</h2><p>' + esc(u.en) + '</p></div><ul class="steps">' +
+    '<div class="uhead"><div class="emo" aria-hidden="true">' + u.emoji + '</div><h2 class="ar" lang="ar">' + esc(u.ar) + '</h2><p>' + esc(u.en) + '</p></div>' +
+    '<ul class="goals" aria-label="Stars for this unit">' +
+    goal(st[0], "Learn the words", wd + " of " + u.words.length) +
+    goal(st[1], echo() ? "Say the sentences" : "Build the sentences", sentGoal + " of " + u.sents.length) +
+    goal(st[2], "Make it solid 💪", all.filter(x => isSolid(x.id)).length + " of " + all.length, all.some(x => isRusty(x.id)) ? "Some are getting rusty. Do your warm-up!" : "Get them right in your warm-up, over several days.") +
+    '</ul><ul class="steps">' +
     step("learn", "👀", "1. Meet the words", "See and hear " + u.words.length + " new words") +
     step("words", "🗣️", "2. Say the words", wd + " of " + u.words.length + " learned") +
-    step("sents", "💬", "3. Say the sentences", done ? sd + " of " + u.sents.length + " learned" : "🔒 Opens when you know all the words", !done) +
-    step("build", "🧩", "4. Build the sentences", done ? "Put the words in the right order" : "🔒 Opens when you know all the words", !done) +
+    step("sents", "💬", "3. Say the sentences", sd + " of " + u.sents.length + " learned") +
+    step("build", "🧩", "4. Build the sentences", bd + " of " + u.sents.length + " built with no slips") +
     '</ul><h3 class="grid-h">Tap a word to hear it</h3><ul class="wgrid">';
   u.words.forEach(w0 => {
     const w = gv(w0);
-    h += '<li><button class="wcell' + (learned(w.id) ? " ok" : "") + '" data-act="say" data-ar="' + esc(w.ar) + '"><span class="emo" aria-hidden="true">' + w.pic + '</span>' +
+    h += '<li><button class="wcell' + (learned(w.id) ? " ok" : "") + (isSolid(w.id) ? " solid" : "") + '" data-act="say" data-ar="' + esc(w.ar) + '"><span class="emo" aria-hidden="true">' + w.pic + '</span>' +
       '<span class="ar" lang="ar">' + esc(w.ar) + '</span><small>' + esc(w.en) + '</small></button></li>';
   });
   return h + '</ul><p class="grownup">More word games: practise words in <a href="https://kalimat.ummahapps.ai/">Kalimat</a>, then make sentences here.</p>';
@@ -993,31 +1059,90 @@ function startBuild(u){
   S.session = {type:"build", kind:"build", unit:u, items:shuffle(u.sents.slice()), idx:0, first:0, missed:new Set(), total:u.sents.length};
   buildItem(); render(); window.scrollTo(0, 0);
 }
+const buildSrc = s => s.type === "warm" ? s.queue[s.idx].it : s.items[s.idx];
 function buildItem(){
-  const s = S.session, words = gv(s.items[s.idx]).ar.split(/\s+/).map(bare);
-  const spare = shuffle(s.unit.words.map(w => bare(gv(w).ar)).filter(a => !words.includes(a) && !a.includes(" ")))[0];
+  const s = S.session, src = buildSrc(s), words = gv(src).ar.split(/\s+/).map(bare);
+  const spare = shuffle(UNITS[src.ui].words.map(w => bare(gv(w).ar)).filter(a => !words.includes(a) && !a.includes(" ")))[0];
   Object.assign(s, {words, placed:0, bad:null, slip:false, complete:false,
     tiles:shuffle(words.map(t => ({t, used:false})).concat(spare ? [{t:spare, used:false}] : []))});
 }
 function tapTile(i){
-  const s = S.session; if (!s || s.type !== "build" || s.complete) return;
+  const s = S.session; if (!s || !(s.type === "build" || s.mode === "build") || s.complete) return;
   const tile = s.tiles[i]; if (!tile || tile.used) return;
   speak(tile.t);
   if (tile.t === s.words[s.placed]){
     tile.used = true; s.placed++; s.bad = null;
     if (s.placed === s.words.length){
       s.complete = true;
-      if (s.slip) s.missed.add(s.items[s.idx].id); else s.first++;
-      setTimeout(() => { if (S.session === s) speak(gv(s.items[s.idx]).ar); }, 700);
+      const src = buildSrc(s);
+      if (s.type === "warm") warmResult(!s.slip);
+      else if (s.slip) s.missed.add(src.id);
+      else {
+        s.first++;
+        const r = rec(src.id); r.u = true; firstLearned(r); r.t = Date.now(); progress.items[src.id] = r; saveProgress();
+      }
+      setTimeout(() => { if (S.session === s && !s.done) speak(gv(src).ar); }, 700);
     }
   } else { s.bad = i; s.slip = true; }
   render();
 }
 function buildNext(){
-  const s = S.session; if (!s || s.type !== "build" || !s.complete) return;
+  const s = S.session; if (!s || !s.complete) return;
   s.idx++;
-  if (s.idx >= s.items.length){ s.done = true; render(); window.scrollTo(0, 0); speak(T.praise()); confetti(); return; }
-  buildItem(); render();
+  if (s.idx >= (s.type === "warm" ? s.queue.length : s.items.length)){
+    s.done = true;
+    if (s.type === "warm"){ progress.warmDay = today(); saveProgress(); }
+    render(); window.scrollTo(0, 0); speak(T.praise()); confetti(); return;
+  }
+  if (s.type === "warm") warmItem(); else buildItem();
+  render(); window.scrollTo(0, 0);
+}
+/* The daily warm-up: up to 8 items that are due, weakest first, as checks that can't be tapped through.
+   Words: hear the Arabic and pick the right picture. Sentences: build them (or pick the picture in Echo mode). */
+function startWarm(){
+  const due = dueItems(), w = due.filter(x => x.kind === "word").slice(0, 5), t = due.filter(x => x.kind === "sent").slice(0, 3);
+  const items = [...w, ...t, ...due.filter(x => !w.includes(x) && !t.includes(x))].slice(0, 8);
+  S.session = {type:"warm", kind:"warm", unit:null, queue:shuffle(items).map(it => ({it, tries:0})), idx:0, first:0, missed:new Set(), total:items.length, solid:0};
+  warmItem(); render(); window.scrollTo(0, 0);
+}
+function warmItem(){
+  const s = S.session, at = s.idx, it = s.queue[at].it;
+  s.mode = it.kind === "sent" && !echo() ? "build" : "pick";
+  if (s.mode === "build"){ buildItem(); return; }
+  Object.assign(s, {opts:pickOptions(it), chosen:null, complete:false});
+  if (settings.autoplay || echo()) setTimeout(() => { if (S.session === s && s.idx === at && !s.complete) speak(gv(it).ar); }, 250);
+}
+/* The right answer and three others with a different picture and meaning: same unit first, then words the child knows. */
+function pickOptions(it){
+  const near = x => x.ui === it.ui ? 0 : learned(x.id) ? 1 : 2;
+  const opts = [gv(it)];
+  shuffle(ALL.filter(x => x.kind === it.kind)).sort((a, b) => near(a) - near(b)).forEach(x0 => {
+    const x = gv(x0);
+    if (opts.length < 4 && !opts.some(o => o.pic === x.pic || o.en === x.en || o.ar === x.ar)) opts.push(x);
+  });
+  return shuffle(opts);
+}
+function tapChoice(i){
+  const s = S.session; if (!s || s.mode !== "pick" || s.complete || !s.opts[i]) return;
+  const it = s.queue[s.idx].it;
+  s.chosen = i; s.complete = true;
+  warmResult(s.opts[i].id === it.id);
+  speak(gv(it).ar); render();
+}
+/* Only the first try at an item counts. A miss comes back once in this round for practice, and again tomorrow. */
+function warmResult(ok){
+  const s = S.session, cur = s.queue[s.idx], id = cur.it.id;
+  if (cur.tries) return;
+  const was = isSolid(id), r = rec(id);
+  if (ok){
+    r.n = Math.min(nOf(id) + 1, GAP.length - 1); r.due = today() + GAP[r.n]; r.b = Math.min(r.b + 1, 5); s.first++;
+    if (s.mode === "build") r.u = true;
+  } else {
+    r.n = Math.max(nOf(id) - 1, 0); r.due = today() + 1; r.b = Math.max(r.b - 1, 0); s.missed.add(id);
+    s.queue.splice(Math.min(s.idx + 3, s.queue.length), 0, {it:cur.it, tries:1});
+  }
+  r.t = Date.now(); progress.items[id] = r; saveProgress();
+  if (!was && isSolid(id)) s.solid++;
 }
 function sayCurrent(){
   const s = S.session; if (!s || !settings.autoplay) return;
@@ -1051,15 +1176,26 @@ function renderSay(s){
             '<button class="btn got" data-act="mark" data-v="1">😊 I said it!</button>';
   return h + '</div><p class="keys">' + (echo() ? "Space: hear it again" : "Space: show me") + ' · 1: try again · 2: I said it</p>';
 }
+function renderPick(s){
+  const cur = s.queue[s.idx], it = gv(cur.it), shown = s.complete || !echo() || voiceState !== "ok";
+  let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">🔥 Warm-up · ' + (s.idx + 1) + ' / ' + s.queue.length + '</span></div>' +
+    progHTML(s.idx, s.queue.length) + '<section class="card">' + (shown ? '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' : '<p class="ask" aria-hidden="true" style="font-size:2.2rem">👂</p>') + sayButtons(it.ar) +
+    '<p class="ask" style="margin-top:10px">Which picture is it?</p></section><div class="picks" role="group" aria-label="Pictures">' + s.opts.map((o, i) => {
+      const right = o.id === cur.it.id, cls = !s.complete ? "" : right ? " right" : s.chosen === i ? " wrong" : " faded";
+      return '<button class="choice' + cls + '" data-act="choose" data-v="' + i + '"' + (s.complete ? " disabled" : "") + '><span class="emo' + ([...o.pic].length > 4 ? " long" : "") + '" aria-hidden="true">' + o.pic + '</span><small>' + esc(o.en) + '</small></button>';
+    }).join("") + '</div>';
+  if (s.complete) h += '<div class="actions"><button class="btn got" style="grid-column:1 / -1" data-act="bnext">' + (s.opts[s.chosen].id === cur.it.id ? "🌟 " : "😊 ") + (s.idx < s.queue.length - 1 ? "Next ›" : "Finish") + '</button></div>';
+  return h;
+}
 function renderBuild(s){
-  const it = gv(s.items[s.idx]);
-  let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">' + esc(s.unit.en) + ' · ' + (s.idx + 1) + ' / ' + s.items.length + '</span></div>' +
-    progHTML(s.idx, s.items.length) + '<section class="card">' + picHTML(it.pic) + '<p class="cue">' + esc(it.en) + '</p>' +
+  const warm = s.type === "warm", n = warm ? s.queue.length : s.items.length, it = gv(buildSrc(s));
+  let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">' + (warm ? "🔥 Warm-up" : esc(s.unit.en)) + ' · ' + (s.idx + 1) + ' / ' + n + '</span></div>' +
+    progHTML(s.idx, n) + '<section class="card">' + picHTML(it.pic) + '<p class="cue">' + esc(it.en) + '</p>' +
     '<p class="ask">🧩 Tap the words in the right order.</p><div class="answer">';
   if (s.complete) h += '<p class="big ar" lang="ar">' + esc(it.ar) + '</p>' + sayButtons(it.ar) + tipHTML(it);
   else h += '<div class="line" lang="ar">' + s.words.map((w, i) => i < s.placed ? '<span class="slot">' + esc(w) + '</span>' : '<span class="gap" aria-hidden="true"></span>').join("") + '</div>';
   h += '</div></section>';
-  if (s.complete) return h + '<div class="actions"><button class="btn got" style="grid-column:1 / -1" data-act="bnext">' + (s.slip ? "😊 " : "🌟 ") + (s.idx < s.items.length - 1 ? "Next ›" : "Finish") + '</button></div>';
+  if (s.complete) return h + '<div class="actions"><button class="btn got" style="grid-column:1 / -1" data-act="bnext">' + (s.slip ? "😊 " : "🌟 ") + (s.idx < n - 1 ? "Next ›" : "Finish") + '</button></div>';
   return h + '<div class="tiles" role="group" aria-label="Words">' + s.tiles.map((t, i) =>
     '<button class="tile' + (t.used ? " used" : "") + (s.bad === i ? " bad" : "") + '" lang="ar" data-act="tile" data-v="' + i + '"' + (t.used ? ' tabindex="-1" aria-hidden="true"' : "") + '>' + esc(t.t) + '</button>').join("") + '</div>';
 }
@@ -1067,7 +1203,9 @@ function renderDone(s){
   const pct = s.total ? s.first / s.total : 1, stars = pct >= .9 ? 3 : pct >= .5 ? 2 : 1;
   const u = s.unit, missed = [...s.missed].map(byId).map(gv);
   let next = "";
-  if (s.kind === "words" && wordsDone(u)) next = '<button class="btn primary" data-act="sents">Say the sentences 💬</button>';
+  const moreDue = s.kind === "warm" ? dueItems().length : 0;
+  if (moreDue) next = '<button class="btn primary" data-act="warm">🔥 Keep going</button>';
+  else if (s.kind === "words") next = '<button class="btn primary" data-act="sents">Say the sentences 💬</button>';
   else if (s.kind === "sents" || s.kind === "build"){
     const i = UNITS.indexOf(u);
     next = '<button class="btn primary" data-act="' + (s.kind === "sents" ? 'build">Build the sentences 🧩' : 'sents">Say the sentences 💬') + '</button>';
@@ -1077,11 +1215,13 @@ function renderDone(s){
   let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button></div><section class="done">' +
     '<p class="stars emo" aria-label="' + stars + ' stars">' + "⭐".repeat(stars) + '<span style="opacity:.25">' + "⭐".repeat(3 - stars) + '</span></p>' +
     '<p class="ar praise" lang="ar">' + esc(T.praise()) + '</p><p class="score">' + (stars === 3 ? "Brilliant! " : stars === 2 ? "Well done! " : "Good try! ") +
-    s.first + ' of ' + s.total + ' right the first time.</p>';
-  if (missed.length) h += '<p class="score" style="margin-bottom:8px">' + (s.kind === "build" ? "Listen to these once more:" : "Say these once more:") + '</p><ul class="again-list">' + missed.map(m =>
+    s.first + ' of ' + s.total + ' right the first time.</p>' +
+    (s.solid ? '<p class="solid-note">💪 ' + s.solid + (s.solid === 1 ? " more is" : " more are") + ' solid now!</p>' : "");
+  if (missed.length) h += '<p class="score" style="margin-bottom:8px">' + (s.kind === "warm" ? "These come back tomorrow:" : s.kind === "build" ? "Listen to these once more:" : "Say these once more:") + '</p><ul class="again-list">' + missed.map(m =>
       '<li><span class="emo" aria-hidden="true">' + m.pic + '</span><span class="ar" lang="ar">' + esc(m.ar) + '</span><button data-act="say" data-ar="' + esc(m.ar) + '" aria-label="Listen"><span class="emo">🔊</span></button></li>').join("") + '</ul>';
-  h += '<div class="actions">' + next + '<button class="btn ' + (next ? "ghost" : "primary") + '" data-act="again">Play again 🔁</button>' +
-       '<button class="btn ghost" data-act="back">' + (u ? "Back to " + esc(u.en) : "Back home") + '</button></div>' +
+  if (s.kind === "warm" && !moreDue) h += '<p class="score">Come back tomorrow for your next warm-up.</p>';
+  h += '<div class="actions">' + next + (s.kind === "warm" ? "" : '<button class="btn ' + (next ? "ghost" : "primary") + '" data-act="again">Play again 🔁</button>') +
+       '<button class="btn ' + (s.kind === "warm" && !moreDue ? "primary" : "ghost") + '" data-act="back">' + (u ? "Back to " + esc(u.en) : "Back home") + '</button></div>' +
        (last ? '<p class="grownup">For grown-ups: ready for more? <a href="https://kalimat.ummahapps.ai/">Kalimat</a> has over 400 more words with pictures, and the words learned here show up there as words you already know.</p>' : "") + '</section>';
   return h;
 }
@@ -1099,7 +1239,7 @@ function settingsHTML(){
     '<h2>Settings</h2><p class="for">For grown-ups.</p>' + voiceNotice() +
     '<div class="opt"><span>Children<small>Add a child, or change a name, boy or girl, animal, or Echo mode (for children who can’t read Arabic yet). Each child has their own progress.</small></span><button class="reset plain" data-act="who">Manage</button></div>' +
     opt("autoplay", "Play on reveal", "Speak the Arabic automatically when a word or sentence is shown.") +
-    (p ? '<div class="opt"><span>Start again<small>Clears ' + name + '’s progress, so all units lock again.</small></span><button class="reset" data-act="reset">Start again</button></div>' : "") +
+    (p ? '<div class="opt"><span>Start again<small>Clears ' + name + '’s words, sentences and stars.</small></span><button class="reset" data-act="reset">Start again</button></div>' : "") +
     '<div class="actions" style="margin-top:14px"><button class="btn primary" data-act="close">Done</button></div></div></div>';
 }
 
@@ -1116,7 +1256,8 @@ function render(){
   else if (!s) h = S.unit ? renderUnit(S.unit) : renderHome();
   else if (s.done) h = renderDone(s);
   else if (s.type === "learn") h = renderLearn(s);
-  else if (s.type === "build") h = renderBuild(s);
+  else if (s.type === "build" || s.mode === "build") h = renderBuild(s);
+  else if (s.type === "warm") h = renderPick(s);
   else h = renderSay(s);
   app.innerHTML = h + (S.sheet ? settingsHTML() : "");
   about.hidden = !!(s || S.unit || (S.view && profiles.list.length));
@@ -1151,7 +1292,7 @@ function reveal(){
 function mark(ok){
   const s = S.session; if (!s || s.type !== "say" || s.done || !s.revealed) return;
   const cur = s.queue[s.idx], id = cur.it.id, r = rec(id);
-  if (ok){ if (!s.missed.has(id)){ r.b = Math.min(r.b + 1, 5); s.first++; } if (!r.l && cur.it.kind === "word") shareWords([cur.it]); r.l = true; }
+  if (ok){ if (!s.missed.has(id)){ r.b = Math.min(r.b + 1, 5); s.first++; } if (!r.l && cur.it.kind === "word") shareWords([cur.it]); firstLearned(r); }
   else {
     r.b = Math.max(r.b - 1, 0); s.missed.add(id);
     if (cur.tries < 2) s.queue.splice(Math.min(s.idx + 3, s.queue.length), 0, {it:cur.it, tries:cur.tries + 1});
@@ -1192,7 +1333,6 @@ document.addEventListener("click", e => {
     case "delkid": deleteKid(); break;
     case "unit": {
       const i = UNITS.findIndex(u => u.id === v);
-      if (!unitOpen(i)) break;
       /* From a finished session: swap the unit underneath, then step back out of the session. */
       if (S.session){ S.unit = UNITS[i]; goBack(); }
       else enter(() => openUnit(UNITS[i]));
@@ -1205,6 +1345,8 @@ document.addEventListener("click", e => {
     case "tile": tapTile(+v); break;
     case "bnext": buildNext(); break;
     case "review": enter(() => startSay("review", null)); break;
+    case "warm": if (S.session) startWarm(); else enter(startWarm); break;
+    case "choose": tapChoice(+v); break;
     case "lnext": learnStep(1); break;
     case "lprev": learnStep(-1); break;
     case "reveal": reveal(); break;
@@ -1236,7 +1378,11 @@ document.addEventListener("keydown", e => {
   if (S.view === "edit" && e.key === "Enter" && e.target.dataset && e.target.dataset.field){ e.preventDefault(); saveKid(); return; }
   const s = S.session; if (!s || s.done) return;
   if (e.target.closest && e.target.closest("button") && (e.key === " " || e.key === "Enter")) return;
-  if (s.type === "build"){ if (s.complete && (e.key === " " || e.key === "Enter")){ e.preventDefault(); buildNext(); } return; }
+  if (s.type === "build" || s.type === "warm"){
+    if (s.complete && (e.key === " " || e.key === "Enter")){ e.preventDefault(); buildNext(); }
+    else if (s.mode === "pick" && /^[1-4]$/.test(e.key)) tapChoice(+e.key - 1);
+    return;
+  }
   if (s.type === "learn"){
     if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter"){ e.preventDefault(); learnStep(1); }
     else if (e.key === "ArrowLeft") learnStep(-1);
