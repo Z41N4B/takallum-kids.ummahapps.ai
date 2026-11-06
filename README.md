@@ -12,6 +12,7 @@ A free Arabic speaking app for children aged about 4 to 11, and the children's v
 - **Echo mode:** chosen per child ("I listen" when adding or changing a child) for children who can't read Arabic yet. In Say the words and Say the sentences the Arabic is shown and spoken straight away, and the child says it back.
 - **Practise again:** up to 8 known items, lowest level and least recently seen first.
 - A word taught in another form than Kalimat lists it (جَدِّي for جَدّ, أَذْهَبُ for ذَهَبَ) has `k`, the Kalimat form, so it counts as known there.
+- `SAY` in `index.html` changes how a word is sent to the voice when a voice misreads it, without changing what is shown.
 - Units open one by one as the words in the previous unit are learned.
 - Children: several profiles per device (`takallum-kids-profiles` in localStorage: name, boy/girl, animal), each with its own progress under `takallum-kids-progress-<id>`. Progress saved before profiles existed moves into a first profile called Learner 1.
 - Boy or girl, chosen per child: words and sentences can carry an `f` override (and `ftip`) for a girl; praise and instructions switch too. `her` holds the form used with “her” words (colours, big, small).

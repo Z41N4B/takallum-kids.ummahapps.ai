@@ -752,11 +752,13 @@ if ("speechSynthesis" in window){
   setTimeout(() => { const before = voiceState; loadVoices(); if (voiceState === "unknown") voiceState = arVoice ? "ok" : "none"; if (before !== voiceState && !S.session) render(); }, 1800);
 } else voiceState = "unsupported";
 
+/* Some voices misread a word; only what is spoken changes, never what is shown. Android says جَدِّي with tanween, so it gets a sukun on the ya. */
+const SAY = [[/جَدِّي/g, "جَدِّيْ"]];
 function speak(text, slow){
   if (!("speechSynthesis" in window)) return;
   try {
     speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
+    const u = new SpeechSynthesisUtterance(SAY.reduce((t, [a, b]) => t.replace(a, b), text));
     u.lang = arVoice ? arVoice.lang : "ar-SA";
     if (arVoice) u.voice = arVoice;
     u.rate = slow ? 0.5 : 0.85;
