@@ -84,7 +84,7 @@
       ],
       "about": {"@type": "Language", "name": "Arabic", "alternateName": "ar"},
       "featureList": [
-        "15 units, 97 first words, 104 short sentences",
+        "21 units, 150 first words, 152 short sentences",
         "Every sentence uses only words taught in its unit or an earlier one",
         "A picture for every word and sentence",
         "Normal and slow Arabic audio",
@@ -400,8 +400,8 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <li><strong>Practise again.</strong> Extra practice with the words and sentences that need it most, any time.</li>
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
-  <h3>Fifteen units</h3>
-  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals and How I feel: 97 words and 104 sentences in all. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences. Each unit opens once the words in the one before are learned.</p>
+  <h3>Twenty-one units</h3>
+  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals, How I feel, Getting ready, At the table, Helping at home, Bedtime, Playing together and Kind words: 150 words and 152 sentences in all. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences. Each unit opens once the words in the one before are learned.</p>
   <h3>Questions</h3>
   <details><summary>Is it free?</summary><p>Yes. It is free, has no adverts and needs no sign-up. Progress is saved in this browser on this device.</p></details>
   <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
@@ -705,6 +705,138 @@ const UNITS = [
     {id:"fe6", pic:"🧕😊", en:"My mum is happy.", ar:"أُمِّي سَعِيدَةٌ.", w:["ummi","said"]},
     {id:"fe7", pic:"🧔🥱", en:"My dad is tired.", ar:"أَبِي مُتْعَبٌ.", w:["abi","mutab"]},
     {id:"fe8", pic:"🙋😊🧔🏻", en:"I am happy with my grandad.", ar:"أَنَا سَعِيدٌ مَعَ جَدِّي.", w:["ana","said","maa2","jaddi"], f:{ar:"أَنَا سَعِيدَةٌ مَعَ جَدِّي."}}
+   ]},
+  /* Units 16 to 21: home and family. Commands use the child's own form (a boy gets the form said to a boy, a girl the form said to a girl). */
+  {id:"morning", emoji:"⏰", en:"Getting ready", ar:"فِي الصَّبَاحِ",
+   words:[
+    {id:"istayqidh", pic:"⏰", en:"wake up!", ar:"اِسْتَيْقِظْ", f:{ar:"اِسْتَيْقِظِي"}, k:"اِسْتَيْقَظَ", tip:"This is how you say it to a boy. To a girl: [[اِسْتَيْقِظِي]].", ftip:"This is how you say it to a girl. To a boy: [[اِسْتَيْقِظْ]]."},
+    {id:"ighsil", pic:"🧼", en:"wash!", ar:"اِغْسِلْ", f:{ar:"اِغْسِلِي"}, k:"غَسَلَ", tip:"To a boy: [[اِغْسِلْ]]. To a girl: [[اِغْسِلِي]]."},
+    {id:"wajh", pic:"😀", en:"a face", ar:"وَجْهٌ"},
+    {id:"nazzif", pic:"🪥", en:"clean! brush!", ar:"نَظِّفْ", f:{ar:"نَظِّفِي"}, k:"نَظَّفَ", tip:"To a boy: [[نَظِّفْ]]. To a girl: [[نَظِّفِي]]."},
+    {id:"asnan", pic:"🦷", en:"teeth", ar:"أَسْنَانٌ", k:"سِنّ"},
+    {id:"albas", pic:"🧥", en:"put on!", ar:"اِلْبَسْ", f:{ar:"اِلْبَسِي"}, k:"لَبِسَ", tip:"To a boy: [[اِلْبَسْ]]. To a girl: [[اِلْبَسِي]]."},
+    {id:"malabis", pic:"👕👖", en:"clothes", ar:"مَلَابِسُ"},
+    {id:"hidha", pic:"👞", en:"shoes", ar:"حِذَاءٌ"},
+    {id:"khudh", pic:"🫴", en:"take!", ar:"خُذْ", f:{ar:"خُذِي"}, k:"أَخَذَ", tip:"To a boy: [[خُذْ]]. To a girl: [[خُذِي]]."}
+   ],
+   sents:[
+    {id:"mo1", pic:"⏰👦", en:"Wake up, my brother!", ar:"اِسْتَيْقِظْ يَا أَخِي.", w:["istayqidh","ya","akhi"], f:{pic:"⏰👧", en:"Wake up, my sister!", ar:"اِسْتَيْقِظِي يَا أُخْتِي.", w:["istayqidh","ya","ukhti"]}},
+    {id:"mo2", pic:"🧼😀", en:"Wash your face.", ar:"اِغْسِلْ وَجْهَكَ.", w:["ighsil","wajh"], f:{ar:"اِغْسِلِي وَجْهَكِ."}, tip:"[[ـكَ]] on the end means “your”, to a boy.", ftip:"[[ـكِ]] on the end means “your”, to a girl."},
+    {id:"mo3", pic:"🧼✋", en:"Wash your hands.", ar:"اِغْسِلْ يَدَيْكَ.", w:["ighsil","yad"], f:{ar:"اِغْسِلِي يَدَيْكِ."}, tip:"[[يَدَيْكَ]] means your two hands.", ftip:"[[يَدَيْكِ]] means your two hands."},
+    {id:"mo4", pic:"🪥🦷", en:"Brush your teeth.", ar:"نَظِّفْ أَسْنَانَكَ.", w:["nazzif","asnan"], f:{ar:"نَظِّفِي أَسْنَانَكِ."}},
+    {id:"mo5", pic:"🧥👕👖", en:"Get dressed.", ar:"اِلْبَسْ مَلَابِسَكَ.", w:["albas","malabis"], f:{ar:"اِلْبَسِي مَلَابِسَكِ."}, tip:"Arabic says “put on your clothes”."},
+    {id:"mo6", pic:"🧥👞", en:"Put on your shoes.", ar:"اِلْبَسْ حِذَاءَكَ.", w:["albas","hidha"], f:{ar:"اِلْبَسِي حِذَاءَكِ."}},
+    {id:"mo7", pic:"🫴🎒", en:"Take your bag.", ar:"خُذْ حَقِيبَتَكَ.", w:["khudh","haqiba"], f:{ar:"خُذِي حَقِيبَتَكِ."}},
+    {id:"mo8", pic:"❓👞", en:"Where are my shoes?", ar:"أَيْنَ حِذَائِي؟", w:["ayna","hidha"]}
+   ]},
+  {id:"table", emoji:"🍲", en:"At the table", ar:"عَلَى الْمَائِدَةِ",
+   words:[
+    {id:"taal", pic:"👈", en:"come!", ar:"تَعَالَ", f:{ar:"تَعَالَيْ"}, tip:"This is how you say it to a boy. To a girl: [[تَعَالَيْ]].", ftip:"This is how you say it to a girl. To a boy: [[تَعَالَ]]."},
+    {id:"kul", pic:"🍴", en:"eat!", ar:"كُلْ", f:{ar:"كُلِي"}, k:"أَكَلَ", tip:"To a boy: [[كُلْ]]. To a girl: [[كُلِي]]."},
+    {id:"ishrab", pic:"🥤👉", en:"drink!", ar:"اِشْرَبْ", f:{ar:"اِشْرَبِي"}, k:"شَرِبَ", tip:"To a boy: [[اِشْرَبْ]]. To a girl: [[اِشْرَبِي]]."},
+    {id:"ijlis", pic:"🪑👇", en:"sit down!", ar:"اِجْلِسْ", f:{ar:"اِجْلِسِي"}, k:"جَلَسَ", tip:"To a boy: [[اِجْلِسْ]]. To a girl: [[اِجْلِسِي]]."},
+    {id:"qul", pic:"🗣️", en:"say!", ar:"قُلْ", f:{ar:"قُولِي"}, tip:"To a boy: [[قُلْ]]. To a girl: [[قُولِي]]."},
+    {id:"bismillah", pic:"🍽️🤲", en:"in the name of Allah", ar:"بِسْمِ اللَّهِ"},
+    {id:"hamdulillah", pic:"😊🤲", en:"all praise is for Allah", ar:"الْحَمْدُ لِلَّهِ"},
+    {id:"yamin", pic:"🫱", en:"the right hand", ar:"يَمِينٌ", k:"يَمِين"},
+    {id:"taam", pic:"🍲", en:"food", ar:"طَعَامٌ"}
+   ],
+   sents:[
+    {id:"ta1", pic:"👈🍴", en:"Come and eat.", ar:"تَعَالَ وَكُلْ.", w:["taal","kul"], f:{ar:"تَعَالَيْ وَكُلِي."}, tip:"[[وَ]] means “and”, and it joins on to the next word.", ftip:"[[وَ]] means “and”, and it joins on to the next word."},
+    {id:"ta2", pic:"🪑👇🔝", en:"Sit on the chair.", ar:"اِجْلِسْ عَلَى الْكُرْسِيِّ.", w:["ijlis","ala","kursi"], f:{ar:"اِجْلِسِي عَلَى الْكُرْسِيِّ."}},
+    {id:"ta3", pic:"🗣️🍽️", en:"Say Bismillah.", ar:"قُلْ بِسْمِ اللَّهِ.", w:["qul","bismillah"], f:{ar:"قُولِي بِسْمِ اللَّهِ."}},
+    {id:"ta4", pic:"🍴🫱", en:"Eat with your right hand.", ar:"كُلْ بِيَمِينِكَ.", w:["kul","yamin"], f:{ar:"كُلِي بِيَمِينِكِ."}, tip:"[[بِـ]] means “with”, and it joins on to the word.", ftip:"[[بِـ]] means “with”, and it joins on to the word."},
+    {id:"ta5", pic:"🥤🥛", en:"Drink your milk.", ar:"اِشْرَبْ حَلِيبَكَ.", w:["ishrab","halib"], f:{ar:"اِشْرَبِي حَلِيبَكِ."}},
+    {id:"ta6", pic:"🗣️😊", en:"Say Alhamdulillah.", ar:"قُلِ الْحَمْدُ لِلَّهِ.", w:["qul","hamdulillah"], f:{ar:"قُولِي الْحَمْدُ لِلَّهِ."}, tip:"[[قُلْ]] takes a kasra before [[الْ]]: [[قُلِ]]."},
+    {id:"ta7", pic:"🍲🤤", en:"The food is delicious.", ar:"الطَّعَامُ لَذِيذٌ.", w:["taam","ladhidh"]}
+   ]},
+  {id:"helping", emoji:"🧹", en:"Helping at home", ar:"أُسَاعِدُ فِي الْبَيْتِ",
+   words:[
+    {id:"rattib", pic:"🧹", en:"tidy!", ar:"رَتِّبْ", f:{ar:"رَتِّبِي"}, tip:"This is how you say it to a boy. To a girl: [[رَتِّبِي]].", ftip:"This is how you say it to a girl. To a boy: [[رَتِّبْ]]."},
+    {id:"ghurfa", pic:"🛋️", en:"a room", ar:"غُرْفَةٌ"},
+    {id:"ijma", pic:"🧺", en:"pick up!", ar:"اِجْمَعْ", f:{ar:"اِجْمَعِي"}, tip:"To a boy: [[اِجْمَعْ]]. To a girl: [[اِجْمَعِي]]."},
+    {id:"alab", pic:"🪀", en:"toys", ar:"أَلْعَابٌ", k:"لُعْبَة"},
+    {id:"saaid", pic:"🙌", en:"help!", ar:"سَاعِدْ", f:{ar:"سَاعِدِي"}, k:"سَاعَدَ", tip:"To a boy: [[سَاعِدْ]]. To a girl: [[سَاعِدِي]]."},
+    {id:"aghliq", pic:"🔒", en:"close!", ar:"أَغْلِقْ", f:{ar:"أَغْلِقِي"}, k:"أَغْلَقَ", tip:"To a boy: [[أَغْلِقْ]]. To a girl: [[أَغْلِقِي]]."},
+    {id:"bab", pic:"🚪", en:"a door", ar:"بَابٌ"},
+    {id:"iftah", pic:"🔓", en:"open!", ar:"اِفْتَحْ", f:{ar:"اِفْتَحِي"}, k:"فَتَحَ", tip:"To a boy: [[اِفْتَحْ]]. To a girl: [[اِفْتَحِي]]."},
+    {id:"nafidha", pic:"🪟", en:"a window", ar:"نَافِذَةٌ"}
+   ],
+   sents:[
+    {id:"hp1", pic:"🧹🛋️", en:"Tidy your room.", ar:"رَتِّبْ غُرْفَتَكَ.", w:["rattib","ghurfa"], f:{ar:"رَتِّبِي غُرْفَتَكِ."}},
+    {id:"hp2", pic:"🧺🪀", en:"Pick up your toys.", ar:"اِجْمَعْ أَلْعَابَكَ.", w:["ijma","alab"], f:{ar:"اِجْمَعِي أَلْعَابَكِ."}},
+    {id:"hp3", pic:"🙌👧", en:"Help your sister.", ar:"سَاعِدْ أُخْتَكَ.", w:["saaid","ukhti"], f:{ar:"سَاعِدِي أُخْتَكِ."}},
+    {id:"hp4", pic:"🔒🚪", en:"Close the door.", ar:"أَغْلِقِ الْبَابَ.", w:["aghliq","bab"], f:{ar:"أَغْلِقِي الْبَابَ."}, tip:"[[أَغْلِقْ]] takes a kasra before [[الْ]]: [[أَغْلِقِ]]."},
+    {id:"hp5", pic:"🔓🪟", en:"Open the window.", ar:"اِفْتَحِ النَّافِذَةَ.", w:["iftah","nafidha"], f:{ar:"اِفْتَحِي النَّافِذَةَ."}, tip:"[[اِفْتَحْ]] takes a kasra before [[الْ]]: [[اِفْتَحِ]]."},
+    {id:"hp6", pic:"❓🪀", en:"Where are my toys?", ar:"أَيْنَ أَلْعَابِي؟", w:["ayna","alab"]},
+    {id:"hp7", pic:"🛋️🐜", en:"My room is small.", ar:"غُرْفَتِي صَغِيرَةٌ.", w:["ghurfa","saghir"], tip:"Room is a “her” word, so small is [[صَغِيرَةٌ]]."}
+   ]},
+  {id:"bedtime", emoji:"🌙", en:"Bedtime", ar:"وَقْتُ النَّوْمِ",
+   words:[
+    {id:"hana", pic:"⏳", en:"it’s time for", ar:"حَانَ وَقْتُ", tip:"After [[حَانَ وَقْتُ]] the ending changes to [[ـِ]]."},
+    {id:"nawm", pic:"💤", en:"sleep", ar:"نَوْمٌ"},
+    {id:"salah", pic:"🕌", en:"prayer", ar:"صَلَاةٌ"},
+    {id:"idhhab", pic:"🚶", en:"go!", ar:"اِذْهَبْ", f:{ar:"اِذْهَبِي"}, k:"ذَهَبَ", tip:"This is how you say it to a boy. To a girl: [[اِذْهَبِي]].", ftip:"This is how you say it to a girl. To a boy: [[اِذْهَبْ]]."},
+    {id:"aghmid", pic:"😌", en:"close your eyes!", ar:"أَغْمِضْ", f:{ar:"أَغْمِضِي"}, tip:"To a boy: [[أَغْمِضْ]]. To a girl: [[أَغْمِضِي]]."},
+    {id:"atfi", pic:"🌑", en:"turn off!", ar:"أَطْفِئْ", f:{ar:"أَطْفِئِي"}, tip:"To a boy: [[أَطْفِئْ]]. To a girl: [[أَطْفِئِي]]."},
+    {id:"daw", pic:"💡", en:"a light", ar:"ضَوْءٌ"},
+    {id:"nam", pic:"🛌", en:"sleep!", ar:"نَمْ", f:{ar:"نَامِي"}, k:"نَامَ", tip:"To a boy: [[نَمْ]]. To a girl: [[نَامِي]]."},
+    {id:"alaan", pic:"⏱️", en:"now", ar:"الْآنَ"}
+   ],
+   sents:[
+    {id:"nt1", pic:"⏳💤", en:"It’s bedtime.", ar:"حَانَ وَقْتُ النَّوْمِ.", w:["hana","nawm"], tip:"Arabic says “the time of sleep has come”."},
+    {id:"nt2", pic:"⏳🕌", en:"It’s time to pray.", ar:"حَانَ وَقْتُ الصَّلَاةِ.", w:["hana","salah"]},
+    {id:"nt3", pic:"⏳🏫", en:"It’s time for school.", ar:"حَانَ وَقْتُ الْمَدْرَسَةِ.", w:["hana","madrasa"]},
+    {id:"nt4", pic:"🚶🛏️", en:"Go to bed.", ar:"اِذْهَبْ إِلَى السَّرِيرِ.", w:["idhhab","ila","sarir"], f:{ar:"اِذْهَبِي إِلَى السَّرِيرِ."}},
+    {id:"nt5", pic:"😌👁️", en:"Close your eyes.", ar:"أَغْمِضْ عَيْنَيْكَ.", w:["aghmid","ayn"], f:{ar:"أَغْمِضِي عَيْنَيْكِ."}, tip:"[[عَيْنَيْكَ]] means your two eyes.", ftip:"[[عَيْنَيْكِ]] means your two eyes."},
+    {id:"nt6", pic:"🌑💡", en:"Turn off the light.", ar:"أَطْفِئِ الضَّوْءَ.", w:["atfi","daw"], f:{ar:"أَطْفِئِي الضَّوْءَ."}, tip:"[[أَطْفِئْ]] takes a kasra before [[الْ]]: [[أَطْفِئِ]]."},
+    {id:"nt7", pic:"🛌⏱️", en:"Go to sleep now.", ar:"نَمِ الْآنَ.", w:["nam","alaan"], f:{ar:"نَامِي الْآنَ."}, tip:"[[نَمْ]] takes a kasra before [[الْ]]: [[نَمِ]]."}
+   ]},
+  {id:"together", emoji:"🤸", en:"Playing together", ar:"هَيَّا نَلْعَبْ",
+   words:[
+    {id:"hayya", pic:"🙌🧒", en:"come on, let’s", ar:"هَيَّا"},
+    {id:"nalab", pic:"🤸", en:"we play", ar:"نَلْعَبْ", k:"لَعِبَ", tip:"After [[هَيَّا]], [[نَلْعَبْ]] means “let’s play”."},
+    {id:"narsum", pic:"🖍️", en:"we draw", ar:"نَرْسُمْ", k:"رَسَمَ"},
+    {id:"dawr", pic:"🔄", en:"a turn", ar:"دَوْرٌ"},
+    {id:"li", pic:"🙋👈", en:"for me, mine", ar:"لِي"},
+    {id:"fadlak", pic:"🥺", en:"please", ar:"مِنْ فَضْلِكَ", f:{ar:"مِنْ فَضْلِكِ"}, tip:"To a boy or a man: [[مِنْ فَضْلِكَ]]. To a girl or a woman: [[مِنْ فَضْلِكِ]]."},
+    {id:"atini", pic:"🤲🫴", en:"give me!", ar:"أَعْطِنِي", f:{ar:"أَعْطِينِي"}, k:"أَعْطَى", tip:"To a boy: [[أَعْطِنِي]]. To a girl: [[أَعْطِينِي]]."},
+    {id:"saidni", pic:"🆘", en:"help me!", ar:"سَاعِدْنِي", f:{ar:"سَاعِدِينِي"}, tip:"To a boy or a man: [[سَاعِدْنِي]]. To a girl or a woman: [[سَاعِدِينِي]]."}
+   ],
+   sents:[
+    {id:"pl1", pic:"🙌🤸", en:"Let’s play!", ar:"هَيَّا نَلْعَبْ!", w:["hayya","nalab"]},
+    {id:"pl2", pic:"🙌🖍️", en:"Let’s draw.", ar:"هَيَّا نَرْسُمْ.", w:["hayya","narsum"]},
+    {id:"pl3", pic:"🤸🏡", en:"Let’s play in the garden.", ar:"هَيَّا نَلْعَبْ فِي الْحَدِيقَةِ.", w:["hayya","nalab","fi","hadiqa"]},
+    {id:"pl4", pic:"🔄🙋", en:"It’s my turn.", ar:"هَذَا دَوْرِي.", w:["hadha","dawr"]},
+    {id:"pl5", pic:"🔄👉", en:"It’s your turn.", ar:"هَذَا دَوْرُكَ.", w:["hadha","dawr"], f:{ar:"هَذَا دَوْرُكِ."}},
+    {id:"pl6", pic:"👉🙋", en:"This is mine.", ar:"هَذَا لِي.", w:["hadha","li"]},
+    {id:"pl7", pic:"🤲⚽", en:"Give me the ball, please.", ar:"أَعْطِنِي الْكُرَةَ مِنْ فَضْلِكَ.", w:["atini","kura","fadlak"], f:{ar:"أَعْطِينِي الْكُرَةَ مِنْ فَضْلِكِ."}},
+    {id:"pl8", pic:"🆘🥺", en:"Help me, please.", ar:"سَاعِدْنِي مِنْ فَضْلِكَ.", w:["saidni","fadlak"], f:{ar:"سَاعِدِينِي مِنْ فَضْلِكِ."}},
+    {id:"pl9", pic:"🆘🧕", en:"Help me, Mum.", ar:"سَاعِدِينِي يَا أُمِّي.", w:["saidni","ya","ummi"], tip:"Mum is a woman, so everyone says [[سَاعِدِينِي]] to her."}
+   ]},
+  {id:"kind", emoji:"💛", en:"Kind words", ar:"كَلِمَاتٌ طَيِّبَةٌ",
+   words:[
+    {id:"asif", pic:"😔", en:"sorry", ar:"آسِفٌ", f:{ar:"آسِفَةٌ"}, tip:"A boy says [[آسِفٌ]]. A girl says [[آسِفَةٌ]]."},
+    {id:"latahzan", pic:"🫂", en:"don’t be sad", ar:"لَا تَحْزَنْ", f:{ar:"لَا تَحْزَنِي"}, tip:"To a boy: [[لَا تَحْزَنْ]]. To a girl: [[لَا تَحْزَنِي]]."},
+    {id:"hal", pic:"❔", en:"a word that starts a question", ar:"هَلْ", tip:"[[هَلْ]] turns a sentence into a yes or no question."},
+    {id:"anta", pic:"👉🙂", en:"you", ar:"أَنْتَ", f:{ar:"أَنْتِ"}, tip:"To a boy: [[أَنْتَ]]. To a girl: [[أَنْتِ]]."},
+    {id:"bikhayr", pic:"👍", en:"fine, well", ar:"بِخَيْرٍ"},
+    {id:"kayfa_m", pic:"🤔🧔", en:"how are you? (to him)", ar:"كَيْفَ حَالُكَ"},
+    {id:"kayfa_f", pic:"🤔🧕", en:"how are you? (to her)", ar:"كَيْفَ حَالُكِ"},
+    {id:"uhibbuka", pic:"❤️🧔", en:"I love you (to him)", ar:"أُحِبُّكَ"},
+    {id:"uhibbuki", pic:"❤️🧕", en:"I love you (to her)", ar:"أُحِبُّكِ"}
+   ],
+   sents:[
+    {id:"ki1", pic:"🙋😔", en:"I’m sorry.", ar:"أَنَا آسِفٌ.", w:["ana","asif"], f:{ar:"أَنَا آسِفَةٌ."}},
+    {id:"ki2", pic:"🫂👦", en:"Don’t be sad, my brother.", ar:"لَا تَحْزَنْ يَا أَخِي.", w:["latahzan","ya","akhi"], f:{pic:"🫂👧", en:"Don’t be sad, my sister.", ar:"لَا تَحْزَنِي يَا أُخْتِي.", w:["latahzan","ya","ukhti"]}},
+    {id:"ki3", pic:"❔👍", en:"Are you okay?", ar:"هَلْ أَنْتَ بِخَيْرٍ؟", w:["hal","anta","bikhayr"], f:{ar:"هَلْ أَنْتِ بِخَيْرٍ؟"}},
+    {id:"ki4", pic:"🙋👍", en:"I’m fine.", ar:"أَنَا بِخَيْرٍ.", w:["ana","bikhayr"]},
+    {id:"ki5", pic:"🤔🧕🏻", en:"How are you, Grandma?", ar:"كَيْفَ حَالُكِ يَا جَدَّتِي؟", w:["kayfa_f","ya","jaddati"]},
+    {id:"ki6", pic:"🤔🧔🏻", en:"How are you, Grandad?", ar:"كَيْفَ حَالُكَ يَا جَدِّي؟", w:["kayfa_m","ya","jaddi"]},
+    {id:"ki7", pic:"💛🧕", en:"I love you, Mum.", ar:"أُحِبُّكِ يَا أُمِّي.", w:["uhibbuki","ya","ummi"]},
+    {id:"ki8", pic:"💛🧔", en:"I love you, Dad.", ar:"أُحِبُّكَ يَا أَبِي.", w:["uhibbuka","ya","abi"]},
+    {id:"ki9", pic:"😋🧕", en:"Mum, I’m hungry.", ar:"يَا أُمِّي، أَنَا جَائِعٌ.", w:["ya","ummi","ana","jaai"], f:{ar:"يَا أُمِّي، أَنَا جَائِعَةٌ."}},
+    {id:"ki10", pic:"🥵🧕", en:"Mum, I’m thirsty.", ar:"يَا أُمِّي، أَنَا عَطْشَانُ.", w:["ya","ummi","ana","atshan"], f:{ar:"يَا أُمِّي، أَنَا عَطْشَى."}}
    ]}
 ];
 
@@ -1055,6 +1187,7 @@ function echoPlay(){
 }
 /* Build a sentence: tap the words in order. One extra word from the unit is mixed in. */
 const bare = t => t.replace(/[.؟!،]/g, "");
+const noVowels = t => t.replace(/[\u064B-\u0652]/g, "");
 function startBuild(u){
   S.session = {type:"build", kind:"build", unit:u, items:shuffle(u.sents.slice()), idx:0, first:0, missed:new Set(), total:u.sents.length};
   buildItem(); render(); window.scrollTo(0, 0);
@@ -1062,7 +1195,7 @@ function startBuild(u){
 const buildSrc = s => s.type === "warm" ? s.queue[s.idx].it : s.items[s.idx];
 function buildItem(){
   const s = S.session, src = buildSrc(s), words = gv(src).ar.split(/\s+/).map(bare);
-  const spare = shuffle(UNITS[src.ui].words.map(w => bare(gv(w).ar)).filter(a => !words.includes(a) && !a.includes(" ")))[0];
+  const spare = shuffle(UNITS[src.ui].words.map(w => bare(gv(w).ar)).filter(a => !words.some(t => noVowels(t) === noVowels(a)) && !a.includes(" ")))[0];
   Object.assign(s, {words, placed:0, bad:null, slip:false, complete:false,
     tiles:shuffle(words.map(t => ({t, used:false})).concat(spare ? [{t:spare, used:false}] : []))});
 }

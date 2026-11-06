@@ -23,7 +23,7 @@ Children who can't read Arabic yet can use Echo mode: each word and sentence is 
 
 Every unit is open from the start. Several children can share one device: each adds themselves with a name, an animal and "I'm a boy" or "I'm a girl", and keeps their own progress (tap the name at the top to switch). The boy/girl choice means sentences about themselves and the praise (أَحْسَنْتَ / أَحْسَنْتِ) match the child.
 
-## Units (97 words, 104 sentences)
+## Units (150 words, 152 sentences)
 
 1. My family (عَائِلَتِي): هَذَا، هَذِهِ، أُمِّي، أَبِي، أَخِي، أُخْتِي. Sentences like هَذِهِ أُمِّي (This is my mum).
 2. Hello (التَّحِيَّةُ): السَّلَامُ عَلَيْكُمْ، وَعَلَيْكُمُ السَّلَامُ، أَنَا، وَلَدٌ، بِنْتٌ، يَا، شُكْرًا. Sentences like شُكْرًا يَا أَبِي (Thank you, Dad).
@@ -40,6 +40,13 @@ Every unit is open from the start. Several children can share one device: each a
 13. Outside (فِي الْحَدِيقَةِ): شَمْسٌ، قَمَرٌ، نَجْمٌ، شَجَرَةٌ، زَهْرَةٌ، حَدِيقَةٌ، جَمِيلٌ. Sentences like أَلْعَبُ فِي الْحَدِيقَةِ (I play in the garden).
 14. More animals (حَيَوَانَاتٌ أُخْرَى): أَسَدٌ، حِصَانٌ، أَرْنَبٌ، بَقَرَةٌ. Sentences like أُرِيدُ أَرْنَبًا (I want a rabbit).
 15. How I feel (مَشَاعِرِي): سَعِيدٌ، حَزِينٌ، خَائِفٌ، مُتْعَبٌ، عَطْشَانُ, each with a girl's form. Sentences like أَنَا سَعِيدٌ / أَنَا سَعِيدَةٌ (I am happy).
+
+16. Getting ready (فِي الصَّبَاحِ): commands such as اِغْسِلْ وَجْهَكَ (Wash your face), in the child's own boy or girl form.
+17. At the table (عَلَى الْمَائِدَةِ): sentences like قُلْ بِسْمِ اللَّهِ (Say Bismillah).
+18. Helping at home (أُسَاعِدُ فِي الْبَيْتِ): sentences like رَتِّبْ غُرْفَتَكَ (Tidy your room).
+19. Bedtime (وَقْتُ النَّوْمِ): sentences like حَانَ وَقْتُ النَّوْمِ (It's bedtime).
+20. Playing together (هَيَّا نَلْعَبْ): sentences like هَذَا دَوْرِي (It's my turn).
+21. Kind words (كَلِمَاتٌ طَيِّبَةٌ): sentences like أُحِبُّكِ يَا أُمِّي (I love you, Mum).
 
 Units 8 to 15 add 50 words children use most from Kalimat (https://kalimat.ummahapps.ai/). Use Kalimat to practise words with games and Takallum Kids to make them into sentences.
 
