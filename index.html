@@ -930,7 +930,7 @@ const UNITS = [
    progress.items[id] = {b: level 0–5, l: learned (got it at least once), t: last seen,
      n: warm-up checks passed on separate days (0–5), due: day number it comes back, u: sentence built with no wrong taps} */
 let progress = {items:{}};
-let settings = {autoplay:true, voiceHelp:true};
+let settings = {autoplay:true, voiceHelp:true, speed:"normal"};
 let profiles = {active:null, list:[]};
 const S = {unit:null, session:null, sheet:false, vgOpen:false, view:null, edit:null};
 const AVATARS = ["🦁","🐱","🐼","🐸","🦊","🐰","🐵","🐧","🐢","🦄","🐝","🐬"];
@@ -941,6 +941,20 @@ const progKey = id => "takallum-kids-progress-" + id;
 function loadProgress(id){ const p = load(progKey(id)); return p && p.items ? p : {items:{}}; }
 function saveProgress(){ if (profiles.active) store(progKey(profiles.active), progress); }
 function saveSettings(){ store("takallum-kids-settings", settings); }
+/* Voice speed, playing straight away and voice help go with each child in all four Ummah Apps Arabic apps (ummah.js).
+   They are changed in the shared Settings panel. The first time, what was set here before fills in for the children already here; new children start from the defaults. */
+function loadShared(){
+  if (!window.UA) return;
+  if (!load("takallum-kids-shared")){
+    const mine = load("takallum-kids-settings") || {};
+    UA.settings(null, mine); profiles.list.forEach(x => UA.settings(x.ua, mine));
+    store("takallum-kids-shared", 1);
+  }
+  const p = me(); Object.assign(settings, UA.settings(p && p.ua)); saveSettings();
+}
+function shareSetting(k){ if (window.UA){ const p = me(); UA.setSetting(p && p.ua, k, settings[k]); } }
+function sharedChanged(s){ Object.assign(settings, s); saveSettings(); render(); }
+const RATES = {slow:0.65, normal:0.85, natural:0.95};
 function saveProfiles(){ store("takallum-kids-profiles", profiles); }
 const me = () => profiles.list.find(p => p.id === profiles.active) || null;
 const newId = () => "p" + Date.now().toString(36) + Math.floor(Math.random() * 1296).toString(36);
@@ -980,6 +994,8 @@ if (window.UA){
 function shareKid(p){ if (window.UA && p) p.ua = UA.save({ua:p.ua, name:p.name, g:toG(p.kid), avatar:p.avatar}); }
 if (!me() && profiles.list.length) profiles.active = profiles.list[0].id;
 if (profiles.active) progress = loadProgress(profiles.active);
+loadShared();
+if (window.UA) UA.watch(() => { const p = me(); return p && p.ua; }, sharedChanged);
 
 /* ---------- speech ---------- */
 let arVoice = null, voiceState = "unknown";
@@ -1006,7 +1022,7 @@ function speak(text, slow){
     const u = new SpeechSynthesisUtterance(SAY.reduce((t, [a, b]) => t.replace(a, b), text));
     u.lang = arVoice ? arVoice.lang : "ar-SA";
     if (arVoice) u.voice = arVoice;
-    u.rate = slow ? 0.5 : 0.85;
+    u.rate = slow ? 0.5 : RATES[settings.speed] || 0.85;
     speechSynthesis.speak(u);
   } catch(e){}
 }
@@ -1197,7 +1213,7 @@ function editState(id){
 }
 function editKid(id){ S.edit = editState(id); S.view = "edit"; render(); window.scrollTo(0, 0); }
 function switchTo(id){
-  profiles.active = id; saveProfiles(); progress = loadProgress(id);
+  profiles.active = id; saveProfiles(); progress = loadProgress(id); loadShared();
   if (window.UA && me()){ UA.setCurrent(me().ua); shareWords(Object.values(WORDS).filter(w => learned(w.id))); }
 }
 function saveKid(){
@@ -1457,7 +1473,7 @@ function settingsHTML(){
   return '<div class="sheet-bg" data-act="close"><div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">' +
     '<h2>Settings</h2><p class="for">For grown-ups.</p>' + voiceNotice() +
     '<div class="opt"><span>Children<small>Add a child, or change a name, boy or girl, animal, or Echo mode (for children who can’t read Arabic yet). Each child has their own progress.</small></span><button class="reset plain" data-act="who">Manage</button></div>' +
-    opt("autoplay", "Play on reveal", "Speak the Arabic automatically when a word or sentence is shown.") +
+    '<div class="opt"><span>Speed and sound<small>Voice speed, playing the Arabic straight away and voice help. These go with ' + name + ' in all four Ummah Apps Arabic apps.</small></span><button class="reset plain" data-act="shared">Open</button></div>' +
     (p ? '<div class="opt"><span>Start again<small>Clears ' + name + '’s words, sentences and stars.</small></span><button class="reset" data-act="reset">Start again</button></div>' : "") +
     '<div class="actions" style="margin-top:14px"><button class="btn primary" data-act="close">Done</button></div></div></div>';
 }
@@ -1574,13 +1590,14 @@ document.addEventListener("click", e => {
     case "again": { const s = S.session; if (s.kind === "build") startBuild(s.unit); else if (s.kind === "review" && learnedItems().length < 1) goBack(); else startSay(s.kind, s.unit); break; }
     case "back": goBack(); break;
     case "settings": S.sheet = true; render(); break;
+    case "shared": if (window.UA){ const p = me(); UA.openSettings({ua:p && p.ua, name:p ? p.name : "", app:"takallum-kids", onChange:sharedChanged}); } break;
     case "reset":
       if (confirm("Clear " + (me() ? me().name + "’s" : "all") + " progress and start again?")){ progress = {items:{}}; saveProgress(); S.sheet = false; S.session = null; S.unit = null; try { history.replaceState(null, ""); } catch(err){} render(); }
       break;
     case "vgdev": vgDev = v; render(); { const b = document.querySelector('[data-act="vgdev"][data-v="' + v + '"]'); if (b) b.focus(); } break;
     case "vgtest": speak("السَّلَامُ عَلَيْكُمْ"); break;
-    case "vgshow": S.vgOpen = true; settings.voiceHelp = true; saveSettings(); render(); { const b = document.querySelector('[data-act="vghide"]'); if (b) b.focus(); } break;
-    case "vghide": S.vgOpen = false; settings.voiceHelp = false; saveSettings(); render(); { const b = document.querySelector(".vg-show"); if (b) b.focus(); } break;
+    case "vgshow": S.vgOpen = true; settings.voiceHelp = true; saveSettings(); shareSetting("voiceHelp"); render(); { const b = document.querySelector('[data-act="vghide"]'); if (b) b.focus(); } break;
+    case "vghide": S.vgOpen = false; settings.voiceHelp = false; saveSettings(); shareSetting("voiceHelp"); render(); { const b = document.querySelector(".vg-show"); if (b) b.focus(); } break;
   }
 });
 document.addEventListener("input", e => {
@@ -1590,7 +1607,7 @@ document.addEventListener("submit", e => e.preventDefault());
 document.addEventListener("change", e => {
   const k = e.target.dataset && e.target.dataset.set;
   if (!k) return;
-  settings[k] = e.target.checked; saveSettings(); render();
+  settings[k] = e.target.checked; saveSettings(); shareSetting(k); render();
 });
 document.addEventListener("keydown", e => {
   if (S.sheet){ if (e.key === "Escape"){ S.sheet = false; render(); } return; }
