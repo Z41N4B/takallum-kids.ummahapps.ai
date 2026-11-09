@@ -5,7 +5,12 @@
    - ua_w_<id>: one learner's known words, as short hashes of the bare Arabic, most recent last
    - ua_s_<id>: one learner's settings {s: "slow"|"normal"|"natural", a: 0|1 play straight away, v: 0|1 vowel marks};
      ua_s_d holds them for a learner with no shared id yet (an unnamed "Learner 1")
-   - ua_d: settings for everyone on this device {h: 0|1 show the help for adding an Arabic voice} */
+     and for Today's practice {p: 0|1 show the card, pa: the apps it covers ("CKPT"), pn: new items a day 3|5|10}
+   - ua_d: settings for everyone on this device {h: 0|1 show the help for adding an Arabic voice}
+   - ua_p_<id> (ua_p_d with no shared id): Today's practice. a: the last day number written, b: which of the last 60 days ending
+     on day a had any practice ("0"/"1", oldest first), x: one entry per app, C Takallum Kids, K Kalimat, P Kalimat Plus, T Takallum:
+     {s: day the counts were taken, o: old work due by day s, s+1 … s+6, r: recent work not solid yet, d: day of the tallies,
+      n: new items started, c: recent items practised, v: old items revised that day} */
 (function(){
   var DOMAIN = /(^|\.)ummahapps\.ai$/.test(location.hostname) ? ";domain=.ummahapps.ai" : "";
   var SECURE = location.protocol === "https:" ? ";secure" : "";
@@ -82,7 +87,7 @@
     o.l = o.l.filter(function(x){ return x.i !== ua; });
     if (o.d.indexOf(ua) < 0) o.d.push(ua);
     if (o.c === ua) o.c = null;
-    write(o); dropC("ua_w_" + ua); dropC("ua_s_" + ua);
+    write(o); dropC("ua_w_" + ua); dropC("ua_s_" + ua); dropC("ua_p_" + ua);
   }
   function setCurrent(ua){ if (!ua) return; var o = read(); if (o.c !== ua){ o.c = ua; write(o); } }
 
@@ -118,13 +123,17 @@
   /* ---------- settings ---------- */
   /* Each app keeps its own rate for each speed; the learner picks the speed once for all four. */
   var SPEEDS = ["slow", "normal", "natural"];
-  var LEARNER = {speed:"s", autoplay:"a", vowels:"v"}, DEVICE = {voiceHelp:"h"};
-  var DEF = {speed:"normal", autoplay:true, vowels:true, voiceHelp:true};
+  var LEARNER = {speed:"s", autoplay:"a", vowels:"v", today:"p", todayApps:"pa", newPerDay:"pn"}, DEVICE = {voiceHelp:"h"};
+  var DEF = {speed:"normal", autoplay:true, vowels:true, voiceHelp:true, today:true, todayApps:"CKPT", newPerDay:5};
+  var BOOL = {autoplay:1, vowels:1, voiceHelp:1, today:1};
   function readObj(n){ var o = null; try { o = JSON.parse(getC(n) || "null"); } catch(e){} return o && typeof o === "object" ? o : {}; }
   var sName = function(ua){ return "ua_s_" + (ua || "d"); };
-  var okVal = function(k, v){ return k === "speed" ? SPEEDS.indexOf(v) >= 0 : typeof v === "boolean"; };
-  var pack = function(k, v){ return k === "speed" ? v : v ? 1 : 0; };
-  var unpack = function(k, v){ return k === "speed" ? v : !!v; };
+  var okVal = function(k, v){
+    return k === "speed" ? SPEEDS.indexOf(v) >= 0 : k === "todayApps" ? typeof v === "string" && /^[CKPT]{0,4}$/.test(v)
+      : k === "newPerDay" ? [3, 5, 10].indexOf(v) >= 0 : typeof v === "boolean";
+  };
+  var pack = function(k, v){ return BOOL[k] ? (v ? 1 : 0) : v; };
+  var unpack = function(k, v){ return BOOL[k] ? (v === 0 || v === 1 ? !!v : undefined) : v; };
   /* The learner's settings. local: the app's own values from before settings were shared,
      used once to fill in any setting the shared list doesn't have yet. */
   function settings(ua, local){
@@ -188,7 +197,7 @@
   function openSettings(opts){
     opts = opts || {};
     if (!dlg){
-      var st = document.createElement("style"); st.textContent = CSS; document.head.appendChild(st);
+      addCss();
       dlg = document.createElement("dialog"); dlg.className = "ua-set"; dlg.setAttribute("aria-labelledby", "ua-set-h");
       document.body.appendChild(dlg);
       dlg.addEventListener("click", function(e){ if (e.target === dlg) dlg.close(); });
@@ -207,10 +216,18 @@
         return '<button type="button" data-speed="' + x[0] + '" aria-pressed="' + (s.speed === x[0]) + '">' + x[1] + '</button>'; }).join("") + '</div></div>' +
       tick("autoplay", "Play the Arabic straight away", "Speak each new word or sentence as soon as it shows. <i>Takallum Kids and Takallum.</i>") +
       tick("vowels", "Vowel marks", "Show the harakat. Turn off to practise reading without them. <i>Takallum.</i> Kalimat, Kalimat Plus and Takallum Kids always show them.") +
+      '<h3>Today’s practice</h3>' +
+      tick("today", "Show Today’s practice", "A card at the top of each app with today’s revision and new work, from the apps below.") +
+      '<div class="ua-col"><span>Apps it covers<small>Practice in these apps counts towards today.</small></span>' +
+      '<div class="ua-seg" role="group" aria-label="Apps it covers">' + APPS.map(function(a){
+        return '<button type="button" data-app="' + a[0] + '" aria-pressed="' + (s.todayApps.indexOf(a[0]) >= 0) + '">' + a[2] + '</button>'; }).join("") + '</div></div>' +
+      '<div class="ua-col"><span>New items a day<small>New words or sentences to start each day.</small></span>' +
+      '<div class="ua-seg" role="group" aria-label="New items a day">' + [3, 5, 10].map(function(n){
+        return '<button type="button" data-new="' + n + '" aria-pressed="' + (s.newPerDay === n) + '">' + n + '</button>'; }).join("") + '</div></div>' +
       '<h3>For everyone on this device</h3>' +
       tick("voiceHelp", "Help with the Arabic voice", "Show the steps for adding an Arabic voice to this device. <i>All four apps.</i>") +
       '<button type="button" class="ua-done">Done</button>';
-    var changed = function(){ if (opts.onChange) opts.onChange(settings(ua)); };
+    var changed = function(){ if (opts.onChange) opts.onChange(settings(ua)); refreshToday(); };
     dlg.onclick = function(e){
       var b = e.target.closest && e.target.closest("button");
       if (!b) return;
@@ -219,6 +236,15 @@
         setSetting(ua, "speed", b.dataset.speed);
         dlg.querySelectorAll("[data-speed]").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
         changed();
+      } else if (b.dataset.new){
+        setSetting(ua, "newPerDay", +b.dataset.new);
+        dlg.querySelectorAll("[data-new]").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+        changed();
+      } else if (b.dataset.app){
+        b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+        var on = ""; dlg.querySelectorAll("[data-app]").forEach(function(x){ if (x.getAttribute("aria-pressed") === "true") on += x.dataset.app; });
+        setSetting(ua, "todayApps", on);
+        changed();
       }
     };
     dlg.onchange = function(e){ var k = e.target.dataset && e.target.dataset.k; if (k){ setSetting(ua, k, e.target.checked); changed(); } };
@@ -226,6 +252,159 @@
     dlg.onclose = function(){ if (back && back.isConnected && back.focus) back.focus(); };
     if (dlg.showModal){ if (!dlg.open) dlg.showModal(); } else dlg.setAttribute("open", "");
     var first = dlg.querySelector('[aria-pressed="true"]'); if (first) first.focus();
+  }
+
+  /* ---------- Today's practice ---------- */
+  /* Like the Hifdh Helper's day: old work first, then recent work, then something new. Each app sends its own counts
+     for the current learner (practice), and the card adds up the apps the learner chose in Settings. */
+  var APPS = [["C", "takallum-kids", "Takallum Kids"], ["K", "kalimat", "Kalimat"], ["P", "kalimat-plus", "Kalimat Plus"], ["T", "takallum", "Takallum"]];
+  var REV_CAP = 20, RECENT_GOAL = 10, KEEP = 60;
+  var codeOf = function(app){ for (var i = 0; i < APPS.length; i++) if (APPS[i][1] === app) return APPS[i][0]; return null; };
+  /* Today as a day number in local time; apps use it for their own "comes back on" dates too. */
+  function dayNo(){ var d = new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5); }
+  var pName = function(ua){ return "ua_p_" + (ua || "d"); };
+  function pRead(ua){ var o = readObj(pName(ua)); if (!o.x || typeof o.x !== "object") o.x = {}; if (typeof o.b !== "string") o.b = ""; return o; }
+  function shiftTo(o, t){
+    if (!o.a || !o.b){ o.a = t; o.b = "0"; return; }
+    if (t > o.a){ o.b = (o.b + new Array(Math.min(t - o.a, KEEP) + 1).join("0")).slice(-KEEP); o.a = t; }
+  }
+  function practisedOn(o, day){ if (!o.a || day > o.a) return false; var i = o.b.length - 1 - (o.a - day); return i >= 0 && o.b.charAt(i) === "1"; }
+  /* Save an app's counts for a learner. state: {o: old work due by today and each of the next 6 days, r: recent work not solid yet};
+     add: {n: new items started, c: recent items practised, v: old items revised}, added to today's tallies. */
+  function practice(ua, app, state, add){
+    var code = codeOf(app); if (!code) return;
+    var o = pRead(ua), t = dayNo(), e = o.x[code] || {}, did = false;
+    if (state){ e.s = t; e.o = (state.o || []).slice(0, 7).map(function(n){ return Math.max(0, n | 0); }); e.r = Math.max(0, state.r | 0); }
+    if (e.d !== t){ e.d = t; e.n = 0; e.c = 0; e.v = 0; }
+    if (add) ["n", "c", "v"].forEach(function(k){ if (add[k] > 0){ e[k] = (e[k] || 0) + add[k]; did = true; } });
+    o.x[code] = e;
+    if (did){ shiftTo(o, t); o.b = o.b.slice(0, -1) + "1"; }
+    setC(pName(ua), JSON.stringify(o));
+  }
+  function practiceAdd(ua, app, add){ practice(ua, app, null, add); refreshToday(); }
+  function summary(ua){
+    var o = pRead(ua), t = dayNo(), s = settings(ua), S = {old:0, r:0, n:0, c:0, v:0, oldApps:[], recentApps:[], apps:[], goal:s.newPerDay};
+    APPS.forEach(function(a){
+      if (s.todayApps.indexOf(a[0]) < 0) return;
+      var e = o.x[a[0]], due = 0, r = 0;
+      /* Counts taken on an earlier day move on by the days since, up to a week. */
+      if (e && e.o && e.o.length){ due = e.o[Math.min(Math.max(t - e.s, 0), e.o.length - 1)] || 0; r = e.r || 0; }
+      S.old += due; S.r += r; S.apps.push(a);
+      if (e && e.d === t){ S.n += e.n || 0; S.c += e.c || 0; S.v += e.v || 0; }
+      if (due) S.oldApps.push([a, due]);
+      if (r) S.recentApps.push([a, r]);
+    });
+    S.streak = 0; S.todayDone = practisedOn(o, t);
+    for (var d = S.todayDone ? t : t - 1; practisedOn(o, d); d--) S.streak++;
+    S.week = []; for (var i = 6; i >= 0; i--) S.week.push([t - i, practisedOn(o, t - i)]);
+    S.t = t;
+    return S;
+  }
+  function appUrl(sub){
+    return /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && PORTS[sub] ? "http://" + location.hostname + ":" + PORTS[sub] + "/" : "https://" + sub + ".ummahapps.ai/";
+  }
+  var TCSS = ".ua-today{--t-card:#FFFFFF;--t-ink:#15233F;--t-muted:#56637D;--t-line:#D3DBE6;--t-lapis:#1E4FA0;--t-soft:#DCE6F7;--t-on:#FFFFFF;--t-ok:#1F6B4A;" +
+    "margin:12px 0 18px;padding:14px 16px 10px;border:1px solid var(--t-line);border-radius:18px;background:var(--t-card);color:var(--t-ink);font-size:15px;line-height:1.4;text-align:left}" +
+    "@media (prefers-color-scheme: dark){:root:not([data-theme=\"light\"]) .ua-today{--t-card:#162035;--t-ink:#E6EBF4;--t-muted:#9AA6BD;--t-line:#2A3753;--t-lapis:#8DB0EC;--t-soft:#1D2D4D;--t-on:#0D1424;--t-ok:#5FC498}}" +
+    ":root[data-theme=\"dark\"] .ua-today{--t-card:#162035;--t-ink:#E6EBF4;--t-muted:#9AA6BD;--t-line:#2A3753;--t-lapis:#8DB0EC;--t-soft:#1D2D4D;--t-on:#0D1424;--t-ok:#5FC498}" +
+    ".ua-today[hidden]{display:none!important}" +
+    ".ua-t-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px}" +
+    ".ua-today h2{margin:0;padding:0;border:0;font-size:1.06rem;font-weight:700;color:var(--t-ink);letter-spacing:0;text-transform:none}" +
+    ".ua-today h2 span{font-weight:400;color:var(--t-muted)}" +
+    ".ua-t-week{display:flex;gap:5px}" +
+    ".ua-t-week span{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.66rem;color:var(--t-muted)}" +
+    ".ua-t-week i{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t-line);display:grid;place-items:center;font-style:normal;font-size:.7rem;font-weight:700;color:var(--t-on)}" +
+    ".ua-t-week .on i{background:var(--t-lapis);border-color:var(--t-lapis)}" +
+    ".ua-t-week .now i{box-shadow:0 0 0 2px var(--t-card),0 0 0 3.5px var(--t-lapis)}" +
+    ".ua-t-streak{margin:6px 0 0;color:var(--t-muted);font-size:.86rem}" +
+    ".ua-t-steps{list-style:none;margin:8px 0 0;padding:0}" +
+    ".ua-t-steps li{display:grid;grid-template-columns:26px 1fr;gap:0 10px;margin:0;padding:10px 0;border-top:1px solid var(--t-line)}" +
+    ".ua-t-num{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--t-line);display:grid;place-items:center;font-weight:700;font-size:.82rem;color:var(--t-muted)}" +
+    ".ua-t-steps .done .ua-t-num{background:var(--t-ok);border-color:var(--t-ok);color:var(--t-on)}" +
+    ".ua-t-steps b{font-weight:700}" +
+    ".ua-t-steps small{display:block;color:var(--t-muted);font-size:.86rem}" +
+    ".ua-t-apps{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}" +
+    ".ua-t-apps a,.ua-t-apps button{display:inline-flex;align-items:center;min-height:36px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--t-lapis);background:transparent;color:var(--t-lapis);font:inherit;font-size:.86rem;font-weight:600;line-height:1.2;text-decoration:none;cursor:pointer}" +
+    ".ua-t-apps button{background:var(--t-lapis);color:var(--t-on)}" +
+    ".ua-t-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2px 12px;border-top:1px solid var(--t-line);padding-top:4px;color:var(--t-muted);font-size:.8rem}" +
+    ".ua-t-link{background:none;border:0;padding:4px 0;min-height:34px;color:var(--t-lapis);font:inherit;font-size:.86rem;font-weight:600;text-decoration:underline;cursor:pointer}" +
+    ".ua-t-all{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px}" +
+    ".ua-t-all p{margin:0;font-weight:600}" +
+    ".ua-t-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}" +
+    ".ua-today a:focus-visible,.ua-today button:focus-visible{outline:3px solid var(--t-lapis);outline-offset:2px}";
+  var cssIn = false;
+  function addCss(){ if (cssIn) return; cssIn = true; var st = document.createElement("style"); st.textContent = CSS + TCSS; document.head.appendChild(st); }
+  var M = null, showDone = false, WD = "SMTWTFS";
+  function weekHTML(S){
+    return '<div class="ua-t-week" role="img" aria-label="Practised on ' + S.week.filter(function(w){ return w[1]; }).length + ' of the last 7 days">' + S.week.map(function(w){
+      return '<span class="' + (w[1] ? "on" : "") + (w[0] === S.t ? " now" : "") + '"><i>' + (w[1] ? "✓" : "") + '</i>' + WD.charAt(new Date(w[0] * 864e5).getUTCDay()) + '</span>'; }).join("") + '</div>';
+  }
+  function streakText(S){
+    if (S.streak > 1) return S.todayDone ? "🔥 " + S.streak + " days in a row." : "🔥 " + S.streak + " days in a row. Practise today to keep it going.";
+    if (S.streak === 1) return S.todayDone ? "🔥 You practised today." : "You practised yesterday. Practise today to make it 2 days in a row.";
+    return "A little every day adds up.";
+  }
+  function cardHTML(ua, name, here){
+    var S = summary(ua), rg = Math.min(RECENT_GOAL, S.r);
+    var head = '<div class="ua-t-head"><h2>Today’s practice' + (name ? ' <span>· ' + esc(name) + '</span>' : "") + '</h2>' + weekHTML(S) + '</div>';
+    var foot = '<div class="ua-t-foot"><span>' + (S.apps.length ? "From " + S.apps.map(function(a){ return a[2]; }).join(", ") : "No apps chosen") + '</span>' +
+      '<button type="button" class="ua-t-link" data-ua-t="settings">Settings</button></div>';
+    if (!S.apps.length) return head + '<p class="ua-t-streak">Choose which apps Today’s practice covers in Settings.</p>' + foot;
+    var chip = function(a, n, k){
+      var label = esc(a[2]) + (n ? " · " + n : "");
+      return a[0] === here ? '<button type="button" data-ua-t="' + k + '">' + label + '</button>' : '<a href="' + appUrl(a[1]) + '#ua-start=' + k + '">' + label + ' ›</a>';
+    };
+    var steps = [
+      {k:"old", title:"Revise old work", done:!S.old || S.v >= REV_CAP, apps:S.oldApps,
+        note:!S.old ? (S.v ? S.v + " revised today. Nothing else is due." : "Nothing is due today.") : S.v >= REV_CAP ? S.v + " revised today. That is plenty for one day." : S.old + " due" + (S.v ? ", " + S.v + " revised today" : "") + "."},
+      {k:"recent", title:"Strengthen recent work", done:!S.r || S.c >= rg, apps:S.recentApps,
+        note:!S.r ? "Nothing half-learnt right now." : Math.min(S.c, rg) + " of " + rg + " practised" + (S.c >= rg ? ". Well done!" : ".")},
+      {k:"new", title:"Something new", done:S.n >= S.goal, apps:S.apps.map(function(a){ return [a, 0]; }),
+        note:Math.min(S.n, S.goal) + " of " + S.goal + " new words or sentences started" + (S.n >= S.goal ? ". Well done!" : ".")}
+    ];
+    var all = steps.every(function(x){ return x.done; });
+    if (all && !showDone) return '<div class="ua-t-all"><p>✓ Today’s practice is done. Masha Allah!</p>' + weekHTML(S) + '</div>' +
+      '<p class="ua-t-streak">' + streakText(S) + '</p><div class="ua-t-foot"><button type="button" class="ua-t-link" data-ua-t="show">Show today’s practice</button>' +
+      '<button type="button" class="ua-t-link" data-ua-t="settings">Settings</button></div>';
+    return head + '<p class="ua-t-streak">' + streakText(S) + '</p><ol class="ua-t-steps">' + steps.map(function(x, i){
+      return '<li class="' + (x.done ? "done" : "") + '"><span class="ua-t-num" aria-hidden="true">' + (x.done ? "✓" : i + 1) + '</span>' +
+        '<div><b>' + x.title + '</b><span class="ua-t-sr">' + (x.done ? " (done)" : "") + '</span><small>' + x.note + '</small></div>' +
+        (x.done ? "" : '<div class="ua-t-apps">' + x.apps.map(function(p){ return chip(p[0], p[1], x.k); }).join("") + '</div>') + '</li>';
+    }).join("") + '</ol>' + (all ? foot.replace('<span>', '<span><button type="button" class="ua-t-link" data-ua-t="show">Hide</button> · ') : foot);
+  }
+  /* Show the card in el. opts: {app, ua(), name(), state(): {o, r}, start(step: "old"|"recent"|"new"), visible(), onSettings(settings)}.
+     A link from another app's card ends in #ua-start=<step>, which starts that step here. */
+  function mountToday(el, opts){
+    addCss(); M = {el:el, opts:opts};
+    document.addEventListener("click", function(e){
+      var b = e.target.closest && e.target.closest(".ua-today [data-ua-t]"); if (!b) return;
+      var k = b.getAttribute("data-ua-t");
+      if (k === "show"){ showDone = !showDone; refreshToday(); return; }
+      if (k === "settings"){ openSettings({ua:opts.ua(), name:opts.name(), app:opts.app, onChange:opts.onSettings}); return; }
+      if (opts.start) opts.start(k);
+    });
+    document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "visible") refreshToday(); });
+    refreshToday();
+    var fromLink = function(){
+      var m = location.hash.match(/^#ua-start=(old|recent|new)$/);
+      if (!m || !opts.start) return;
+      try { history.replaceState(history.state, "", location.pathname + location.search); } catch(err){}
+      setTimeout(function(){ opts.start(m[1]); }, 0);
+    };
+    fromLink();
+    window.addEventListener("hashchange", fromLink);
+  }
+  /* Saves this app's counts and redraws the card. An app that redraws its whole screen passes the card's new element
+     (or null while the card is not on screen). */
+  function refreshToday(el){
+    if (!M) return;
+    if (el !== undefined) M.el = el;
+    var o = M.opts, ua = o.ua();
+    if (o.state) practice(ua, o.app, o.state());
+    el = M.el; if (!el || !el.isConnected) return;
+    el.classList.add("ua-today");
+    if (!settings(ua).today || (o.visible && !o.visible())){ el.hidden = true; el.innerHTML = ""; return; }
+    el.hidden = false; el.innerHTML = cardHTML(ua, o.name(), codeOf(o.app));
   }
 
   /* When testing on this computer (node serve.js <port>), links between the apps go to their local servers. */
@@ -238,5 +417,6 @@
   });
 
   window.UA = {sync:sync, save:save, remove:remove, setCurrent:setCurrent, addKnown:addKnown, knows:knows, key:key,
-    settings:settings, setSetting:setSetting, watch:watch, openSettings:openSettings};
+    settings:settings, setSetting:setSetting, watch:watch, openSettings:openSettings,
+    dayNo:dayNo, mountToday:mountToday, refreshToday:refreshToday, practiceAdd:practiceAdd};
 })();

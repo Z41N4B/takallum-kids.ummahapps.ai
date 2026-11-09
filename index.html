@@ -1067,7 +1067,7 @@ const dueOf = id => rec(id).due || 0;
 const isDue = id => learned(id) && dueOf(id) <= today();
 const isSolid = id => nOf(id) >= SOLID && today() - dueOf(id) <= RUSTY_AFTER;
 const isRusty = id => nOf(id) >= SOLID && !isSolid(id);
-function firstLearned(r){ if (!r.l){ r.l = true; r.due = today() + GAP[0]; } }
+function firstLearned(r){ if (!r.l){ r.l = true; r.due = today() + GAP[0]; addPractice({n:1}); } }
 /* Children in Echo mode can't read the tiles, so saying the sentences stands in for building them. */
 const sentDone = id => echo() ? learned(id) : !!rec(id).u;
 const unitItems = u => [...u.words, ...u.sents];
@@ -1158,6 +1158,7 @@ function warmCardHTML(){
 }
 function renderHome(){
   let h = headerHTML();
+  h += '<section id="ua-today" aria-label="Today’s practice" hidden></section>';
   h += voiceGuideHTML() + '<ul class="units">';
   const known = learnedItems().length;
   h += warmCardHTML();
@@ -1367,6 +1368,7 @@ function tapChoice(i){
 function warmResult(ok){
   const s = S.session, cur = s.queue[s.idx], id = cur.it.id;
   if (cur.tries) return;
+  addPractice({v:1});
   const was = isSolid(id), r = rec(id);
   if (ok){
     r.n = Math.min(nOf(id) + 1, GAP.length - 1); r.due = today() + GAP[r.n]; r.b = Math.min(r.b + 1, 5); s.first++;
@@ -1496,6 +1498,7 @@ function render(){
   else h = renderSay(s);
   app.innerHTML = h + (S.sheet ? settingsHTML() : "");
   about.hidden = !!(s || S.unit || (S.view && profiles.list.length));
+  if (window.UA) UA.refreshToday(document.getElementById("ua-today"));
 }
 
 /* ---------- navigation ---------- */
@@ -1632,6 +1635,21 @@ document.addEventListener("keydown", e => {
 try { history.replaceState(null, ""); } catch(e){}
 if (window.UA && me()){ UA.setCurrent(me().ua); shareWords(Object.values(WORDS).filter(w => learned(w.id))); }
 render();
+
+/* ---------- Today's practice across the four apps (ummah.js) ---------- */
+/* Old work is the warm-up: up to 8 a day, and none left for today once a warm-up is finished. New is words and sentences learnt. */
+function addPractice(x){ if (window.UA){ const p = me(); UA.practiceAdd(p && p.ua, "takallum-kids", x); } }
+function practiceState(){
+  const t = today(), o = [0, 0, 0, 0, 0, 0, 0];
+  learnedItems().forEach(x => { const d = dueOf(x.id); for (let i = 0; i < 7; i++) if (d <= t + i) o[i]++; });
+  return {o: o.map((n, i) => i === 0 && progress.warmDay === t ? 0 : Math.min(n, 8)), r: 0};
+}
+function startStep(step){
+  S.sheet = false; S.view = null;
+  if (step === "old" && dueItems().length) enter(startWarm);
+  else { const u = UNITS.find(x => !wordsDone(x)) || UNITS[0]; enter(() => openUnit(u)); }
+}
+if (window.UA) UA.mountToday(document.getElementById("ua-today"), {app:"takallum-kids", ua:() => { const p = me(); return p && p.ua; }, name:() => { const p = me(); return p ? p.name : ""; }, state:practiceState, start:startStep, onSettings:sharedChanged});
 </script>
 </body>
 </html>
