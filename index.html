@@ -436,7 +436,7 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <li><strong>Warm-up.</strong> Once a day, up to eight words and sentences come back. Your child hears a word and picks its picture, or builds a sentence, so it can’t just be tapped through. Each one returns after 1, 3, 7, 14 and 30 days.</li>
     <li><strong>Three stars.</strong> Every unit is open from the start. Each one shows a star for learning the words, one for building the sentences, and one for making everything solid, which means right on three separate days. The third star takes about two weeks and can fade if warm-ups are skipped.</li>
     <li><strong>My garden.</strong> Every day your child finishes the warm-up, something new grows in a garden drawn like a child’s pencil picture: flowers, every 7th day a tree, every 30th a pond with a duck. It never fills up and nothing dies; if warm-ups are skipped, it only looks thirsty until the next one.</li>
-    <li><strong>Stories with Laith.</strong> Laith the lion cub stars in seven short stories. He says sentences your child has learned, and your child helps him by finding pictures and saying lines back. Lines said to Laith use the boy form, because he is a boy; lines about your child use their own form.</li>
+    <li><strong>Stories with Laith.</strong> Laith the lion cub stars in a short story for every unit. He says sentences your child has learned, and your child helps him by finding pictures and saying lines back. Lines said to Laith use the boy form, because he is a boy; lines about your child use their own form.</li>
     <li><strong>Practise again.</strong> Extra practice with the words and sentences that need it most, any time.</li>
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
@@ -1325,7 +1325,7 @@ function renderGarden(){
      me   the child says it about themselves: the child's own form
      to   the child says it to Laith: the boy form, because Laith is a boy
      find Laith says a word and the child taps its picture
-   Moods: happy, wave, sad, think, sleepy. Unless thanks:false, Laith says شُكْرًا at the end. */
+   Moods: happy, wave, sad, think, sleepy, scared, cross. Unless thanks:false, Laith says شُكْرًا at the end. */
 const STORIES = {
   family:{en:"Laith comes to visit", panels:[
     {t:"n", en:"Laith the lion cub has come to your house! Show him your family.", mood:"wave"},
@@ -1365,7 +1365,143 @@ const STORIES = {
     {t:"L", id:"fe2", mood:"sad", pic:""},
     {t:"to", id:"ki2", mood:"sad"}, {t:"to", id:"ki3", mood:"think"},
     {t:"L", id:"ki4", pic:"👍"}, {t:"to", id:"pl1"},
-    {t:"L", id:"fe1", mood:"wave", pic:""}]}
+    {t:"L", id:"fe1", mood:"wave", pic:""}]},
+  animals:{en:"Laith wants a pet", panels:[
+    {t:"n", en:"Laith wants a pet. Let’s go and look!", mood:"wave", pic:"🏪"},
+    {t:"L", id:"an5"},
+    {t:"find", id:"qitt", en:"Help Laith find it! Tap the picture."},
+    {t:"n", en:"A little dog runs up to Laith.", pic:"🐶"},
+    {t:"L", id:"an2"}, {t:"me", id:"an6"},
+    {t:"find", id:"fil", en:"Laith hears a very big animal. Tap the picture."},
+    {t:"L", id:"an3", mood:"think"}]},
+  colours:{en:"Laith paints a picture", panels:[
+    {t:"n", en:"Laith is painting a picture. Help him choose the colours!", mood:"wave", pic:"🎨"},
+    {t:"L", id:"co2"},
+    {t:"find", id:"ahmar", en:"Which crayon does Laith need? Tap the colour."},
+    {t:"L", id:"co1"},
+    {t:"find", id:"asfar", en:"And which one now? Tap the colour."},
+    {t:"L", id:"co5"}, {t:"me", id:"co6"},
+    {t:"n", en:"What a beautiful picture!", pic:"🖼️"}]},
+  day:{en:"A day with Laith", panels:[
+    {t:"n", en:"Laith is spending the whole day with you.", mood:"wave"},
+    {t:"L", id:"da1"}, {t:"me", id:"da2"},
+    {t:"find", id:"alabu", en:"What does Laith want to do now? Tap the picture."},
+    {t:"L", id:"da6"}, {t:"me", id:"da5"},
+    {t:"L", id:"da4", mood:"sleepy"}]},
+  little:{en:"Silly Laith", panels:[
+    {t:"n", en:"Laith points at a dog and says it’s a cat. Silly Laith!", mood:"think", pic:"🐶"},
+    {t:"me", id:"li2"},
+    {t:"n", en:"Now Laith points at a cat. Is it a cat?", mood:"think", pic:"🐱"},
+    {t:"me", id:"li1"},
+    {t:"L", id:"li4", mood:"think", pic:"🧒"}, {t:"me", id:"li5"},
+    {t:"n", en:"And who is that?", mood:"think", pic:"👧"},
+    {t:"me", id:"li6"}]},
+  people:{en:"Laith meets your grandparents", panels:[
+    {t:"n", en:"Laith is visiting your grandparents with you.", mood:"wave", pic:"🏡"},
+    {t:"me", id:"pe4", pic:""},
+    {t:"find", id:"jaddi", en:"There he is! Tap the picture."},
+    {t:"me", id:"pe1"}, {t:"me", id:"pe2"}, {t:"me", id:"pe3"},
+    {t:"n", en:"There is a baby here too!", pic:"👶"},
+    {t:"L", id:"pe5"}]},
+  body:{en:"Where is Laith’s nose?", panels:[
+    {t:"n", en:"Laith is learning about his body. Show him yours!", mood:"wave"},
+    {t:"L", id:"bo8", mood:"think", pic:""},
+    {t:"find", id:"anf", en:"Help Laith! Tap the picture."},
+    {t:"me", id:"bo4"},
+    {t:"L", id:"bo6", mood:"wave"}, {t:"me", id:"bo9"},
+    {t:"find", id:"udhun", en:"Laith says a word. Tap the picture."},
+    {t:"me", id:"bo3"}]},
+  school:{en:"Laith goes to school", panels:[
+    {t:"n", en:"It’s Laith’s first day at school!", mood:"wave", pic:"🏫"},
+    {t:"L", id:"sc1"},
+    {t:"L", id:"sc5", mood:"think", pic:""},
+    {t:"find", id:"haqiba", en:"Help Laith find it! Tap the picture."},
+    {t:"L", id:"sc6", pic:""}, {t:"to", id:"sc2"},
+    {t:"n", en:"Oh! Who is that in the classroom?", mood:"think", pic:"🐱"},
+    {t:"to", id:"sc4"}]},
+  yummy:{en:"Laith’s picnic", panels:[
+    {t:"n", en:"Laith has made a picnic for you!", mood:"wave", pic:"🧺"},
+    {t:"L", id:"yu1", pic:""},
+    {t:"find", id:"asir", en:"Pass Laith the juice! Tap the picture."},
+    {t:"me", id:"yu2"}, {t:"L", id:"yu7"},
+    {t:"find", id:"kaka", en:"Laith has a surprise for you. What is it?"},
+    {t:"L", id:"yu5"}, {t:"me", id:"yu6"}]},
+  outside:{en:"Laith in the garden", panels:[
+    {t:"n", en:"Laith is playing outside in the sunshine.", mood:"wave", pic:"☀️"},
+    {t:"L", id:"ou4"}, {t:"L", id:"ou1"},
+    {t:"find", id:"zahra", en:"Laith wants to smell something. Tap the picture."},
+    {t:"to", id:"ou2"},
+    {t:"n", en:"Now it’s night time.", mood:"think", pic:"🌃"},
+    {t:"L", id:"ou5", mood:"think", pic:""},
+    {t:"find", id:"qamar", en:"Show Laith! Tap the picture."},
+    {t:"me", id:"ou6"}]},
+  animals2:{en:"Laith at the farm", panels:[
+    {t:"n", en:"Laith is at the farm with his dad.", mood:"wave", pic:"🚜"},
+    {t:"L", id:"am1"},
+    {t:"find", id:"hisan", en:"Laith hears an animal. Tap the picture."},
+    {t:"me", id:"am4"}, {t:"L", id:"am6"},
+    {t:"find", id:"arnab", en:"Something small is hopping. Tap the picture."},
+    {t:"L", id:"am5"}, {t:"to", id:"am3"}]},
+  feelings:{en:"Laith hears a bang", panels:[
+    {t:"n", en:"BANG! Laith hears a loud noise.", mood:"scared", pic:"💥"},
+    {t:"L", id:"fe3", mood:"scared", pic:""},
+    {t:"n", en:"It was only a door. You give Laith a big hug.", pic:"🤗"},
+    {t:"L", id:"fe1", pic:""}, {t:"me", id:"fe1"},
+    {t:"n", en:"You run and play all afternoon.", pic:"🏃"},
+    {t:"L", id:"fe5", mood:"think", pic:""},
+    {t:"n", en:"You give Laith some milk.", pic:"🥛"},
+    {t:"L", id:"fe4", mood:"sleepy", pic:""}]},
+  morning:{en:"Wake up, Laith!", panels:[
+    {t:"n", en:"Laith is still asleep, and it’s time for school!", mood:"sleepy", pic:"⏰"},
+    {t:"to", id:"istayqidh", mood:"sleepy"},
+    {t:"to", id:"mo2"}, {t:"to", id:"mo4"}, {t:"to", id:"mo5"},
+    {t:"L", id:"mo8", mood:"think", pic:""},
+    {t:"find", id:"hidha", en:"Help Laith find them! Tap the picture."},
+    {t:"to", id:"mo6"}, {t:"to", id:"mo7"},
+    {t:"n", en:"Laith is ready. Off to school!", mood:"wave", pic:"🏫"}]},
+  table:{en:"Dinner with Laith", panels:[
+    {t:"n", en:"Laith’s mum has made dinner.", mood:"wave", pic:"🍲"},
+    {t:"Lto", id:"ta1", mood:"wave"},
+    {t:"to", id:"ta2"}, {t:"to", id:"ta3"},
+    {t:"n", en:"Oops! Laith picks up his food with his left paw.", mood:"think", pic:"🍗"},
+    {t:"to", id:"ta4"},
+    {t:"L", id:"ta7"},
+    {t:"to", id:"ta6"}, {t:"L", id:"hamdulillah", pic:""}]},
+  helping:{en:"Laith’s messy room", panels:[
+    {t:"n", en:"Oh no! Laith’s room is very messy.", mood:"sad", pic:"🧸"},
+    {t:"L", id:"hp6", mood:"think", pic:""},
+    {t:"to", id:"hp2"}, {t:"to", id:"hp1"},
+    {t:"n", en:"Phew! Tidying is hot work.", pic:"🥵"},
+    {t:"to", id:"hp5"},
+    {t:"n", en:"Brrr! Now the wind is cold.", pic:"🌬️"},
+    {t:"to", id:"hp4"},
+    {t:"L", id:"fe1", pic:""}]},
+  h_ask:{en:"Who is at the door?", panels:[
+    {t:"n", en:"Knock, knock! Someone is at the door.", mood:"think", pic:"🚪"},
+    {t:"me", id:"ha1"},
+    {t:"L", id:"salam", mood:"wave"}, {t:"to", id:"wsalam"},
+    {t:"n", en:"Laith has brought a little boy with him.", pic:"🧒🏽"},
+    {t:"to", id:"ha4"},
+    {t:"n", en:"You have a present for Laith.", pic:"🎁"},
+    {t:"to", id:"ha7"}]},
+  h_adab:{en:"Laith sneezes", panels:[
+    {t:"n", en:"Laith smells a flower… Aaa-choo!", pic:"🌸"},
+    {t:"L", id:"hamdulillah", pic:"🤧"},
+    {t:"to", id:"hb6"}, {t:"L", id:"hb7"},
+    {t:"n", en:"Then it starts to rain.", mood:"wave", pic:"🌧️"},
+    {t:"L", id:"hb8"}, {t:"me", id:"hb8"}]},
+  h_dua:{en:"Laith’s bedtime dua", panels:[
+    {t:"n", en:"It’s time to sleep. Laith wants to say his dua.", mood:"sleepy", pic:"🛏️"},
+    {t:"L", id:"hc1", mood:"sleepy"}, {t:"me", id:"hc1"},
+    {t:"L", id:"hc4", mood:"sleepy"}, {t:"me", id:"hc4"},
+    {t:"n", en:"Goodnight, Laith!", mood:"sleepy", pic:"🌙"}], thanks:false},
+  h_good:{en:"Laith is cross", panels:[
+    {t:"n", en:"Laith’s friend took his ball, and Laith is cross!", mood:"cross", pic:"⚽"},
+    {t:"to", id:"hd1", mood:"cross"},
+    {t:"n", en:"Laith takes a deep breath and feels better.", pic:"😮‍💨"},
+    {t:"L", id:"fe1", pic:""},
+    {t:"n", en:"Laith shares his ball with his friend.", pic:"🤝"},
+    {t:"to", id:"hd2"}]}
 };
 /* Development check: every id is a real word or sentence. */
 Object.entries(STORIES).forEach(([u, st]) => st.panels.forEach(p => { if (p.id && !byId(p.id)) console.warn("Story " + u + " uses an unknown id: " + p.id); }));
@@ -1373,10 +1509,14 @@ function laithSVG(mood){
   const boil = !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
   const F = c => fillC(c);
   const eye = (x, y) => '<circle cx="' + x + '" cy="' + y + '" r="3.2" class="dot"/><circle cx="' + (x + 1) + '" cy="' + (y - 1) + '" r="1" class="shine"/>';
-  const eyes = mood === "sleepy" ? '<path d="M84 66 q5 4 10 0 M106 66 q5 4 10 0" fill="none"/>' : eye(89, 66) + eye(111, 66);
+  const eyes = mood === "sleepy" ? '<path d="M84 66 q5 4 10 0 M106 66 q5 4 10 0" fill="none"/>' :
+    mood === "scared" ? '<circle cx="89" cy="66" r="5.5" fill="none"/><circle cx="111" cy="66" r="5.5" fill="none"/>' + eye(89, 66) + eye(111, 66) :
+    mood === "cross" ? '<path d="M82 56 L95 61 M118 56 L105 61" fill="none"/>' + eye(89, 66) + eye(111, 66) : eye(89, 66) + eye(111, 66);
   const mouth = mood === "sad" ? '<path d="M92 89 C96 84 104 84 108 89" fill="none"/><ellipse cx="85" cy="77" rx="2.2" ry="3.4" fill="' + F("blue") + '"/>' :
     mood === "think" ? '<ellipse cx="100" cy="87" rx="2.6" ry="3" fill="none"/>' :
     mood === "sleepy" ? '<path d="M96 86 C98 88 102 88 104 86" fill="none"/>' :
+    mood === "scared" ? '<path d="M91 88 q3 -3 6 0 q3 3 6 0 q3 -3 6 0" fill="none"/>' :
+    mood === "cross" ? '<path d="M92 88 L108 88" fill="none"/>' :
     '<path d="M100 82 C98 88 92 88 90 85 M100 82 C102 88 108 88 110 85" fill="none"/>';
   const art = '<g class="bob">' +
     '<path d="M70 150 C60 120 78 104 100 104 C122 104 140 120 130 150 Z" fill="' + F("yellow") + '"/>' +
@@ -1436,7 +1576,7 @@ function renderStory(s){
   let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">🦁 ' + esc(s.story.en) + ' · ' + (s.idx + 1) + ' / ' + ps.length + '</span></div>' +
     progHTML(s.idx + 1, ps.length) + '<section class="card story"><div class="scene">' + laithSVG(mood) +
     (((it && it.pic) || p.pic) && !(p.t === "find" && !s.found) ? '<div class="prop emo" aria-hidden="true">' + ((it && it.pic) || p.pic) + '</div>' : "") + '</div>';
-  const line = (who) => '<p class="who-says">' + who + '</p><p class="big ar" lang="ar">' + esc(it.ar) + '</p><p class="cue">' + esc(it.en) + '</p>' + sayButtons(it.ar);
+  const line = (who) => '<p class="who-says">' + who + '</p><p class="big ar" lang="ar">' + esc(it.ar) + '</p><p class="cue">' + esc(it.en) + '</p>' + refHTML(it) + sayButtons(it.ar);
   if (p.t === "n") h += '<p class="tale">' + esc(p.en) + '</p>';
   else if (p.t === "L" || p.t === "Lto") h += line("Laith says:");
   else if (p.t === "me") h += line("Your turn! Say it:");
