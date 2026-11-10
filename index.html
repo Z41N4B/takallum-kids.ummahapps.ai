@@ -986,10 +986,17 @@ if (window.UA){
     if (l.g) p.kid = l.g === "f" ? "girl" : "boy";
     if (AVATARS.includes(l.avatar)) p.avatar = l.avatar;
   });
+  /* A child removed in another of the apps is removed here too, with their progress. */
+  if (r.removed.length){
+    const goneIds = r.removed.map(i => profiles.list[i].id);
+    goneIds.forEach(id => { try { localStorage.removeItem(progKey(id)); } catch(e){} });
+    profiles.list = profiles.list.filter(p => !goneIds.includes(p.id));
+    if (goneIds.includes(profiles.active)) profiles.active = null;
+  }
   r.extra.forEach(x => profiles.list.push({id:newId(), ua:x.ua, name:x.name, kid:x.g === "f" ? "girl" : x.g === "m" ? "boy" : null, avatar:AVATARS.includes(x.avatar) ? x.avatar : freeAvatar()}));
   const cur = profiles.list.find(p => p.ua && p.ua === r.cur);
   if (cur) profiles.active = cur.id;
-  if (profiles.list.length) saveProfiles();
+  if (profiles.list.length || r.removed.length) saveProfiles();
 }
 function shareKid(p){ if (window.UA && p) p.ua = UA.save({ua:p.ua, name:p.name, g:toG(p.kid), avatar:p.avatar}); }
 if (!me() && profiles.list.length) profiles.active = profiles.list[0].id;
@@ -1228,8 +1235,8 @@ function saveKid(){
 }
 function deleteKid(){
   const e = S.edit; if (!e || !e.id) return;
-  if (!confirm("Remove " + e.orig + " and all their progress on this device?")) return;
   const gone = profiles.list.find(x => x.id === e.id);
+  if (!(window.UA ? UA.confirmRemove(e.orig, gone && gone.ua) : confirm("Remove " + e.orig + " and all their progress on this device? It cannot be undone."))) return;
   if (window.UA && gone) UA.remove(gone.ua);
   profiles.list = profiles.list.filter(x => x.id !== e.id);
   try { localStorage.removeItem(progKey(e.id)); } catch(err){}
@@ -1240,6 +1247,28 @@ function deleteKid(){
 }
 
 /* ---------- unit screen ---------- */
+/* "Already learnt": every word and sentence in a unit counts as learnt and solid, so it gets its three stars without doing it again.
+   The warm-up still brings them back now and then, spread over the next month. r.k keeps each item's record from before, for Undo. */
+function knowUnit(u){
+  const p = me(), items = unitItems(u);
+  if (!confirm("Mark " + u.en + " as already learnt" + (p ? " for " + p.name : "") + "?\n\nAll " + items.length + " words and sentences count as learnt and solid, so the unit gets its three stars. They still come back in the warm-up now and then, spread over the next month. You can undo this on the unit page.")) return;
+  items.forEach((x, i) => {
+    const r = rec(x.id);
+    if (isSolid(x.id) && !r.k) return;
+    const k = r.k || JSON.stringify(progress.items[x.id] || null);
+    progress.items[x.id] = {b:Math.max(r.b || 0, 3), l:true, t:Date.now(), n:SOLID, due:today() + 7 + i % 24, u:true, k};
+  });
+  saveProgress(); shareWords(u.words);
+}
+function unknowUnit(u){
+  if (!confirm("Undo already learnt for " + u.en + "? The words and sentences go back to how they were before.")) return;
+  unitItems(u).forEach(x => {
+    const r = progress.items[x.id]; if (!r || !r.k) return;
+    let before = null; try { before = JSON.parse(r.k); } catch(e){}
+    if (before) progress.items[x.id] = before; else delete progress.items[x.id];
+  });
+  saveProgress();
+}
 function renderUnit(u){
   const wd = countLearned(u.words), sd = countLearned(u.sents), done = wordsDone(u), bd = u.sents.filter(x => rec(x.id).u).length;
   const seen = u.words.some(w => rec(w.id).t);
@@ -1265,7 +1294,10 @@ function renderUnit(u){
     h += '<li><button class="wcell' + (learned(w.id) ? " ok" : "") + (isSolid(w.id) ? " solid" : "") + '" data-act="say" data-ar="' + esc(w.ar) + '"><span class="emo" aria-hidden="true">' + w.pic + '</span>' +
       '<span class="ar" lang="ar">' + esc(w.ar) + '</span><small>' + esc(w.en) + '</small></button></li>';
   });
-  return h + '</ul>' + (u.note ? '<p class="grownup">' + esc(u.note) + '</p>' : "") + '<p class="grownup">More word games: practise words in <a href="https://kalimat.ummahapps.ai/">Kalimat</a>, then make sentences here.</p>';
+  const marked = all.some(x => rec(x.id).k);
+  h += '</ul>' + (marked ? '<p class="grownup">Marked as already learnt. <button class="link" data-act="unknowunit">Undo</button></p>'
+    : !st[2] ? '<p class="grownup">Does your child already know this unit? <button class="link" data-act="knowunit">Mark it as already learnt</button></p>' : "");
+  return h + (u.note ? '<p class="grownup">' + esc(u.note) + '</p>' : "") + '<p class="grownup">More word games: practise words in <a href="https://kalimat.ummahapps.ai/">Kalimat</a>, then make sentences here.</p>';
 }
 
 /* ---------- sessions ---------- */
@@ -1577,6 +1609,8 @@ document.addEventListener("click", e => {
       break;
     }
     case "learn": enter(() => startLearn(S.unit)); break;
+    case "knowunit": if (S.unit){ knowUnit(S.unit); render(); } break;
+    case "unknowunit": if (S.unit){ unknowUnit(S.unit); render(); } break;
     case "words": enter(() => startSay("words", S.unit)); break;
     case "sents": if (S.session) startSay("sents", S.session.unit); else enter(() => startSay("sents", S.unit)); break;
     case "build": if (S.session) startBuild(S.session.unit); else enter(() => startBuild(S.unit)); break;

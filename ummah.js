@@ -38,14 +38,15 @@
   var unnamed = function(p){ return !p.ua && /^Learner \d+$/.test(String(p.name || "").trim()); };
 
   /* Link an app's own learners to the shared list, matching by name the first time.
-     locals: [{ua, name, g, avatar}] (g and avatar may be missing; ua is "" for one removed in another app).
-     Sets ua on each local, fills in name/g/avatar from the shared list,
-     and returns {changed, extra: shared learners with no local match yet, cur: the shared current id}. */
+     locals: [{ua, name, g, avatar}] (g and avatar may be missing; ua is "" for one unlinked before removing reached every app).
+     Sets ua on each local, fills in name/g/avatar from the shared list, and returns {changed,
+     extra: shared learners with no local match yet, cur: the shared current id,
+     removed: indexes in locals of learners removed in another app, which the app deletes with their progress}. */
   function sync(locals){
-    var o = read(), changed = false, now = Date.now();
-    locals.forEach(function(p){
+    var o = read(), changed = false, now = Date.now(), removed = [];
+    locals.forEach(function(p, i){
       if (p.ua === "" || unnamed(p)) return;
-      if (p.ua && o.d.indexOf(p.ua) >= 0){ p.ua = ""; changed = true; return; }
+      if (p.ua && o.d.indexOf(p.ua) >= 0){ removed.push(i); return; }
       var s = p.ua && o.l.filter(function(x){ return x.i === p.ua; })[0];
       if (!s && !p.ua){
         s = o.l.filter(function(x){ return same(x.n, p.name) && !locals.some(function(q){ return q.ua === x.i; }); })[0];
@@ -68,11 +69,13 @@
     write(o);
     var extra = o.l.filter(function(x){ return !locals.some(function(p){ return p.ua === x.i; }); })
       .map(function(x){ return {ua:x.i, name:x.n, g:x.g || null, avatar:x.a || null}; });
-    return {changed:changed, extra:extra, cur:o.c};
+    return {changed:changed, extra:extra, cur:o.c, removed:removed};
   }
-  /* Save one learner after the app changed them; returns their shared id. */
+  /* Has this learner been removed (in any of the apps)? */
+  function gone(ua){ return !!ua && read().d.indexOf(ua) >= 0; }
+  /* Save one learner after the app changed them; returns their shared id. One removed in another tab is not brought back. */
   function save(p){
-    if (p.ua === "" || unnamed(p)) return p.ua;
+    if (p.ua === "" || unnamed(p) || gone(p.ua)) return p.ua;
     var o = read(), s = p.ua && o.l.filter(function(x){ return x.i === p.ua; })[0];
     if (!s){ s = {i:p.ua || newId()}; o.l.push(s); o.d = o.d.filter(function(i){ return i !== s.i; }); }
     s.n = p.name; s.u = Date.now();
@@ -88,6 +91,13 @@
     if (o.d.indexOf(ua) < 0) o.d.push(ua);
     if (o.c === ua) o.c = null;
     write(o); dropC("ua_w_" + ua); dropC("ua_s_" + ua); dropC("ua_p_" + ua);
+  }
+  /* The warning before removing a learner. A learner shared with the other apps is removed from all four. */
+  function confirmRemove(name, ua){
+    var who = String(name || "this learner");
+    return confirm(ua
+      ? "Remove " + who + " from all four Arabic apps?\n\nThis deletes " + who + " and all their progress, known words and settings in Takallum Kids, Kalimat, Kalimat Plus and Takallum on this device. It cannot be undone."
+      : "Remove " + who + "?\n\nThis deletes " + who + " and all their progress in this app on this device. It cannot be undone.");
   }
   function setCurrent(ua){ if (!ua) return; var o = read(); if (o.c !== ua){ o.c = ua; write(o); } }
 
@@ -107,7 +117,7 @@
   function keys(ua){ var v = ua && getC("ua_w_" + ua); return v ? v.split(".") : []; }
   /* Add words (vowelled Arabic) this learner now knows. */
   function addKnown(ua, list){
-    if (!ua) return;
+    if (!ua || gone(ua)) return;
     var have = keys(ua), seen = {}, grew = false;
     have.forEach(function(k){ seen[k] = 1; });
     list.forEach(function(ar){ if (!ar) return; var k = key(ar); if (!seen[k]){ seen[k] = 1; have.push(k); grew = true; } });
@@ -272,7 +282,7 @@
   /* Save an app's counts for a learner. state: {o: old work due by today and each of the next 6 days, r: recent work not solid yet};
      add: {n: new items started, c: recent items practised, v: old items revised}, added to today's tallies. */
   function practice(ua, app, state, add){
-    var code = codeOf(app); if (!code) return;
+    var code = codeOf(app); if (!code || gone(ua)) return;
     var o = pRead(ua), t = dayNo(), e = o.x[code] || {}, did = false;
     if (state){ e.s = t; e.o = (state.o || []).slice(0, 7).map(function(n){ return Math.max(0, n | 0); }); e.r = Math.max(0, state.r | 0); }
     if (e.d !== t){ e.d = t; e.n = 0; e.c = 0; e.v = 0; }
@@ -416,7 +426,7 @@
     });
   });
 
-  window.UA = {sync:sync, save:save, remove:remove, setCurrent:setCurrent, addKnown:addKnown, knows:knows, key:key,
+  window.UA = {sync:sync, save:save, remove:remove, gone:gone, confirmRemove:confirmRemove, setCurrent:setCurrent, addKnown:addKnown, knows:knows, key:key,
     settings:settings, setSetting:setSetting, watch:watch, openSettings:openSettings,
     dayNo:dayNo, mountToday:mountToday, refreshToday:refreshToday, practiceAdd:practiceAdd};
 })();
