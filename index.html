@@ -133,6 +133,7 @@
   --bg:#EDF1F6; --surface:#FFFFFF; --sunk:#E3E9F1; --ink:#15233F; --muted:#56637D;
   --lapis:#1E4FA0; --lapis-ink:#FFFFFF; --lapis-soft:#DCE6F7; --brass:#9A6A0E; --brass-soft:#F3E6C8;
   --line:#D3DBE6; --good:#1F6B4A; --good-soft:#DDF0E6; --miss:#A8382C;
+  --pencil:#4B4F58; --paper:#FFFDF5; --cr-red:#E0503A; --cr-yellow:#E9A800; --cr-pink:#E77FB0; --cr-purple:#8C63C9; --cr-orange:#EE8424; --cr-blue:#3F8FD6; --cr-green:#4E9A3C; --cr-brown:#94643A;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
@@ -143,6 +144,7 @@
     --bg:#0D1424; --surface:#162035; --sunk:#111A2C; --ink:#E6EBF4; --muted:#9AA6BD;
     --lapis:#8DB0EC; --lapis-ink:#0D1424; --lapis-soft:#1D2D4D; --brass:#E2B75E; --brass-soft:#3A2F17;
     --line:#2A3753; --good:#5FC498; --good-soft:#173528; --miss:#F08A7E;
+    --pencil:#D5DAE3; --paper:#1B2438; --cr-red:#FF7A63; --cr-yellow:#FFD04D; --cr-pink:#FF9FCB; --cr-purple:#B99BF2; --cr-orange:#FFA65A; --cr-blue:#7DB8F2; --cr-green:#7CCB63; --cr-brown:#C99766;
   }
 }
 :root[data-theme="dark"]{
@@ -150,6 +152,7 @@
   --bg:#0D1424; --surface:#162035; --sunk:#111A2C; --ink:#E6EBF4; --muted:#9AA6BD;
   --lapis:#8DB0EC; --lapis-ink:#0D1424; --lapis-soft:#1D2D4D; --brass:#E2B75E; --brass-soft:#3A2F17;
   --line:#2A3753; --good:#5FC498; --good-soft:#173528; --miss:#F08A7E;
+  --pencil:#D5DAE3; --paper:#1B2438; --cr-red:#FF7A63; --cr-yellow:#FFD04D; --cr-pink:#FF9FCB; --cr-purple:#B99BF2; --cr-orange:#FFA65A; --cr-blue:#7DB8F2; --cr-green:#7CCB63; --cr-brown:#C99766;
 }
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);
@@ -225,6 +228,38 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .unit.warm.idle{background:var(--surface);border:1px solid var(--line)}
 .unit.review{background:var(--brass-soft);border-color:transparent}
 .unit.all-done .meter i{background:var(--good)}
+.garden-card{width:100%;display:block;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:10px 14px 14px}
+.garden{display:block;width:100%;height:auto;stroke:var(--pencil);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.garden .redraw *{fill:none;opacity:.45}
+.garden.dry .pl{filter:saturate(.35)}
+.garden .fresh path,.garden .fresh ellipse{stroke-dasharray:1;stroke-dashoffset:1;animation:g-draw 1.8s ease-out .3s forwards}
+.garden .fresh{animation:g-fill 2.4s ease-out}
+@keyframes g-draw{to{stroke-dashoffset:0}}
+@keyframes g-fill{0%,40%{opacity:.25}100%{opacity:1}}
+.garden .fly{animation:g-fly 7s ease-in-out infinite alternate}
+@keyframes g-fly{0%{transform:translate(0,0)}50%{transform:translate(40px,14px)}100%{transform:translate(90px,-4px)}}
+@media (prefers-reduced-motion: reduce){.garden .fly,.garden .fresh{animation:none}.garden .fresh path,.garden .fresh ellipse{animation:none;stroke-dashoffset:0}}
+.gc-t{display:flex;justify-content:space-between;align-items:baseline;margin-top:4px}
+.gc-t b{font-size:1.15rem}.gc-t span{color:var(--muted);font-size:.9rem}
+.gc-s{display:block;color:var(--muted);font-size:.9rem}
+.garden.full{background:var(--paper);border:1px solid var(--line);border-radius:22px;margin-top:6px}
+.g-note{color:var(--muted);font-size:.92rem;text-align:center;margin:10px 4px}
+.grew{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:10px 14px;margin:0 0 16px}
+.grew p{margin:4px 0 0;font-weight:600}
+.praise-en{color:var(--muted);font-size:.95rem;margin:4px 0 8px}
+.laith{width:150px;height:auto;flex:none;stroke:var(--pencil);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.laith .redraw *{fill:none;opacity:.45}
+.laith .dot{fill:var(--pencil)}.laith .shine{fill:var(--paper);stroke:none}
+.laith .wave{animation:l-wave 1.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:10% 90%}
+.laith .bob{animation:l-bob 2.4s ease-in-out infinite alternate}
+@keyframes l-wave{to{transform:rotate(-18deg)}}@keyframes l-bob{to{transform:translateY(-3px)}}
+@media (prefers-reduced-motion: reduce){.laith .wave,.laith .bob{animation:none}}
+.card.story{background:var(--paper)}
+.scene{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:6px}
+.scene .prop{font-size:3rem;line-height:1}
+.tale{font-size:1.15rem;font-weight:600;margin:6px 0 10px}
+.who-says{color:var(--muted);font-size:.92rem;margin:4px 0 0}
+.step.story-step{background:var(--paper)}
 .sync{color:var(--muted);font-size:.82rem;text-align:center;margin-top:22px}
 
 /* unit screen */
@@ -400,6 +435,8 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <li><strong>Build the sentences.</strong> Your child taps the words of each sentence in the right order, hearing each word as they tap it.</li>
     <li><strong>Warm-up.</strong> Once a day, up to eight words and sentences come back. Your child hears a word and picks its picture, or builds a sentence, so it can’t just be tapped through. Each one returns after 1, 3, 7, 14 and 30 days.</li>
     <li><strong>Three stars.</strong> Every unit is open from the start. Each one shows a star for learning the words, one for building the sentences, and one for making everything solid, which means right on three separate days. The third star takes about two weeks and can fade if warm-ups are skipped.</li>
+    <li><strong>My garden.</strong> Every day your child finishes the warm-up, something new grows in a garden drawn like a child’s pencil picture: flowers, every 7th day a tree, every 30th a pond with a duck. It never fills up and nothing dies; if warm-ups are skipped, it only looks thirsty until the next one.</li>
+    <li><strong>Stories with Laith.</strong> Laith the lion cub stars in seven short stories. He says sentences your child has learned, and your child helps him by finding pictures and saying lines back. Lines said to Laith use the boy form, because he is a boy; lines about your child use their own form.</li>
     <li><strong>Practise again.</strong> Extra practice with the words and sentences that need it most, any time.</li>
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
@@ -1055,6 +1092,23 @@ const T = {
   sayIt: () => girl() ? "قُولِي بِالْعَرَبِيَّةِ" : "قُلْ بِالْعَرَبِيَّةِ",
   echo: () => girl() ? "اسْمَعِي وَكَرِّرِي" : "اسْمَعْ وَكَرِّرْ"
 };
+/* Praise at the end of a round: boy form, girl form and a plain English meaning. */
+const PRAISE = [
+  ["أَحْسَنْتَ!", "أَحْسَنْتِ!", "Well done!"],
+  ["مُمْتَازٌ!", "مُمْتَازَةٌ!", "Excellent!"],
+  ["أَنْتَ رَائِعٌ!", "أَنْتِ رَائِعَةٌ!", "You’re amazing!"],
+  ["بَارَكَ اللَّهُ فِيكَ!", "بَارَكَ اللَّهُ فِيكِ!", "May Allah bless you!"],
+  ["أَنْتَ بَطَلٌ!", "أَنْتِ بَطَلَةٌ!", "You’re a hero!"],
+  ["أَنْتَ نَجْمٌ!", "أَنْتِ نَجْمَةٌ!", "You’re a star!"],
+  ["مَا شَاءَ اللَّهُ!", "مَا شَاءَ اللَّهُ!", "Masha’Allah!"],
+  ["عَمَلٌ رَائِعٌ!", "عَمَلٌ رَائِعٌ!", "Great work!"]
+];
+let lastPraise = -1;
+function newPraise(){
+  let i; do { i = Math.floor(Math.random() * PRAISE.length); } while (i === lastPraise);
+  lastPraise = i; return {ar:PRAISE[i][girl() ? 1 : 0], en:PRAISE[i][2]};
+}
+function finishRound(s){ s.done = true; s.praise = newPraise(); render(); window.scrollTo(0, 0); speak(s.praise.ar); confetti(); }
 const WORDS = {};
 UNITS.forEach((u, ui) => u.words.forEach(w => { WORDS[w.id] = Object.assign({kind:"word", ui}, w); }));
 UNITS.forEach((u, ui) => u.sents.forEach(s => { s.kind = "sent"; s.ui = ui; }));
@@ -1144,6 +1198,262 @@ function voiceGuideHTML(){
     '<div class="vg-actions"><button class="go" data-act="vgtest">Test the voice</button><button data-act="vghide">Hide these steps</button></div></section>';
 }
 
+/* ---------- the garden ---------- */
+/* Every day a warm-up is finished, one new thing grows in the child's garden. It never fills up and nothing dies:
+   if warm-ups are skipped long enough for words to wait 3 days or more, the garden only looks thirsty.
+   Drawn like a child's pencil-and-crayon picture: wobbly lines (an SVG displacement filter whose seed changes a few
+   times a second, so the lines gently jiggle) and diagonal crayon hatching. */
+const gardenDays = () => progress.garden || (progress.warmDay ? [progress.warmDay] : []);
+function plantToday(){
+  const days = gardenDays().slice(), t = today();
+  if (days.includes(t)) return false;
+  days.push(t); progress.garden = days; saveProgress(); return true;
+}
+const thirsty = () => dueItems().some(x => today() - dueOf(x.id) >= 3);
+function seeded(n){ let s = (n * 7919 + 104729) % 233280; return () => (s = (s * 9301 + 49297) % 233280) / 233280; }
+const CRAYON = ["red", "yellow", "pink", "purple", "orange", "blue"];
+const PLANT_NAME = {flower:"flower", tulip:"tulip", sunflower:"sunflower", bush:"berry bush", mushroom:"mushroom", tree:"apple tree", pond:"pond with a duck"};
+/* Plant n (0 = the first day): every 7th is a tree, every 30th a pond with a duck, the rest a mix of flowers. */
+function plantOf(n){
+  const r = seeded(n + 1);
+  if ((n + 1) % 30 === 0) return {kind:"pond", c:"blue", r};
+  if ((n + 1) % 7 === 0) return {kind:"tree", c:"red", r};
+  const kinds = ["flower", "tulip", "flower", "sunflower", "bush", "tulip", "mushroom", "flower"];
+  return {kind:kinds[Math.floor(r() * kinds.length)], c:CRAYON[Math.floor(r() * CRAYON.length)], r};
+}
+const fillC = c => 'url(#gh-' + c + ')';
+const P = (d, f) => '<path pathLength="1" d="' + d + '" fill="' + (f ? fillC(f) : "none") + '"/>';
+const E = (x, y, rx, ry, f) => '<ellipse pathLength="1" cx="' + x + '" cy="' + y + '" rx="' + rx + '" ry="' + ry + '" fill="' + (f ? fillC(f) : "none") + '"/>';
+/* A petal: an oval d away from the flower's centre (0, cy), turned to angle a. */
+const petal = (cy, d, rx, ry, f, a) => '<ellipse pathLength="1" cx="0" cy="' + (cy - d) + '" rx="' + rx + '" ry="' + ry + '" fill="' + fillC(f) + '" transform="rotate(' + a + ' 0 ' + cy + ')"/>';
+const leaf = (y, s) => P("M0 " + y + " C" + 8 * s + " " + (y - 7) + " " + 14 * s + " " + (y - 3) + " " + 16 * s + " " + (y + 1) + " C" + 10 * s + " " + (y + 4) + " " + 4 * s + " " + (y + 3) + " 0 " + y + "Z", "green");
+function plantSVG(p){
+  const k = p.kind, c = p.c;
+  if (k === "flower") return P("M0 0 C-2 -14 2 -28 0 -40") + leaf(-13, 1) + leaf(-22, -1) +
+    [0, 60, 120, 180, 240, 300].map(a => petal(-48, 7, 4.2, 6.5, c, a)).join("") + E(0, -48, 4, 4, "yellow");
+  if (k === "tulip") return P("M0 0 C1 -12 -1 -24 0 -38") + leaf(-10, -1) + leaf(-18, 1) +
+    P("M-8 -38 C-10 -48 -7 -55 -6 -58 L-2 -51 L0 -59 L2 -51 L6 -58 C7 -55 10 -48 8 -38 C5 -33 -5 -33 -8 -38Z", c);
+  if (k === "sunflower") return P("M0 0 C-2 -20 2 -40 0 -58") + leaf(-16, 1) + leaf(-30, -1) +
+    Array.from({length:10}, (_, i) => petal(-68, 10, 3.4, 6.5, "yellow", i * 36)).join("") + E(0, -68, 6.5, 6.5, "brown");
+  if (k === "bush") return P("M-17 0 C-22 -10 -14 -23 -5 -20 C-1 -29 12 -27 13 -19 C21 -17 21 -4 17 0Z", "green") +
+    [[-8, -9], [3, -15], [9, -6], [-2, -4]].map(([x, y]) => E(x, y, 2.6, 2.6, c)).join("");
+  if (k === "mushroom") return P("M-4 0 L-3 -12 L3 -12 L4 0Z", "brown") +
+    P("M-14 -12 C-14 -26 14 -26 14 -12Z", "red") + E(-6, -18, 2, 2) + E(4, -20, 2, 2) + E(7, -14, 1.6, 1.6);
+  if (k === "tree") return P("M-5 0 L-3 -30 L3 -30 L5 0Z", "brown") +
+    P("M-22 -30 C-31 -40 -23 -59 -10 -57 C-6 -71 10 -71 14 -58 C27 -60 31 -40 21 -32 C12 -25 -14 -24 -22 -30Z", "green") +
+    [[-10, -44], [6, -52], [12, -38], [-2, -36]].map(([x, y]) => E(x, y, 3.4, 3.4, "red")).join("");
+  return E(0, -4, 26, 7, "blue") + P("M-6 -8 C-10 -16 2 -18 6 -12 C12 -14 12 -8 6 -6 C2 -4 -4 -4 -6 -8Z", "yellow") +
+    E(-6, -16, 4, 4, "yellow") + P("M-10 -16 L-14 -15 L-10 -14Z", "orange");
+}
+function gardenDefs(boil){
+  const hatch = c => '<pattern id="gh-' + c + '" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">' +
+    '<rect width="5" height="5" style="fill:var(--cr-' + c + ');opacity:.22"/><line x1="1" y1="0" x2="1" y2="5" style="stroke:var(--cr-' + c + ')" stroke-width="2.3" opacity=".9"/></pattern>';
+  return '<defs>' + CRAYON.concat(["green", "brown"]).map(hatch).join("") +
+    '<filter id="g-wob" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1">' +
+    (boil ? '<animate attributeName="seed" values="1;5;9" dur="0.6s" calcMode="discrete" repeatCount="indefinite"/>' : "") +
+    '</feTurbulence><feDisplacementMap in="SourceGraphic" scale="2.6"/></filter></defs>';
+}
+/* One plant in place: the drawing twice, the second a little offset with no colour, like a pencil going over a line again. */
+function placed(p, x, y, s, fresh){
+  const g = plantSVG(p);
+  return '<g class="pl' + (fresh ? " fresh" : "") + '" transform="translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + s + ')">' + g +
+    '<g class="redraw" transform="translate(.7 .5)">' + g + '</g></g>';
+}
+function sky(w, n){
+  let h = '<g class="sun">' + E(w - 30, 26, 11, 11, "yellow") + Array.from({length:8}, (_, i) => {
+    const a = i * Math.PI / 4, x = w - 30, y = 26;
+    return '<path pathLength="1" d="M' + (x + Math.cos(a) * 15).toFixed(1) + " " + (y + Math.sin(a) * 15).toFixed(1) + " L" + (x + Math.cos(a) * 21).toFixed(1) + " " + (y + Math.sin(a) * 21).toFixed(1) + '" fill="none"/>';
+  }).join("") + '</g>' + P("M30 30 C26 22 36 16 42 20 C46 12 60 14 60 22 C68 22 68 32 60 32 L32 32 C28 32 28 30 30 30Z");
+  if (n >= 3) h += '<g class="fly"><g transform="translate(' + (w * .45).toFixed(0) + ' 30)">' + P("M0 0 C-8 -10 -12 -2 -2 2Z", "purple") + P("M0 0 C8 -10 12 -2 2 2Z", "purple") + '</g></g>';
+  if (n >= 10) h += P("M" + (w * .7) + " 18 q4 -5 8 0 q4 -5 8 0");
+  return h;
+}
+const grass = (w, y) => '<path pathLength="1" d="M4 ' + y + " C" + w * .25 + " " + (y - 3) + " " + w * .5 + " " + (y + 3) + " " + (w - 4) + " " + y + '" fill="none"/>' +
+  Array.from({length:Math.floor(w / 26)}, (_, i) => { const x = 12 + i * 26; return '<path pathLength="1" d="M' + x + " " + y + " l2 -6 M" + (x + 4) + " " + y + ' l-1 -5" fill="none"/>'; }).join("");
+/* The card on the home and warm-up screens: the 18 newest plants in three rows, newest at the front. */
+function gardenCardSVG(fresh){
+  const days = gardenDays(), n = days.length, W = 340, H = 196, rows = [[180, 1.12], [138, .9], [104, .72]];
+  const boil = !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  let body = "";
+  const shown = Math.min(n, 18);
+  for (let row = 2; row >= 0; row--){
+    if (row === 0 || shown > row * 6) body += grass(W, rows[row][0] + 4);
+    for (let k = row * 6; k < Math.min(shown, row * 6 + 6); k++){
+      const i = n - 1 - k, p = plantOf(i), col = (k + row * 3) % 6, [y, s] = rows[row];
+      body += placed(p, 30 + col * 56 + (p.r() - .5) * 14, y + (p.r() - .5) * 4, s, fresh && k === 0);
+    }
+  }
+  if (!n) body += '<g class="pl" transform="translate(' + W / 2 + ' 180)">' + E(0, -3, 4, 3, "brown") + '<path pathLength="1" d="M0 -6 C-1 -10 2 -12 0 -15" fill="none"/></g>';
+  return '<svg class="garden' + (thirsty() ? " dry" : "") + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + (n ? "Your garden: " + n + (n === 1 ? " plant" : " plants") : "Your garden: a seed waiting to grow") + '">' +
+    gardenDefs(boil) + '<g filter="url(#g-wob)">' + sky(W, n) + body + '</g></svg>';
+}
+/* The whole garden, every plant ever grown, oldest at the top. Long gardens don't jiggle, to keep phones fast. */
+function gardenFullSVG(){
+  const days = gardenDays(), n = days.length, W = 340, rowsN = Math.max(1, Math.ceil(n / 6)), H = 70 + rowsN * 66;
+  const boil = rowsN <= 6 && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  let body = "";
+  for (let r = 0; r < rowsN; r++){
+    const y = 120 + r * 66;
+    body += grass(W, y + 4);
+    for (let i = r * 6; i < Math.min(n, r * 6 + 6); i++){ const p = plantOf(i); body += placed(p, 30 + (i % 6) * 56 + (p.r() - .5) * 14, y, .88, false); }
+  }
+  return '<svg class="garden full' + (thirsty() ? " dry" : "") + '" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Your whole garden: ' + n + (n === 1 ? " plant" : " plants") + '">' +
+    gardenDefs(boil) + '<g filter="url(#g-wob)">' + sky(W, n) + body + '</g></svg>';
+}
+function gardenCardHTML(){
+  const n = gardenDays().length, grew = gardenDays().includes(today()), due = dueItems().length;
+  if (!n && !learnedItems().length) return "";
+  const last = n ? PLANT_NAME[plantOf(n - 1).kind] : "";
+  const sub = grew ? "You grew a " + last + " today!" : thirsty() ? "Your garden is thirsty. A warm-up will water it 💧" :
+    due ? "Do your warm-up to grow something new" : !n ? "After tomorrow’s warm-up, your first flower grows" : "Something new grows with your next warm-up";
+  return '<li><button class="garden-card" data-act="garden" aria-label="My garden. ' + n + (n === 1 ? " plant" : " plants") + '. ' + sub + '">' + gardenCardSVG(false) +
+    '<span class="gc-t"><b>My garden</b><span>' + n + (n === 1 ? " plant" : " plants") + '</span></span><span class="gc-s">' + sub + '</span></button></li>';
+}
+function renderGarden(){
+  const n = gardenDays().length;
+  return '<div class="bar"><button class="link" data-act="back">‹ Back</button><span class="count">' + n + (n === 1 ? " plant" : " plants") + '</span></div>' +
+    '<h2 class="who-h">My garden</h2>' + (thirsty() ? '<p class="g-note">Your garden is thirsty. Do a warm-up to water it 💧</p>' : "") + gardenFullSVG() +
+    '<p class="g-note">Every day you finish your warm-up, something new grows. Every 7th is a tree, and every 30th is a pond with a duck. Your garden never fills up.</p>';
+}
+
+/* ---------- Laith the lion cub ---------- */
+/* Little stories with Laith, drawn in the same pencil style as the garden. Every Arabic line is a word or sentence the
+   app already teaches, by id. Panel types:
+     n    narration in English
+     L    Laith says it about himself: always the boy form (Laith is a boy)
+     Lto  Laith says it to the child: the child's own boy or girl form
+     me   the child says it about themselves: the child's own form
+     to   the child says it to Laith: the boy form, because Laith is a boy
+     find Laith says a word and the child taps its picture
+   Moods: happy, wave, sad, think, sleepy. Unless thanks:false, Laith says شُكْرًا at the end. */
+const STORIES = {
+  family:{en:"Laith comes to visit", panels:[
+    {t:"n", en:"Laith the lion cub has come to your house! Show him your family.", mood:"wave"},
+    {t:"me", id:"fa1"}, {t:"me", id:"fa2"},
+    {t:"find", id:"akhi", en:"Laith wants to meet your brother. Tap the picture."},
+    {t:"me", id:"fa3"}]},
+  hello:{en:"Saying hello", panels:[
+    {t:"n", en:"Laith has come to say hello.", mood:"wave"},
+    {t:"L", id:"salam", mood:"wave"}, {t:"to", id:"wsalam"},
+    {t:"L", id:"he4", pic:""}, {t:"me", id:"he4"},
+    {t:"n", en:"Laith gives you a flower.", pic:"🌸"},
+    {t:"to", id:"shukran"}], thanks:false},
+  food:{en:"Laith is hungry", panels:[
+    {t:"L", id:"fo6", mood:"sad", pic:"😋"}, {t:"L", id:"fo2", pic:""},
+    {t:"find", id:"tuffaha", en:"Help Laith find it! Tap the picture."},
+    {t:"L", id:"fo3", pic:""},
+    {t:"find", id:"halib", en:"Can you find it too?"},
+    {t:"n", en:"Yum! Laith isn’t hungry any more."}]},
+  home:{en:"Where is the ball?", panels:[
+    {t:"n", en:"Laith wants to play, but his ball is lost!", mood:"sad"},
+    {t:"L", id:"ho2", mood:"think"},
+    {t:"find", id:"kura", en:"Help Laith! Tap the picture."},
+    {t:"n", en:"You found it! Now Laith’s dad is calling him.", pic:"📣"},
+    {t:"L", id:"ho6", pic:"📍"}]},
+  bedtime:{en:"Laith is sleepy", panels:[
+    {t:"L", id:"fe4", mood:"sleepy", pic:"🥱"}, {t:"L", id:"nt1", mood:"sleepy"},
+    {t:"to", id:"nt4", mood:"sleepy"}, {t:"to", id:"nt5", mood:"sleepy"}, {t:"to", id:"nt7", mood:"sleepy"},
+    {t:"n", en:"Laith is fast asleep. Shh! 🤫", mood:"sleepy", pic:"🌙"}], thanks:false},
+  together:{en:"Let’s play!", panels:[
+    {t:"L", id:"pl1", mood:"wave"}, {t:"L", id:"pl4", pic:"🔄"},
+    {t:"to", id:"pl7"},
+    {t:"find", id:"kura", en:"Which one is it? Tap the picture."},
+    {t:"Lto", id:"pl5"},
+    {t:"n", en:"You take turns and have lots of fun.", pic:"🤸"}]},
+  kind:{en:"Laith is sad", panels:[
+    {t:"n", en:"Laith is sad today.", mood:"sad"},
+    {t:"L", id:"fe2", mood:"sad", pic:""},
+    {t:"to", id:"ki2", mood:"sad"}, {t:"to", id:"ki3", mood:"think"},
+    {t:"L", id:"ki4", pic:"👍"}, {t:"to", id:"pl1"},
+    {t:"L", id:"fe1", mood:"wave", pic:""}]}
+};
+/* Development check: every id is a real word or sentence. */
+Object.entries(STORIES).forEach(([u, st]) => st.panels.forEach(p => { if (p.id && !byId(p.id)) console.warn("Story " + u + " uses an unknown id: " + p.id); }));
+function laithSVG(mood){
+  const boil = !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const F = c => fillC(c);
+  const eye = (x, y) => '<circle cx="' + x + '" cy="' + y + '" r="3.2" class="dot"/><circle cx="' + (x + 1) + '" cy="' + (y - 1) + '" r="1" class="shine"/>';
+  const eyes = mood === "sleepy" ? '<path d="M84 66 q5 4 10 0 M106 66 q5 4 10 0" fill="none"/>' : eye(89, 66) + eye(111, 66);
+  const mouth = mood === "sad" ? '<path d="M92 89 C96 84 104 84 108 89" fill="none"/><ellipse cx="85" cy="77" rx="2.2" ry="3.4" fill="' + F("blue") + '"/>' :
+    mood === "think" ? '<ellipse cx="100" cy="87" rx="2.6" ry="3" fill="none"/>' :
+    mood === "sleepy" ? '<path d="M96 86 C98 88 102 88 104 86" fill="none"/>' :
+    '<path d="M100 82 C98 88 92 88 90 85 M100 82 C102 88 108 88 110 85" fill="none"/>';
+  const art = '<g class="bob">' +
+    '<path d="M70 150 C60 120 78 104 100 104 C122 104 140 120 130 150 Z" fill="' + F("yellow") + '"/>' +
+    '<path d="M78 150 L78 168 M122 150 L122 168 M70 168 L86 168 M114 168 L130 168" fill="none"/>' +
+    '<path d="M130 140 C150 140 156 120 148 112" fill="none"/><path d="M146 108 C142 102 154 100 152 108 C156 112 148 116 146 108Z" fill="' + F("orange") + '"/>' +
+    '<g' + (mood === "wave" ? ' class="wave"' : "") + '><path d="M74 122 C60 112 54 98 58 88" fill="none"/><circle cx="58" cy="85" r="6" fill="' + F("yellow") + '"/></g>' +
+    '<path d="M100 26 C112 18 124 30 130 34 C142 32 150 46 148 56 C160 64 156 80 148 86 C154 98 142 112 132 110 C126 122 108 124 100 118 C92 124 74 122 68 110 C58 112 46 98 52 86 C44 80 40 64 52 56 C50 46 58 32 70 34 C76 30 88 18 100 26Z" fill="' + F("orange") + '"/>' +
+    '<circle cx="100" cy="72" r="30" fill="' + F("yellow") + '"/>' +
+    '<circle cx="76" cy="46" r="7" fill="' + F("yellow") + '"/><circle cx="124" cy="46" r="7" fill="' + F("yellow") + '"/>' +
+    eyes + '<ellipse cx="80" cy="80" rx="5" ry="3" fill="' + F("pink") + '" stroke="none"/><ellipse cx="120" cy="80" rx="5" ry="3" fill="' + F("pink") + '" stroke="none"/>' +
+    '<path d="M95 76 L105 76 L100 82Z" class="dot"/>' + mouth + '</g>';
+  return '<svg class="laith" viewBox="30 10 140 165" role="img" aria-label="Laith the lion cub">' + gardenDefs(boil) +
+    '<g filter="url(#g-wob)">' + art + '<g class="redraw" transform="translate(.8 .6)">' + art + '</g></g></svg>';
+}
+/* The words and sentences in a story panel, in the form the panel needs. */
+function storyItem(p){
+  const it = byId(p.id); if (!it) return null;
+  const childForm = p.t === "me" || p.t === "Lto" || p.t === "find";
+  const r = childForm ? gv(it) : Object.assign({}, it);
+  /* Lines by or to Laith show only Laith, unless the story gives a picture: the usual pictures show people. */
+  if ("pic" in p) r.pic = p.pic; else if (p.t === "L" || p.t === "to") r.pic = ""; else r.pic = (r.pic || "").replace("🙋", me() ? me().avatar : "");
+  return r;
+}
+function startStory(u){
+  S.session = {type:"story", kind:"story", unit:u, story:STORIES[u.id], idx:0, first:0, total:0, missed:new Set()};
+  storyPanel(); render(); window.scrollTo(0, 0);
+}
+function storyPanels(s){ return s.story.thanks === false ? s.story.panels : s.story.panels.concat([{t:"L", id:"shukran", mood:"wave"}]); }
+function storyPanel(){
+  const s = S.session, p = storyPanels(s)[s.idx];
+  s.found = false; s.wrong = null; s.opts = null;
+  if (p.t === "find"){
+    const it = byId(p.id), pool = UNITS[it.ui].words.filter(w => w.id !== it.id && gv(w).pic !== gv(it).pic);
+    s.opts = shuffle([gv(it)].concat(shuffle(pool.slice()).slice(0, 2).map(gv)));
+  }
+  const it = p.id ? storyItem(p) : null, at = s.idx;
+  if (it && (settings.autoplay || echo() || p.t === "find" || p.t === "L" || p.t === "Lto")) setTimeout(() => { if (S.session === s && s.idx === at) speak(it.ar); }, 350);
+}
+function storyNext(){
+  const s = S.session; if (!s || s.type !== "story") return;
+  const p = storyPanels(s)[s.idx];
+  if (p.t === "find" && !s.found) return;
+  if (s.idx < storyPanels(s).length - 1){ s.idx++; storyPanel(); render(); window.scrollTo(0, 0); return; }
+  progress.stories = Object.assign({}, progress.stories, {[s.unit.id]:true}); saveProgress();
+  finishRound(s);
+}
+function storyPick(i){
+  const s = S.session; if (!s || s.type !== "story" || s.found || !s.opts) return;
+  const p = storyPanels(s)[s.idx];
+  if (s.opts[i].id === p.id){ s.found = true; s.wrong = null; speak(s.opts[i].ar); }
+  else { s.wrong = i; speak(s.opts[i].ar); }
+  render();
+}
+function renderStory(s){
+  const ps = storyPanels(s), p = ps[s.idx], it = p.id ? storyItem(p) : null;
+  const mood = p.t === "find" ? (s.found ? "happy" : "think") : p.mood || "happy";
+  let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button><span class="count">🦁 ' + esc(s.story.en) + ' · ' + (s.idx + 1) + ' / ' + ps.length + '</span></div>' +
+    progHTML(s.idx + 1, ps.length) + '<section class="card story"><div class="scene">' + laithSVG(mood) +
+    (((it && it.pic) || p.pic) && !(p.t === "find" && !s.found) ? '<div class="prop emo" aria-hidden="true">' + ((it && it.pic) || p.pic) + '</div>' : "") + '</div>';
+  const line = (who) => '<p class="who-says">' + who + '</p><p class="big ar" lang="ar">' + esc(it.ar) + '</p><p class="cue">' + esc(it.en) + '</p>' + sayButtons(it.ar);
+  if (p.t === "n") h += '<p class="tale">' + esc(p.en) + '</p>';
+  else if (p.t === "L" || p.t === "Lto") h += line("Laith says:");
+  else if (p.t === "me") h += line("Your turn! Say it:");
+  else if (p.t === "to") h += line("Your turn! Say it to Laith:");
+  else {
+    h += '<p class="tale">' + esc(p.en) + '</p><p class="big ar" lang="ar">' + (echo() && !s.found ? "👂" : esc(it.ar)) + '</p>' + sayButtons(it.ar) +
+      '<div class="picks" role="group" aria-label="Pictures">' + s.opts.map((o, i) => {
+        const cls = s.found ? (o.id === p.id ? " right" : " faded") : s.wrong === i ? " wrong" : "";
+        return '<button class="choice' + cls + '" data-act="spick" data-v="' + i + '"' + (s.found ? " disabled" : "") + '><span class="emo" aria-hidden="true">' + o.pic + '</span><small>' + esc(o.en) + '</small></button>';
+      }).join("") + '</div>';
+  }
+  h += '</section><div class="actions">';
+  if (p.t === "find" && !s.found) return h + '</div>';
+  const last = s.idx === ps.length - 1, said = p.t === "me" || p.t === "to";
+  return h + '<button class="btn ' + (said ? "got" : "primary") + '" style="grid-column:1 / -1" data-act="snext">' + (said ? "😊 I said it!" : last ? "The end 🌟" : "Next ›") + '</button></div>';
+}
+
 /* ---------- home ---------- */
 function headerHTML(){
   const p = me();
@@ -1168,7 +1478,7 @@ function renderHome(){
   h += '<section id="ua-today" aria-label="Today’s practice" hidden></section>';
   h += voiceGuideHTML() + '<ul class="units">';
   const known = learnedItems().length;
-  h += warmCardHTML();
+  h += gardenCardHTML() + warmCardHTML();
   if (known >= 3) h += '<li><button class="unit review" data-act="review"><span class="emo" aria-hidden="true">⭐</span><span class="t">Practise again</span>' +
     '<span class="s">A mix of ' + Math.min(8, known) + ' words and sentences you know</span></button></li>';
   UNITS.forEach((u, i) => {
@@ -1288,6 +1598,7 @@ function renderUnit(u){
     step("words", "🗣️", "2. Say the words", wd + " of " + u.words.length + " learned") +
     step("sents", "💬", "3. Say the sentences", sd + " of " + u.sents.length + " learned") +
     step("build", "🧩", "4. Build the sentences", bd + " of " + u.sents.length + " built with no slips") +
+    (STORIES[u.id] ? step("story", "🦁", "5. A story with Laith", (progress.stories && progress.stories[u.id] ? "✓ " : "") + STORIES[u.id].en) : "") +
     '</ul><h3 class="grid-h">Tap a word to hear it</h3><ul class="wgrid">';
   u.words.forEach(w0 => {
     const w = gv(w0);
@@ -1358,8 +1669,8 @@ function buildNext(){
   s.idx++;
   if (s.idx >= (s.type === "warm" ? s.queue.length : s.items.length)){
     s.done = true;
-    if (s.type === "warm"){ progress.warmDay = today(); saveProgress(); }
-    render(); window.scrollTo(0, 0); speak(T.praise()); confetti(); return;
+    if (s.type === "warm"){ progress.warmDay = today(); s.grew = plantToday(); saveProgress(); }
+    finishRound(s); return;
   }
   if (s.type === "warm") warmItem(); else buildItem();
   render(); window.scrollTo(0, 0);
@@ -1483,8 +1794,9 @@ function renderDone(s){
   const last = (s.kind === "sents" || s.kind === "build") && UNITS.indexOf(u) === UNITS.length - 1;
   let h = '<div class="bar"><button class="link" data-act="back">‹ Exit</button></div><section class="done">' +
     '<p class="stars emo" aria-label="' + stars + ' stars">' + "⭐".repeat(stars) + '<span style="opacity:.25">' + "⭐".repeat(3 - stars) + '</span></p>' +
-    '<p class="ar praise" lang="ar">' + esc(T.praise()) + '</p><p class="score">' + (stars === 3 ? "Brilliant! " : stars === 2 ? "Well done! " : "Good try! ") +
-    s.first + ' of ' + s.total + ' right the first time.</p>' +
+    '<p class="ar praise" lang="ar">' + esc((s.praise || {}).ar || T.praise()) + '</p>' + (s.praise ? '<p class="praise-en">' + esc(s.praise.en) + '</p>' : "") +
+    (s.grew ? '<div class="grew">' + gardenCardSVG(true) + '<p>🌱 A new ' + PLANT_NAME[plantOf(gardenDays().length - 1).kind] + ' grew in your garden!</p></div>' : "") + '<p class="score">' + (s.kind === "story" ? "" : stars === 3 ? "Brilliant! " : stars === 2 ? "Well done! " : "Good try! ") +
+    (s.kind === "story" ? "You helped Laith! 🦁" : s.first + ' of ' + s.total + ' right the first time.') + '</p>' +
     (s.solid ? '<p class="solid-note">💪 ' + s.solid + (s.solid === 1 ? " more is" : " more are") + ' solid now!</p>' : "");
   if (missed.length) h += '<p class="score" style="margin-bottom:8px">' + (s.kind === "warm" ? "These come back tomorrow:" : s.kind === "build" ? "Listen to these once more:" : "Say these once more:") + '</p><ul class="again-list">' + missed.map(m =>
       '<li><span class="emo" aria-hidden="true">' + m.pic + '</span><span class="ar" lang="ar">' + esc(m.ar) + (m.ref ? '<small class="ref" lang="en">' + esc(m.ref) + '</small>' : "") + '</span><button data-act="say" data-ar="' + esc(m.ar) + '" aria-label="Listen"><span class="emo">🔊</span></button></li>').join("") + '</ul>';
@@ -1522,8 +1834,10 @@ function render(){
   if (!profiles.list.length){ if (!S.edit) S.edit = editState(null); S.view = "edit"; h = renderEdit(); }
   else if (S.view === "edit") h = renderEdit();
   else if (S.view === "who") h = renderWho();
+  else if (S.view === "garden") h = renderGarden();
   else if (!s) h = S.unit ? renderUnit(S.unit) : renderHome();
   else if (s.done) h = renderDone(s);
+  else if (s.type === "story") h = renderStory(s);
   else if (s.type === "learn") h = renderLearn(s);
   else if (s.type === "build" || s.mode === "build") h = renderBuild(s);
   else if (s.type === "warm") h = renderPick(s);
@@ -1569,7 +1883,7 @@ function mark(ok){
   }
   r.t = Date.now(); progress.items[id] = r; saveProgress();
   s.idx++; s.revealed = echo();
-  if (s.idx >= s.queue.length){ s.done = true; render(); window.scrollTo(0, 0); speak(T.praise()); confetti(); return; }
+  if (s.idx >= s.queue.length){ finishRound(s); return; }
   render(); echoPlay();
 }
 function learnStep(d){
@@ -1624,8 +1938,12 @@ document.addEventListener("click", e => {
     case "reveal": reveal(); break;
     case "mark": mark(v === "1"); break;
     case "say": speak(el.dataset.ar, el.dataset.slow === "1"); break;
-    case "again": { const s = S.session; if (s.kind === "build") startBuild(s.unit); else if (s.kind === "review" && learnedItems().length < 1) goBack(); else startSay(s.kind, s.unit); break; }
+    case "again": { const s = S.session; if (s.kind === "story") startStory(s.unit); else if (s.kind === "build") startBuild(s.unit); else if (s.kind === "review" && learnedItems().length < 1) goBack(); else startSay(s.kind, s.unit); break; }
     case "back": goBack(); break;
+    case "story": enter(() => startStory(S.unit)); break;
+    case "snext": storyNext(); break;
+    case "spick": storyPick(+v); break;
+    case "garden": enter(() => { S.view = "garden"; render(); window.scrollTo(0, 0); }); break;
     case "settings": S.sheet = true; render(); break;
     case "shared": if (window.UA){ const p = me(); UA.openSettings({ua:p && p.ua, name:p ? p.name : "", app:"takallum-kids", onChange:sharedChanged}); } break;
     case "reset":

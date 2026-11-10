@@ -18,6 +18,10 @@ Sister app for older learners: Takallum (https://takallum.ummahapps.ai/)
 5. **Warm-up**: once a day, up to 8 words and sentences come back. The child hears a word and picks its picture, or builds a sentence. Each one returns after 1, 3, 7, 14 and 30 days, and is solid once it has been right on 3 separate days.
 6. **Three stars for each unit**: words learned, sentences built, everything solid. The third star takes about two weeks and can fade if warm-ups are skipped.
 7. **Practise again**: a mix of up to 8 known words and sentences, weakest and least recently seen first.
+8. **My garden**: every day the warm-up is finished, a new plant grows in a garden drawn like a child's pencil-and-crayon picture (every 7th a tree, every 30th a pond with a duck). It never fills up; skipped warm-ups only make it look thirsty.
+9. **Stories with Laith**: seven short stories with Laith the lion cub, made only from sentences the app teaches. The child finds pictures for him and says lines back.
+
+Praise at the end of each round rotates through phrases such as مُمْتَازٌ / مُمْتَازَةٌ and بَارَكَ اللَّهُ فِيكَ / فِيكِ, always in the child's own form.
 
 Children who can't read Arabic yet can use Echo mode: each word and sentence is spoken first and the child says it back.
 

@@ -4,6 +4,8 @@ A free Arabic speaking app for children aged about 4 to 11, and the children's v
 
 **Content:** 25 units, 177 words and 184 sentences, mostly two to four words, all in fully vowelled Modern Standard Arabic. Units 8 to 15 add 50 of the words children use most from Kalimat: use Kalimat to practise words and Takallum Kids to make sentences. Units 16 to 21 are for home and family, adapted for young children from Takallum's At home with children group: commands use the child's own form (boy or girl), and the "several children" forms are left out. Units 22 to 25 hold 32 short phrases from the ahadith, chosen from Takallum's From the ahadith group: each keeps the wording and the Sahih al-Bukhari or Sahih Muslim number and has no boy or girl form. One is the opening part of a longer hadith. No scholar has reviewed them.
 
+**Garden, praise and Laith:** a pencil-sketch garden grows one plant for each day the warm-up is finished (`gardenDays`, `plantOf`), praise rotates through eight phrases in the child's form (`PRAISE`), and Laith the lion cub stars in seven stories built only from existing word and sentence ids (`STORIES`).
+
 ## How it works
 - **Meet the words:** picture, vowelled Arabic, English and audio for each word in the unit.
 - **Say the words:** see the picture, say the Arabic out loud, tap Show me, then I said it! or Try again. Try-again items come back later in the round.
