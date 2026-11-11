@@ -2,7 +2,8 @@
    The same file sits in each app's folder; keep the copies identical.
    Each app has its own localStorage, so what they share lives in cookies on .ummahapps.ai:
    - ua_l: the learners on this device {c: current id, l: [{i: id, n: name, g: "m"|"f", a: animal, u: last change}], d: removed ids}
-   - ua_w_<id>: one learner's known words, as short hashes of the bare Arabic, most recent last
+   - ua_w_<id>: one learner's known words, as short hashes of the bare Arabic, oldest first, most recent last.
+     A cookie holds at most 600, so the rest go on in ua_w_<id>_1, ua_w_<id>_2 … (up to 3000 words in 5 cookies)
    - ua_s_<id>: one learner's settings {s: "slow"|"normal"|"natural", a: 0|1 play straight away, v: 0|1 vowel marks};
      ua_s_d holds them for a learner with no shared id yet (an unnamed "Learner 1")
      and for Today's practice {p: 0|1 show the card, pa: the apps it covers ("CKPT"), pn: new items a day 3|5|10}
@@ -14,7 +15,7 @@
 (function(){
   var DOMAIN = /(^|\.)ummahapps\.ai$/.test(location.hostname) ? ";domain=.ummahapps.ai" : "";
   var SECURE = location.protocol === "https:" ? ";secure" : "";
-  var MAXW = 600;
+  var WPER = 600, WCOOKIES = 5, MAXW = WPER * WCOOKIES;
   function getC(n){
     var m = document.cookie.match(new RegExp("(?:^|; )" + n + "=([^;]*)"));
     if (!m) return null;
@@ -90,7 +91,7 @@
     o.l = o.l.filter(function(x){ return x.i !== ua; });
     if (o.d.indexOf(ua) < 0) o.d.push(ua);
     if (o.c === ua) o.c = null;
-    write(o); dropC("ua_w_" + ua); dropC("ua_s_" + ua); dropC("ua_p_" + ua);
+    write(o); for (var w = 0; w < WCOOKIES; w++) dropC(wName(ua, w)); dropC("ua_s_" + ua); dropC("ua_p_" + ua);
   }
   /* The warning before removing a learner. A learner shared with the other apps is removed from all four. */
   function confirmRemove(name, ua){
@@ -114,14 +115,25 @@
     for (var i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
     return ((h >>> 0) % 60466176).toString(36);
   }
-  function keys(ua){ var v = ua && getC("ua_w_" + ua); return v ? v.split(".") : []; }
+  /* The known words are spread over up to WCOOKIES cookies, WPER in each: ua_w_<id>, then ua_w_<id>_1 and so on. */
+  function wName(ua, i){ return "ua_w_" + ua + (i ? "_" + i : ""); }
+  function keys(ua){
+    var out = [];
+    if (ua) for (var i = 0; i < WCOOKIES; i++){ var v = getC(wName(ua, i)); if (v) out = out.concat(v.split(".")); }
+    return out;
+  }
   /* Add words (vowelled Arabic) this learner now knows. */
   function addKnown(ua, list){
     if (!ua || gone(ua)) return;
     var have = keys(ua), seen = {}, grew = false;
     have.forEach(function(k){ seen[k] = 1; });
     list.forEach(function(ar){ if (!ar) return; var k = key(ar); if (!seen[k]){ seen[k] = 1; have.push(k); grew = true; } });
-    if (grew) setC("ua_w_" + ua, have.slice(-MAXW).join("."));
+    if (!grew) return;
+    have = have.slice(-MAXW);
+    for (var i = 0; i < WCOOKIES; i++){
+      var part = have.slice(i * WPER, (i + 1) * WPER);
+      if (part.length) setC(wName(ua, i), part.join(".")); else if (getC(wName(ua, i)) !== null) dropC(wName(ua, i));
+    }
   }
   /* A test for "does this learner know this word from any of the apps?" */
   function knows(ua){
