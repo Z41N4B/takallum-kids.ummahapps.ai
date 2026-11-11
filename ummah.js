@@ -426,6 +426,37 @@
     });
   });
 
+  /* ---------- quick links ---------- */
+  /* A row of the four apps' icons at the very top of each page; the app you are in has a gold ring. */
+  function hereApp(){
+    var m = location.hostname.match(/^([a-z-]+)\.ummahapps\.ai$/);
+    if (m) return m[1];
+    for (var k in PORTS) if (String(PORTS[k]) === location.port) return k;
+    return null;
+  }
+  var QCSS = ".ua-quick{display:flex;justify-content:flex-end;gap:6px;max-width:1000px;margin:0 auto;padding:8px max(12px,env(safe-area-inset-right,0px)) 0 max(12px,env(safe-area-inset-left,0px));box-sizing:border-box}" +
+    ".ua-quick a,.ua-quick span{display:block;padding:4px;border-radius:12px;line-height:0}" +
+    ".ua-quick img{display:block;width:30px;height:30px;max-width:none;border-radius:8px;flex:none}" +
+    ".ua-quick a:hover img{transform:translateY(-1px)}" +
+    ".ua-quick span img{outline:2.5px solid #E2B75E;outline-offset:2px}" +
+    ".ua-quick a:focus-visible{outline:3px solid #E2B75E;outline-offset:1px}";
+  function addQuick(){
+    if (document.querySelector(".ua-quick")) return;
+    var here = hereApp(), st = document.createElement("style"), nav = document.createElement("nav");
+    st.textContent = QCSS; document.head.appendChild(st);
+    nav.className = "ua-quick"; nav.setAttribute("aria-label", "Ummah Apps Arabic apps");
+    nav.innerHTML = APPS.map(function(a){
+      var img = '<img src="' + (a[1] === here ? "" : appUrl(a[1])) + 'favicon.svg" alt="" width="30" height="30">';
+      return a[1] === here ? '<span aria-current="page" title="' + a[2] + ' (you are here)" aria-label="' + a[2] + ', you are here" role="img">' + img + '</span>'
+        : '<a href="' + appUrl(a[1]) + '" title="' + a[2] + '" aria-label="' + a[2] + '">' + img + '</a>';
+    }).join("");
+    document.body.insertBefore(nav, document.body.firstChild);
+    /* Line the icons up with the app's own column. */
+    var wrap = document.querySelector(".wrap");
+    if (wrap){ var mw = getComputedStyle(wrap).maxWidth; if (mw && mw !== "none") nav.style.maxWidth = mw; }
+  }
+  if (document.body) addQuick(); else document.addEventListener("DOMContentLoaded", addQuick);
+
   window.UA = {sync:sync, save:save, remove:remove, gone:gone, confirmRemove:confirmRemove, setCurrent:setCurrent, addKnown:addKnown, knows:knows, key:key,
     settings:settings, setSetting:setSetting, watch:watch, openSettings:openSettings,
     dayNo:dayNo, mountToday:mountToday, refreshToday:refreshToday, practiceAdd:practiceAdd};
