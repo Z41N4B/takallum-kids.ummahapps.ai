@@ -455,7 +455,7 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <h2 id="ua-fam-h">Four free Arabic apps that work together</h2>
     <ul>
       <li><span class="ua-app here" aria-current="page"><span class="ua-ar" lang="ar" dir="rtl">تَكَلُّم</span><b>Takallum Kids</b><small>Ages 4 to 11: first words and short sentences to say out loud</small></span></li>
-      <li><a class="ua-app" href="https://kalimat.ummahapps.ai/"><span class="ua-ar" lang="ar" dir="rtl">كَلِمَات</span><b>Kalimat</b><small>Beginners: over 800 everyday words and Qur’an words, with pictures and games</small></a></li>
+      <li><a class="ua-app" href="https://kalimat.ummahapps.ai/"><span class="ua-ar" lang="ar" dir="rtl">كَلِمَات</span><b>Kalimat</b><small>Beginners: over 900 everyday words and Qur’an words, with pictures and games</small></a></li>
       <li><a class="ua-app" href="https://kalimat-plus.ummahapps.ai/"><span class="ua-ar" lang="ar" dir="rtl">كَلِمَات</span><b>Kalimat Plus</b><small>Next step: words for worship, tarbiyyah, character and the environment</small></a></li>
       <li><a class="ua-app" href="https://takallum.ummahapps.ai/"><span class="ua-ar" lang="ar" dir="rtl">تَكَلُّم</span><b>Takallum</b><small>Speaking drills, sentence chains and role-plays for older learners</small></a></li>
     </ul>
@@ -1977,7 +1977,7 @@ function renderDone(s){
   if (s.kind === "warm" && !moreDue) h += '<p class="score">Come back tomorrow for your next warm-up.</p>';
   h += '<div class="actions">' + next + (s.kind === "warm" ? "" : '<button class="btn ' + (next ? "ghost" : "primary") + '" data-act="again">Play again 🔁</button>') +
        '<button class="btn ' + (s.kind === "warm" && !moreDue ? "primary" : "ghost") + '" data-act="back">' + (u ? "Back to " + esc(u.en) : "Back home") + '</button></div>' +
-       (last ? '<p class="grownup">For grown-ups: ready for more? <a href="https://kalimat.ummahapps.ai/">Kalimat</a> has over 800 more words with pictures, and the words learned here show up there as words you already know.</p>' : "") + '</section>';
+       (last ? '<p class="grownup">For grown-ups: ready for more? <a href="https://kalimat.ummahapps.ai/">Kalimat</a> has over 900 more words with pictures, and the words learned here show up there as words you already know.</p>' : "") + '</section>';
   return h;
 }
 function confetti(){
