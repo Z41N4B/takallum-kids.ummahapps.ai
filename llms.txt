@@ -27,7 +27,7 @@ Children who can't read Arabic yet can use Echo mode: each word and sentence is 
 
 Every unit is open from the start. Several children can share one device: each adds themselves with a name, an animal and "I'm a boy" or "I'm a girl", and keeps their own progress (tap the name at the top to switch). The boy/girl choice means sentences about themselves and the praise (أَحْسَنْتَ / أَحْسَنْتِ) match the child.
 
-## Units (177 words, 184 sentences)
+## Units (208 words, 184 sentences)
 
 1. My family (عَائِلَتِي): هَذَا، هَذِهِ، أُمِّي، أَبِي، أَخِي، أُخْتِي. Sentences like هَذِهِ أُمِّي (This is my mum).
 2. Hello (التَّحِيَّةُ): السَّلَامُ عَلَيْكُمْ، وَعَلَيْكُمُ السَّلَامُ، أَنَا، وَلَدٌ، بِنْتٌ، يَا، شُكْرًا. Sentences like شُكْرًا يَا أَبِي (Thank you, Dad).

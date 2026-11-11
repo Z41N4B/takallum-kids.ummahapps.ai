@@ -84,7 +84,7 @@
       ],
       "about": {"@type": "Language", "name": "Arabic", "alternateName": "ar"},
       "featureList": [
-        "25 units, 177 first words, 184 short sentences, with phrases from the ahadith and their hadith numbers",
+        "25 units, 208 first words, 184 short sentences, with phrases from the ahadith and their hadith numbers",
         "Sentences in units 1 to 21 use only words taught in that unit or an earlier one",
         "A picture for every word and sentence",
         "Normal and slow Arabic audio",
@@ -441,7 +441,7 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
   </ul>
   <h3>Twenty-five units</h3>
-  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals, How I feel, Getting ready, At the table, Helping at home, Bedtime, Playing together and Kind words, then four units from the ahadith: Asking and answering, Good manners, Duas and remembering Allah, and Good character. That makes 177 words and 184 sentences in all. The hadith units keep the wording of Sahih al-Bukhari and Sahih Muslim, show each hadith number, and do not change for a boy or a girl. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences.</p>
+  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals, How I feel, Getting ready, At the table, Helping at home, Bedtime, Playing together and Kind words, then four units from the ahadith: Asking and answering, Good manners, Duas and remembering Allah, and Good character. That makes 208 words and 184 sentences in all. The hadith units keep the wording of Sahih al-Bukhari and Sahih Muslim, show each hadith number, and do not change for a boy or a girl. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences.</p>
   <h3>Questions</h3>
   <details><summary>Is it free?</summary><p>Yes. It is free, has no adverts and needs no sign-up. Progress is saved in this browser on this device.</p></details>
   <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
@@ -887,17 +887,21 @@ const UNITS = [
     {id:"sabi", pic:"🧒🏽", en:"a young boy", ar:"صَبِيٌّ"},
     {id:"laka", pic:"🎁👉", en:"for you, yours (to him)", ar:"لَكَ"},
     {id:"lam", pic:"🚫⏪", en:"did not", ar:"لَمْ"},
-    {id:"nughayr", pic:"🐤", en:"a little bird", ar:"نُغَيْرٌ"}
+    {id:"nughayr", pic:"🐤", en:"a little bird", ar:"نُغَيْرٌ"},
+    {id:"dha", pic:"🔎", en:"this, that", ar:"ذَا"},
+    {id:"ansa", pic:"🤦", en:"I forget", ar:"أَنْسَى", tip:"After [[لَمْ]] it becomes [[أَنْسَ]]."},
+    {id:"khabatu", pic:"🫣", en:"I hid, I kept it", ar:"خَبَأْتُ"},
+    {id:"faala", pic:"🎬", en:"he did", ar:"فَعَلَ"}
    ],
    sents:[
-    {id:"ha1", pic:"🚪❓", en:"Who is it?", ar:"مَنْ ذَا؟", ref:"Sahih al-Bukhari 6250", tip:"When someone knocked and answered only “It’s me”, the Prophet ﷺ disliked it, so give your name.", w:["man"]},
+    {id:"ha1", pic:"🚪❓", en:"Who is it?", ar:"مَنْ ذَا؟", ref:"Sahih al-Bukhari 6250", tip:"When someone knocked and answered only “It’s me”, the Prophet ﷺ disliked it, so give your name.", w:["man","dha"]},
     {id:"ha2", pic:"📛❓", en:"What’s your name? (to him)", ar:"مَا اسْمُكَ؟", ref:"Sahih al-Bukhari 6190", w:["ma","ismuka"]},
     {id:"ha3", pic:"❓🧒🏽", en:"Where is the boy?", ar:"أَيْنَ الصَّبِيُّ؟", ref:"Sahih al-Bukhari 6191", w:["ayna","sabi"]},
     {id:"ha4", pic:"❓📛👦", en:"What is his name?", ar:"مَا اسْمُهُ؟", ref:"Sahih al-Bukhari 6191", w:["ma","ismuhu"]},
     {id:"ha5", pic:"🤔😟", en:"What’s the matter? (to him)", ar:"مَا لَكَ؟", ref:"Sahih al-Bukhari 6148", w:["ma","laka"]},
-    {id:"ha6", pic:"🧠✅", en:"I didn’t forget.", ar:"لَمْ أَنْسَ.", ref:"Sahih al-Bukhari 6051", tip:"After [[لَمْ]], the verb [[أَنْسَى]] loses its last vowel.", w:["lam"]},
-    {id:"ha7", pic:"🎁🤫", en:"I kept this for you. (to him)", ar:"خَبَأْتُ هَذَا لَكَ.", ref:"Sahih al-Bukhari 6132", w:["hadha","laka"]},
-    {id:"ha8", pic:"👦🐤", en:"Abu Umayr, what did the little bird do?", ar:"يَا أَبَا عُمَيْرٍ، مَا فَعَلَ النُّغَيْرُ؟", ref:"Sahih al-Bukhari 6129", tip:"Said playfully to a little boy who had a pet bird.", w:["ya","ma","nughayr"]}
+    {id:"ha6", pic:"🧠✅", en:"I didn’t forget.", ar:"لَمْ أَنْسَ.", ref:"Sahih al-Bukhari 6051", tip:"After [[لَمْ]], the verb [[أَنْسَى]] loses its last vowel.", w:["lam","ansa"]},
+    {id:"ha7", pic:"🎁🤫", en:"I kept this for you. (to him)", ar:"خَبَأْتُ هَذَا لَكَ.", ref:"Sahih al-Bukhari 6132", w:["khabatu","hadha","laka"]},
+    {id:"ha8", pic:"👦🐤", en:"Abu Umayr, what did the little bird do?", ar:"يَا أَبَا عُمَيْرٍ، مَا فَعَلَ النُّغَيْرُ؟", ref:"Sahih al-Bukhari 6129", tip:"Said playfully to a little boy who had a pet bird. [[أَبَا عُمَيْرٍ]] is the boy’s nickname: “father of Umayr”.", w:["ya","ma","faala","nughayr"]}
    ]},
   {id:"h_adab", emoji:"🤝", en:"Good manners", ar:"آدَابٌ جَمِيلَةٌ", sec:"From the ahadith", note:HADITH_NOTE,
    words:[
@@ -908,17 +912,26 @@ const UNITS = [
     {id:"thalatha", pic:"3️⃣", en:"three", ar:"ثَلَاثَةٌ"},
     {id:"salamw", pic:"🕊️", en:"peace", ar:"سَلَامٌ"},
     {id:"rahma", pic:"💗", en:"mercy", ar:"رَحْمَةٌ"},
-    {id:"matar", pic:"🌧️", en:"rain", ar:"مَطَرٌ"}
+    {id:"matar", pic:"🌧️", en:"rain", ar:"مَطَرٌ"},
+    {id:"allah", pic:"☝️✨", en:"Allah", ar:"اللَّهُ", tip:"After [[يَا]] or another word it can end [[اللَّهَ]] or [[اللَّهِ]]."},
+    {id:"kafin", pic:"👌", en:"enough", ar:"كَافٍ", tip:"When another word comes after it, it becomes [[كَافِي]]."},
+    {id:"bayna", pic:"↔️", en:"between, among", ar:"بَيْنَ"},
+    {id:"afshu", pic:"📣👥", en:"spread! (to a group)", ar:"أَفْشُوا"},
+    {id:"yusallimu", pic:"🤝👋", en:"he greets", ar:"يُسَلِّمُ"},
+    {id:"yarhamu", pic:"💞", en:"he shows mercy", ar:"يَرْحَمُ", tip:"[[يَرْحَمُكَ]] means “he has mercy on you”."},
+    {id:"yahdi", pic:"🧭", en:"he guides", ar:"يَهْدِي"},
+    {id:"yuslihu", pic:"🔧", en:"he puts right", ar:"يُصْلِحُ"},
+    {id:"fadl", pic:"🎀", en:"kindness, a gift from Allah", ar:"فَضْلٌ"}
    ],
    sents:[
-    {id:"hb1", pic:"👦🏻🍽️", en:"Young boy, say Bismillah.", ar:"يَا غُلَامُ، سَمِّ اللَّهَ.", ref:"Sahih al-Bukhari 5376", tip:"Said to a boy at the table. The hadith goes on: [[وَكُلْ بِيَمِينِكَ وَكُلْ مِمَّا يَلِيكَ]], eat with your right hand and eat what is near you.", w:["ya","ghulam","samm"]},
+    {id:"hb1", pic:"👦🏻🍽️", en:"Young boy, say Bismillah.", ar:"يَا غُلَامُ، سَمِّ اللَّهَ.", ref:"Sahih al-Bukhari 5376", tip:"Said to a boy at the table. The hadith goes on: [[وَكُلْ بِيَمِينِكَ وَكُلْ مِمَّا يَلِيكَ]], eat with your right hand and eat what is near you.", w:["ya","ghulam","samm","allah"]},
     {id:"hb2", pic:"🥤➡️", en:"The one on the right, then the next on the right.", ar:"الْأَيْمَنَ فَالْأَيْمَنَ.", ref:"Sahih al-Bukhari 5612", tip:"For passing round a drink.", w:["ayman"]},
-    {id:"hb3", pic:"🍲✌️", en:"Food for two is enough for three.", ar:"طَعَامُ الِاثْنَيْنِ كَافِي الثَّلَاثَةِ.", ref:"Sahih al-Bukhari 5392", w:["taam","ithnan","thalatha"]},
-    {id:"hb4", pic:"🕊️👥", en:"Spread the greeting of peace among yourselves.", ar:"أَفْشُوا السَّلَامَ بَيْنَكُمْ.", ref:"Sahih Muslim 54 a", w:["salamw"]},
-    {id:"hb5", pic:"👋🧓", en:"The young greet the old.", ar:"يُسَلِّمُ الصَّغِيرُ عَلَى الْكَبِيرِ.", ref:"Sahih al-Bukhari 6231", w:["saghir","ala","kabir"]},
-    {id:"hb6", pic:"🤧💗", en:"May Allah have mercy on you. (to him, after a sneeze)", ar:"يَرْحَمُكَ اللَّهُ.", ref:"Sahih al-Bukhari 6224", tip:"The one who sneezes says [[الْحَمْدُ لِلَّهِ]].", w:["rahma"]},
-    {id:"hb7", pic:"🤧🤲", en:"May Allah guide you and set your affairs right.", ar:"يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ.", ref:"Sahih al-Bukhari 6224", tip:"The reply from the one who sneezed.", w:[]},
-    {id:"hb8", pic:"🌧️🤲", en:"We have been given rain by the kindness and mercy of Allah.", ar:"مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ.", ref:"Sahih al-Bukhari 1038", w:["rahma"]}
+    {id:"hb3", pic:"🍲✌️", en:"Food for two is enough for three.", ar:"طَعَامُ الِاثْنَيْنِ كَافِي الثَّلَاثَةِ.", ref:"Sahih al-Bukhari 5392", w:["taam","ithnan","kafin","thalatha"]},
+    {id:"hb4", pic:"🕊️👥", en:"Spread the greeting of peace among yourselves.", ar:"أَفْشُوا السَّلَامَ بَيْنَكُمْ.", ref:"Sahih Muslim 54 a", w:["afshu","salamw","bayna"]},
+    {id:"hb5", pic:"👋🧓", en:"The young greet the old.", ar:"يُسَلِّمُ الصَّغِيرُ عَلَى الْكَبِيرِ.", ref:"Sahih al-Bukhari 6231", w:["yusallimu","saghir","ala","kabir"]},
+    {id:"hb6", pic:"🤧💗", en:"May Allah have mercy on you. (to him, after a sneeze)", ar:"يَرْحَمُكَ اللَّهُ.", ref:"Sahih al-Bukhari 6224", tip:"The one who sneezes says [[الْحَمْدُ لِلَّهِ]].", w:["yarhamu","allah","rahma"]},
+    {id:"hb7", pic:"🤧🤲", en:"May Allah guide you and set your affairs right.", ar:"يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ.", ref:"Sahih al-Bukhari 6224", tip:"The reply from the one who sneezed.", w:["yahdi","allah","yuslihu"]},
+    {id:"hb8", pic:"🌧️🤲", en:"We have been given rain by the kindness and mercy of Allah.", ar:"مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ.", ref:"Sahih al-Bukhari 1038", w:["fadl","allah","rahma"]}
    ]},
   {id:"h_dua", emoji:"🤲", en:"Duas and remembering Allah", ar:"أَدْعِيَةٌ وَأَذْكَارٌ", sec:"From the ahadith", note:HADITH_NOTE,
    words:[
@@ -926,16 +939,24 @@ const UNITS = [
     {id:"kathir", pic:"🔢", en:"a lot, many", ar:"كَثِيرٌ"},
     {id:"tayyib", pic:"🌿", en:"good, pure", ar:"طَيِّبٌ"},
     {id:"nas", pic:"👥", en:"people", ar:"النَّاسُ"},
-    {id:"quwwa", pic:"💪", en:"strength", ar:"قُوَّةٌ"}
+    {id:"quwwa", pic:"💪", en:"strength", ar:"قُوَّةٌ"},
+    {id:"ahya", pic:"🌅", en:"I live", ar:"أَحْيَا"},
+    {id:"amutu", pic:"🥀", en:"I die", ar:"أَمُوتُ", tip:"In the bedtime dua, sleep is like a little death, and waking up is like coming back to life."},
+    {id:"ighfir", pic:"🫧", en:"forgive! (to Allah)", ar:"اغْفِرْ"},
+    {id:"ihdini", pic:"🗺️", en:"guide me!", ar:"اهْدِنِي"},
+    {id:"subhanallah", pic:"🌌", en:"glory be to Allah", ar:"سُبْحَانَ اللَّهِ"},
+    {id:"illa", pic:"➖", en:"except", ar:"إِلَّا"},
+    {id:"rabb", pic:"☝️🌍", en:"Lord", ar:"رَبٌّ"},
+    {id:"mubarak", pic:"🌾", en:"blessed", ar:"مُبَارَكٌ"}
    ],
    sents:[
-    {id:"hc1", pic:"🤲😴", en:"In Your name, O Allah, I die and I live.", ar:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.", ref:"Sahih al-Bukhari 6324", tip:"Before sleeping.", w:["allahumma"]},
-    {id:"hc2", pic:"🤲💧", en:"O Allah, forgive me.", ar:"اللَّهُمَّ اغْفِرْ لِي.", ref:"Sahih Muslim 2679 a", w:["allahumma","li"]},
-    {id:"hc3", pic:"🤲🧭", en:"O Allah, guide me and keep me on the right path.", ar:"اللَّهُمَّ اهْدِنِي وَسَدِّدْنِي.", ref:"Sahih Muslim 2725 a", w:["allahumma"]},
-    {id:"hc4", pic:"✨🤲", en:"Glory be to Allah, and praise be to Him.", ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.", ref:"Sahih al-Bukhari 6405", w:[]},
-    {id:"hc5", pic:"💪🤲", en:"There is no power and no strength except through Allah.", ar:"لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.", ref:"Sahih al-Bukhari 6384", w:["la","quwwa"]},
-    {id:"hc6", pic:"🤒🤲", en:"Take away the harm, Lord of mankind.", ar:"أَذْهِبِ الْبَاسَ رَبَّ النَّاسِ.", ref:"Sahih al-Bukhari 5675", tip:"For someone who is ill.", w:["nas"]},
-    {id:"hc7", pic:"🍽️🌿", en:"Praise be to Allah, much praise, good and blessed.", ar:"الْحَمْدُ لِلَّهِ كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ.", ref:"Sahih al-Bukhari 5458", tip:"Said after eating.", w:["kathir","tayyib"]}
+    {id:"hc1", pic:"🤲😴", en:"In Your name, O Allah, I die and I live.", ar:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.", ref:"Sahih al-Bukhari 6324", tip:"Before sleeping.", w:["allahumma","amutu","ahya"]},
+    {id:"hc2", pic:"🤲💧", en:"O Allah, forgive me.", ar:"اللَّهُمَّ اغْفِرْ لِي.", ref:"Sahih Muslim 2679 a", w:["allahumma","ighfir","li"]},
+    {id:"hc3", pic:"🤲🧭", en:"O Allah, guide me and keep me on the right path.", ar:"اللَّهُمَّ اهْدِنِي وَسَدِّدْنِي.", ref:"Sahih Muslim 2725 a", w:["allahumma","ihdini"]},
+    {id:"hc4", pic:"✨🤲", en:"Glory be to Allah, and praise be to Him.", ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.", ref:"Sahih al-Bukhari 6405", w:["subhanallah"]},
+    {id:"hc5", pic:"💪🤲", en:"There is no power and no strength except through Allah.", ar:"لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.", ref:"Sahih al-Bukhari 6384", w:["la","quwwa","illa","allah"]},
+    {id:"hc6", pic:"🤒🤲", en:"Take away the harm, Lord of mankind.", ar:"أَذْهِبِ الْبَاسَ رَبَّ النَّاسِ.", ref:"Sahih al-Bukhari 5675", tip:"For someone who is ill.", w:["rabb","nas"]},
+    {id:"hc7", pic:"🍽️🌿", en:"Praise be to Allah, much praise, good and blessed.", ar:"الْحَمْدُ لِلَّهِ كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ.", ref:"Sahih al-Bukhari 5458", tip:"Said after eating.", w:["hamdulillah","kathir","tayyib","mubarak"]}
    ]},
   {id:"h_good", emoji:"🌟", en:"Good character", ar:"خُلُقٌ حَسَنٌ", sec:"From the ahadith", note:HADITH_NOTE,
    words:[
@@ -946,18 +967,28 @@ const UNITS = [
     {id:"rifq", pic:"🐣", en:"gentleness", ar:"رِفْقٌ"},
     {id:"khulq", pic:"🌟", en:"character, manners", ar:"خُلُقٌ"},
     {id:"khayr", pic:"✨", en:"something good", ar:"خَيْرٌ"},
-    {id:"quran", pic:"📖✨", en:"the Qur’an", ar:"قُرْآنٌ"}
+    {id:"quran", pic:"📖✨", en:"the Qur’an", ar:"قُرْآنٌ"},
+    {id:"kull", pic:"💯", en:"every, all", ar:"كُلُّ"},
+    {id:"birr", pic:"💛", en:"being good", ar:"بِرٌّ"},
+    {id:"husn", pic:"🌷", en:"goodness, beauty", ar:"حُسْنٌ"},
+    {id:"tahur", pic:"🚿", en:"cleanliness", ar:"طُهُورٌ"},
+    {id:"shatr", pic:"🌗", en:"half", ar:"شَطْرٌ"},
+    {id:"iman", pic:"🤍", en:"faith", ar:"إِيمَانٌ"},
+    {id:"aw", pic:"🔀", en:"or", ar:"أَوْ"},
+    {id:"yasmut", pic:"🤫", en:"he stays quiet", ar:"يَصْمُتُ", tip:"After [[لِ]] it becomes [[يَصْمُتْ]]: “let him stay quiet”."},
+    {id:"taallama", pic:"🎓", en:"he learned", ar:"تَعَلَّمَ"},
+    {id:"allama", pic:"🧑‍🏫", en:"he taught", ar:"عَلَّمَ"}
    ],
    sents:[
     {id:"hd1", pic:"😠🚫", en:"Don’t get angry. (to him)", ar:"لَا تَغْضَبْ.", ref:"Sahih al-Bukhari 6116", w:["la","taghdab"]},
-    {id:"hd2", pic:"🤗🎁", en:"Every good deed is charity.", ar:"كُلُّ مَعْرُوفٍ صَدَقَةٌ.", ref:"Sahih al-Bukhari 6021", w:["maruf","sadaqa"]},
-    {id:"hd3", pic:"💗🔁", en:"Whoever does not show mercy will not be shown mercy.", ar:"مَنْ لَا يَرْحَمُ لَا يُرْحَمُ.", ref:"Sahih al-Bukhari 5997", tip:"[[يَرْحَمُ]] is “he shows mercy” and [[يُرْحَمُ]] is “he is shown mercy”.", w:["man","la","rahma"]},
+    {id:"hd2", pic:"🤗🎁", en:"Every good deed is charity.", ar:"كُلُّ مَعْرُوفٍ صَدَقَةٌ.", ref:"Sahih al-Bukhari 6021", w:["kull","maruf","sadaqa"]},
+    {id:"hd3", pic:"💗🔁", en:"Whoever does not show mercy will not be shown mercy.", ar:"مَنْ لَا يَرْحَمُ لَا يُرْحَمُ.", ref:"Sahih al-Bukhari 5997", tip:"[[يَرْحَمُ]] is “he shows mercy” and [[يُرْحَمُ]] is “he is shown mercy”.", w:["man","la","yarhamu","rahma"]},
     {id:"hd4", pic:"🗣️✅👥", en:"Hold fast to telling the truth. (to a group)", ar:"عَلَيْكُمْ بِالصِّدْقِ.", ref:"Sahih Muslim 2607 c", w:["sidq"]},
     {id:"hd5", pic:"🐣🧕", en:"Be gentle. (to her)", ar:"عَلَيْكِ بِالرِّفْقِ.", ref:"Sahih Muslim 2594 b", w:["rifq"]},
-    {id:"hd6", pic:"🌟💛", en:"Being good is good character.", ar:"الْبِرُّ حُسْنُ الْخُلُقِ.", ref:"Sahih Muslim 2553 a", w:["khulq"]},
-    {id:"hd7", pic:"🧼✨", en:"Cleanliness is half of faith.", ar:"الطُّهُورُ شَطْرُ الْإِيمَانِ.", ref:"Sahih Muslim 223", w:[]},
-    {id:"hd8", pic:"🤐✨", en:"Let him say something good or stay silent.", ar:"فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ.", ref:"Sahih al-Bukhari 6018", w:["khayr"]},
-    {id:"hd9", pic:"📖🎓", en:"The best of you are those who learn the Qur’an and teach it.", ar:"خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ.", ref:"Sahih al-Bukhari 5027", w:["man","quran"]}
+    {id:"hd6", pic:"🌟💛", en:"Being good is good character.", ar:"الْبِرُّ حُسْنُ الْخُلُقِ.", ref:"Sahih Muslim 2553 a", w:["birr","husn","khulq"]},
+    {id:"hd7", pic:"🧼✨", en:"Cleanliness is half of faith.", ar:"الطُّهُورُ شَطْرُ الْإِيمَانِ.", ref:"Sahih Muslim 223", w:["tahur","shatr","iman"]},
+    {id:"hd8", pic:"🤐✨", en:"Let him say something good or stay silent.", ar:"فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ.", ref:"Sahih al-Bukhari 6018", w:["khayr","aw","yasmut"]},
+    {id:"hd9", pic:"📖🎓", en:"The best of you are those who learn the Qur’an and teach it.", ar:"خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ.", ref:"Sahih al-Bukhari 5027", w:["khayr","man","taallama","quran","allama"]}
    ]}
 ];
 
