@@ -43,3 +43,6 @@ Then open http://localhost:8765
 
 ## Already learnt
 A unit page has Mark it as already learnt for grown-ups. Every word and sentence in the unit counts as learnt and solid, so the unit gets its three stars; the warm-up still brings them back, spread over the next month. Each item keeps its record from before in `k`, so Undo puts it back.
+
+## Next unit
+The home screen shows Next unit after the warm-up: the first unit that is begun but has not got its three stars, or else the first without them. Today’s practice uses it for Something new.

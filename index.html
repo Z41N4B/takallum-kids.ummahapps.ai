@@ -1650,6 +1650,9 @@ function renderHome(){
   h += voiceGuideHTML() + '<ul class="units">';
   const known = learnedItems().length;
   h += gardenCardHTML() + warmCardHTML();
+  const nu = nextUnit();
+  if (nu && profiles.list.length) h += '<li><button class="unit review next-unit" data-act="unit" data-v="' + nu.id + '"><span class="emo" aria-hidden="true">' + nu.emoji + '</span><span class="t">Next: ' + esc(nu.en) + '</span>' +
+    '<span class="s">' + (nu.words.some(w => rec(w.id).t) ? "Carry on where you left off" : "The next unit in order") + '</span></button></li>';
   if (known >= 3) h += '<li><button class="unit review" data-act="review"><span class="emo" aria-hidden="true">⭐</span><span class="t">Practise again</span>' +
     '<span class="s">A mix of ' + Math.min(8, known) + ' words and sentences you know</span></button></li>';
   UNITS.forEach((u, i) => {
@@ -2170,7 +2173,12 @@ function practiceState(){
 function startStep(step){
   S.sheet = false; S.view = null;
   if (step === "old" && dueItems().length) enter(startWarm);
-  else { const u = UNITS.find(x => !wordsDone(x)) || UNITS[0]; enter(() => openUnit(u)); }
+  else { const u = nextUnit() || UNITS[0]; enter(() => openUnit(u)); }
+}
+/* The next unit in order: one already begun and without its three stars, or else the first without them. */
+function nextUnit(){
+  const open = u => !unitStars(u).every(Boolean);
+  return UNITS.find(u => open(u) && u.words.some(w => rec(w.id).t)) || UNITS.find(open) || null;
 }
 if (window.UA) UA.mountToday(document.getElementById("ua-today"), {app:"takallum-kids", ua:() => { const p = me(); return p && p.ua; }, name:() => { const p = me(); return p ? p.name : ""; }, state:practiceState, start:startStep, onSettings:sharedChanged});
 </script>
