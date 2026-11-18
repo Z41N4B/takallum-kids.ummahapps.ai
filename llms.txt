@@ -25,7 +25,7 @@ Praise at the end of each round rotates through phrases such as مُمْتَاز
 
 Children who can't read Arabic yet can use Echo mode: each word and sentence is spoken first and the child says it back.
 
-Every unit is open from the start. Several children can share one device: each adds themselves with a name, an animal and "I'm a boy" or "I'm a girl", and keeps their own progress (tap the name at the top to switch). The boy/girl choice means sentences about themselves and the praise (أَحْسَنْتَ / أَحْسَنْتِ) match the child.
+Every unit is open from the start. Up to 6 children can share one device: each adds themselves with a name, an animal and "I'm a boy" or "I'm a girl", and keeps their own progress (tap the name at the top to switch). The boy/girl choice means sentences about themselves and the praise (أَحْسَنْتَ / أَحْسَنْتِ) match the child.
 
 ## Units (208 words, 184 sentences)
 
@@ -52,7 +52,7 @@ Every unit is open from the start. Several children can share one device: each a
 20. Playing together (هَيَّا نَلْعَبْ): sentences like هَذَا دَوْرِي (It's my turn).
 21. Kind words (كَلِمَاتٌ طَيِّبَةٌ): sentences like أُحِبُّكِ يَا أُمِّي (I love you, Mum).
 
-From the ahadith. Each phrase keeps the wording of the hadith and shows its Sahih al-Bukhari or Sahih Muslim number. The English is a simple meaning, not a formal translation.
+From the ahadith. Each phrase keeps the wording of the hadith and shows its Sahih al-Bukhari or Sahih Muslim number, which links to the full hadith on sunnah.com. The English is a simple meaning, not a formal translation.
 
 22. Asking and answering (سُؤَالٌ وَجَوَابٌ): phrases like مَا اسْمُكَ؟ (What's your name?).
 23. Good manners (آدَابٌ جَمِيلَةٌ): phrases like يَا غُلَامُ، سَمِّ اللَّهَ (Young boy, say Bismillah).

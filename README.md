@@ -2,7 +2,7 @@
 
 A free Arabic speaking app for children aged about 4 to 11, and the children's version of [Takallum](https://takallum.ummahapps.ai/). Live at https://takallum-kids.ummahapps.ai/
 
-**Content:** 25 units, 208 words and 184 sentences, mostly two to four words, all in fully vowelled Modern Standard Arabic. Units 8 to 15 add 50 of the words children use most from Kalimat: use Kalimat to practise words and Takallum Kids to make sentences. Units 16 to 21 are for home and family, adapted for young children from Takallum's At home with children group: commands use the child's own form (boy or girl), and the "several children" forms are left out. Units 22 to 25 hold 32 short phrases from the ahadith, chosen from Takallum's From the ahadith group: each keeps the wording and the Sahih al-Bukhari or Sahih Muslim number and has no boy or girl form. One is the opening part of a longer hadith. Their word lists teach most of the words in the phrases, so each phrase lists them in `w`. No scholar has reviewed them.
+**Content:** 25 units, 208 words and 184 sentences, mostly two to four words, all in fully vowelled Modern Standard Arabic. Units 8 to 15 add 50 of the words children use most from Kalimat: use Kalimat to practise words and Takallum Kids to make sentences. Units 16 to 21 are for home and family, adapted for young children from Takallum's At home with children group: commands use the child's own form (boy or girl), and the "several children" forms are left out. Units 22 to 25 hold 32 short phrases from the ahadith, chosen from Takallum's From the ahadith group: each keeps the wording and the Sahih al-Bukhari or Sahih Muslim number and has no boy or girl form. Tap the number to read the full hadith on sunnah.com. One is the opening part of a longer hadith. Their word lists teach most of the words in the phrases, so each phrase lists them in `w`. No scholar has reviewed them.
 
 **Garden, praise and Laith:** a pencil-sketch garden grows one plant for each day the warm-up is finished (`gardenDays`, `plantOf`), praise rotates through eight phrases in the child's form (`PRAISE`), and Laith the lion cub stars in 25 stories, one for each unit, built only from existing word and sentence ids (`STORIES`).
 
@@ -19,7 +19,8 @@ A free Arabic speaking app for children aged about 4 to 11, and the children's v
 - A word taught in another form than Kalimat lists it (جَدِّي for جَدّ, أَذْهَبُ for ذَهَبَ) has `k`, the Kalimat form, so it counts as known there.
 - `SAY` in `index.html` changes how a word is sent to the voice when a voice misreads it, without changing what is shown.
 - Nothing is locked: every unit and step is open from the start.
-- Children: several profiles per device (`takallum-kids-profiles` in localStorage: name, boy/girl, animal), each with its own progress under `takallum-kids-progress-<id>`. Progress saved before profiles existed moves into a first profile called Learner 1.
+- About for grown-ups: the ⓘ button next to the settings gear opens the About text and common questions.
+- Children: up to 6 profiles per device, the same limit as the other Arabic apps (`takallum-kids-profiles` in localStorage: name, boy/girl, animal), each with its own progress under `takallum-kids-progress-<id>`. A new child needs a name, so they show in the other apps too. Progress saved before profiles existed moves into a first profile called Learner 1.
 - Boy or girl, chosen per child: words and sentences can carry an `f` override (and `ftip`) for a girl; praise and instructions switch too. `her` holds the form used with “her” words (colours, big, small).
 - Progress: each item has a level from 0 to 5 and a learned flag. I said it! on the first try adds a level; Try again takes one off but never un-learns. Levels only order Practise again; stars come from `n`.
 
@@ -33,7 +34,7 @@ Takallum Kids, Kalimat, Kalimat Plus and Takallum share four things on the same 
 Each page starts with the four apps’ icons as quick links, top right in line with the page, with a gold ring on the app you are in, and ends with the same four-app family strip. On localhost, `ummah.js` points the strip's links at the local servers (Kids 8771, Kalimat 8766, Kalimat Plus 8772, Takallum 8770).
 
 ## SEO and GEO
-`index.html` has meta tags, Open Graph and JSON-LD (WebApplication + LearningResource + FAQPage), plus a visible About and FAQ section for grown-ups. `robots.txt`, `sitemap.xml` and `llms.txt` sit at the root.
+`index.html` has meta tags, Open Graph and JSON-LD (WebApplication + LearningResource + FAQPage), plus the About text and FAQ for grown-ups, shown when you tap the ⓘ About button at the top and kept in the page HTML. `robots.txt`, `sitemap.xml` and `llms.txt` sit at the root.
 
 ## Running locally
 ```

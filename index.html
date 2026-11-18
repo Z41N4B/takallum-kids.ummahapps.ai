@@ -93,7 +93,7 @@
         "Happy and try-again buttons; words that need practice come back sooner",
         "Every unit is open from the start",
         "A daily warm-up brings words and sentences back over days and weeks until they are solid, with three stars for each unit",
-        "Several children on one device, each with their own name, animal and progress"
+        "Up to 6 children on one device, each with their own name, animal and progress"
       ],
       "publisher": {"@id": "https://ummahapps.ai/#org"},
       "isPartOf": {"@id": "https://takallum-kids.ummahapps.ai/#website"}
@@ -115,7 +115,7 @@
         {"@type": "Question", "name": "Does it have boy and girl forms?",
          "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each child picks I am a boy or I am a girl when they add themselves. Sentences about themselves change, for example أَنَا جَائِعٌ for a boy and أَنَا جَائِعَةٌ for a girl, and so do the praise and instructions."}},
         {"@type": "Question", "name": "Can several children use Takallum Kids on the same device?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child. Progress stays in the browser on that device."}},
+         "acceptedAnswer": {"@type": "Answer", "text": "Yes. Up to 6 children can share a device. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child. Progress stays in the browser on that device."}},
         {"@type": "Question", "name": "Why is there no sound?",
          "acceptedAnswer": {"@type": "Answer", "text": "The app uses the device's own Arabic text-to-speech voice. Many phones, especially Samsung, have none by default. The home screen has step-by-step instructions for adding one on iPhone, Android, Windows, Mac and Chromebook."}}
       ]
@@ -195,7 +195,7 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .avatars button[aria-pressed="true"]{border-color:var(--lapis);background:var(--lapis-soft)}
 
 /* children */
-.me{display:inline-flex;align-items:center;gap:6px;max-width:44%;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 6px;min-height:46px;font-weight:600}
+.me{display:inline-flex;align-items:center;gap:6px;max-width:44%;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 6px;min-height:46px;font-weight:600}
 .me .emo{font-size:1.6rem}
 .me .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .who-h{text-align:center;font-size:1.4rem;margin:4px 0 14px}
@@ -307,6 +307,7 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .say{display:flex;gap:10px;justify-content:center;margin-top:10px}
 .say button{border:2px solid var(--line);background:var(--sunk);border-radius:999px;padding:8px 18px;font-weight:600;font-size:.95rem;display:inline-flex;align-items:center;gap:6px;min-height:44px}
 .say .emo{font-size:1.1rem}
+.hadith-link{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .ref{margin:2px 0 8px;color:var(--muted);font-size:.84rem;text-align:center}
 .again-list .ref{display:block;margin:0;font-family:inherit;text-align:right;line-height:1.3}
 .sec-h h3{margin:14px 0 0;font-size:1.1rem}
@@ -398,6 +399,8 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 .about details:last-of-type{border-bottom:1px solid var(--line)}
 .about summary{color:var(--ink);font-weight:500;cursor:pointer;padding:4px 0}
 .about details p{margin:4px 0 6px}
+#about-body h2{border-top:0;padding-top:4px}
+@media (max-width:400px){.top{gap:8px}.top .icon-btn{width:40px;height:40px}}
 .about .credit{text-align:center;font-size:.82rem;margin-top:18px}
 .about a{color:var(--lapis)}
 /* Ummah Apps family strip: the same in all four apps */
@@ -425,10 +428,11 @@ a.ua-app:hover{border-color:var(--f-lapis)}
 </main>
 
 <footer class="wrap about" id="about">
-  <h2>About Takallum Kids (for grown-ups)</h2>
-  <p><strong>Takallum Kids</strong> (<bdi class="ari" dir="rtl" lang="ar">تَكَلُّم</bdi>, “speaking”) is a free Arabic speaking app for children aged about 4 to 11. It is the children’s version of <a href="https://takallum.ummahapps.ai/">Takallum</a>. Children learn a handful of words first, each with a picture and audio, and then say short sentences built from those words.</p>
-  <h3>How it works</h3>
-  <ul>
+  <div class="about" id="about-body" hidden>
+    <h2>About Takallum Kids (for grown-ups)</h2>
+    <p><strong>Takallum Kids</strong> (<bdi class="ari" dir="rtl" lang="ar">تَكَلُّم</bdi>, “speaking”) is a free Arabic speaking app for children aged about 4 to 11. It is the children’s version of <a href="https://takallum.ummahapps.ai/">Takallum</a>. Children learn a handful of words first, each with a picture and audio, and then say short sentences built from those words.</p>
+    <h3>How it works</h3>
+    <ul>
     <li><strong>Meet the words.</strong> Each unit starts with 5 to 8 words. Your child sees the picture, the vowelled Arabic and the English, and hears it.</li>
     <li><strong>Say the words.</strong> Your child sees the picture, says the Arabic out loud, taps <strong>Show me</strong> to see and hear it, then taps <strong>I said it!</strong> or <strong>Try again</strong>. Words to try again come back a little later.</li>
     <li><strong>Say the sentences.</strong> Two to four word sentences made from the words, like <bdi class="ari" dir="rtl" lang="ar">هَذَا قِطٌّ</bdi> (this is a cat), <bdi class="ari" dir="rtl" lang="ar">أُحِبُّ أُمِّي</bdi> (I love my mum) and <bdi class="ari" dir="rtl" lang="ar">أَيْنَ الْكُرَةُ؟</bdi> (where is the ball?).</li>
@@ -439,17 +443,18 @@ a.ua-app:hover{border-color:var(--f-lapis)}
     <li><strong>Stories with Laith.</strong> Laith the lion cub stars in a short story for every unit. He says sentences your child has learned, and your child helps him by finding pictures and saying lines back. Lines said to Laith use the boy form, because he is a boy; lines about your child use their own form.</li>
     <li><strong>Practise again.</strong> Extra practice with the words and sentences that need it most, any time.</li>
     <li><strong>Echo mode.</strong> For children who can’t read Arabic yet: choose <strong>I listen</strong> when you add your child, and each word and sentence is spoken first so they can say it back.</li>
-  </ul>
-  <h3>Twenty-five units</h3>
-  <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals, How I feel, Getting ready, At the table, Helping at home, Bedtime, Playing together and Kind words, then four units from the ahadith: Asking and answering, Good manners, Duas and remembering Allah, and Good character. That makes 208 words and 184 sentences in all. The hadith units keep the wording of Sahih al-Bukhari and Sahih Muslim, show each hadith number, and do not change for a boy or a girl. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences.</p>
-  <h3>Questions</h3>
-  <details><summary>Is it free?</summary><p>Yes. It is free, has no adverts and needs no sign-up. Progress is saved in this browser on this device.</p></details>
-  <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
-  <details><summary>Which kind of Arabic does it teach?</summary><p>Modern Standard Arabic (fusha), the Arabic of books and school, understood across the Arab world. Every word is fully vowelled.</p></details>
-  <details><summary>Does it have boy and girl forms?</summary><p>Yes. Each child picks <strong>I’m a boy</strong> or <strong>I’m a girl</strong> when they add themselves, and you can change it by tapping their name at the top. Sentences about themselves change, like <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعٌ</bdi> and <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعَةٌ</bdi> (I am hungry), and so does the praise: <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتَ</bdi> or <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتِ</bdi>.</p></details>
-  <details><summary>How do I know my child really knows the words?</summary><p>Look for the third star on each unit. All units are open, so a child can move on whenever they like, but the third star only comes from getting every word and sentence right in the warm-up on three separate days. There is no microphone check, because phones often mishear children, so saying a word out loud is on trust and the warm-up does the checking.</p></details>
-  <details><summary>Why is there no sound?</summary><p>The app speaks with your device’s own Arabic text-to-speech voice, and many phones, especially Samsung, don’t have one until you add it. Tap <strong>No sound? How to add an Arabic voice</strong> on the home screen for steps for your device.</p></details>
-  <details><summary>Can several children use the same device?</summary><p>Yes. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child or add another. Progress stays in this browser on this device; nothing is sent anywhere. To start one child over, open settings and choose <strong>Start again</strong>.</p></details>
+    </ul>
+    <h3>Twenty-five units</h3>
+    <p>My family, Hello, Food, Animals, Colours, At home, Every day, Yes no and who, People I love, My body, School and things, Yummy food, Outside, More animals, How I feel, Getting ready, At the table, Helping at home, Bedtime, Playing together and Kind words, then four units from the ahadith: Asking and answering, Good manners, Duas and remembering Allah, and Good character. That makes 208 words and 184 sentences in all. The hadith units keep the wording of Sahih al-Bukhari and Sahih Muslim, show each hadith number (tap it to read the full hadith on sunnah.com), and do not change for a boy or a girl. To practise words with games, use <a href="https://kalimat.ummahapps.ai/">Kalimat</a>; come here to make them into sentences.</p>
+    <h3>Questions</h3>
+    <details><summary>Is it free?</summary><p>Yes. It is free, has no adverts and needs no sign-up. Progress is saved in this browser on this device.</p></details>
+    <details><summary>What age is it for?</summary><p>About 4 to 11. It is made for children who can read Arabic letters with vowel marks, and to be used on their own. Younger children can lean on the pictures and the audio.</p></details>
+    <details><summary>Which kind of Arabic does it teach?</summary><p>Modern Standard Arabic (fusha), the Arabic of books and school, understood across the Arab world. Every word is fully vowelled.</p></details>
+    <details><summary>Does it have boy and girl forms?</summary><p>Yes. Each child picks <strong>I’m a boy</strong> or <strong>I’m a girl</strong> when they add themselves, and you can change it by tapping their name at the top. Sentences about themselves change, like <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعٌ</bdi> and <bdi class="ari" dir="rtl" lang="ar">أَنَا جَائِعَةٌ</bdi> (I am hungry), and so does the praise: <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتَ</bdi> or <bdi class="ari" dir="rtl" lang="ar">أَحْسَنْتِ</bdi>.</p></details>
+    <details><summary>How do I know my child really knows the words?</summary><p>Look for the third star on each unit. All units are open, so a child can move on whenever they like, but the third star only comes from getting every word and sentence right in the warm-up on three separate days. There is no microphone check, because phones often mishear children, so saying a word out loud is on trust and the warm-up does the checking.</p></details>
+    <details><summary>Why is there no sound?</summary><p>The app speaks with your device’s own Arabic text-to-speech voice, and many phones, especially Samsung, don’t have one until you add it. Tap <strong>No sound? How to add an Arabic voice</strong> on the home screen for steps for your device.</p></details>
+    <details><summary>Can several children use the same device?</summary><p>Yes. Up to 6 children can share a device. Each child adds themselves with a name, boy or girl, and an animal, and keeps their own progress. Tap the name at the top to switch child or add another. Progress stays in this browser on this device; nothing is sent anywhere. To start one child over, open settings and choose <strong>Start again</strong>.</p></details>
+  </div>
   <p class="credit">Takallum Kids is part of <a href="https://ummahapps.ai/">Ummah Apps</a>. For older learners, try <a href="https://takallum.ummahapps.ai/">Takallum</a>.</p>
   <nav class="ua-fam" aria-labelledby="ua-fam-h">
     <h2 id="ua-fam-h">Four free Arabic apps that work together</h2>
@@ -1043,6 +1048,8 @@ if (!profiles.list.length){
 delete settings.kid;
 /* Share the children with the other Ummah Apps on this device (ummah.js). A child added in another app
    comes in without boy or girl when that app doesn't ask, and picks it the first time they open this one. */
+/* Up to 6 children on a device, the same limit as the other Arabic apps, so every child shows in all four. */
+const MAXKIDS = 6;
 const toG = kid => kid === "girl" ? "f" : kid === "boy" ? "m" : null;
 const freeAvatar = () => AVATARS.find(a => !profiles.list.some(p => p.avatar === a)) || AVATARS[0];
 if (window.UA){
@@ -1061,7 +1068,7 @@ if (window.UA){
     profiles.list = profiles.list.filter(p => !goneIds.includes(p.id));
     if (goneIds.includes(profiles.active)) profiles.active = null;
   }
-  r.extra.forEach(x => profiles.list.push({id:newId(), ua:x.ua, name:x.name, kid:x.g === "f" ? "girl" : x.g === "m" ? "boy" : null, avatar:AVATARS.includes(x.avatar) ? x.avatar : freeAvatar()}));
+  r.extra.forEach(x => profiles.list.length < MAXKIDS && profiles.list.push({id:newId(), ua:x.ua, name:x.name, kid:x.g === "f" ? "girl" : x.g === "m" ? "boy" : null, avatar:AVATARS.includes(x.avatar) ? x.avatar : freeAvatar()}));
   const cur = profiles.list.find(p => p.ua && p.ua === r.cur);
   if (cur) profiles.active = cur.id;
   if (profiles.list.length || r.removed.length) saveProfiles();
@@ -1181,6 +1188,7 @@ UNITS.forEach((u, ui) => u.sents.forEach(s => [s.w, s.f && s.f.w].filter(Boolean
   if (!WORDS[id] || WORDS[id].ui > ui) console.warn("Sentence " + s.id + " uses a word not yet taught: " + id);
 })));
 
+const ICON_INFO = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r=".6" fill="currentColor"/></svg>';
 const ICON_GEAR = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
 
 function sayButtons(ar){
@@ -1630,6 +1638,7 @@ function headerHTML(){
   const p = me();
   return '<header class="top"><h1 class="mark"><span lang="ar">تَكَلُّم</span><span class="sr"> Takallum Kids: first Arabic words and sentences</span></h1><span class="kids">Kids</span><span class="sp"></span>' +
          (p ? '<button class="me" data-act="who" aria-label="Who is learning: ' + esc(p.name) + '. Change"><span class="emo" aria-hidden="true">' + p.avatar + '</span><span class="nm">' + esc(p.name) + '</span></button>' : "") +
+         '<button class="icon-btn" data-act="about" aria-label="About" title="About">' + ICON_INFO + '</button>' +
          '<button class="icon-btn" data-act="settings" aria-label="Settings">' + ICON_GEAR + '</button></header>';
 }
 function starsHTML(st){
@@ -1678,9 +1687,11 @@ function renderWho(){
       '<small>' + w + ' words · ' + s + ' sentences' + (p.mode === "echo" ? " · 👂 Echo" : "") + '</small></button>' +
       '<button class="kid-edit" data-act="editkid" data-v="' + p.id + '" aria-label="Change ' + esc(p.name) + '"><span class="emo" aria-hidden="true">✏️</span></button></li>';
   });
-  return h + '</ul><div class="actions"><button class="btn ghost" data-act="addkid">➕ Add a child</button></div>' +
-    '<p class="sync">Each child keeps their own progress on this device.</p>';
+  return h + '</ul>' + (profiles.list.length < MAXKIDS ? '<div class="actions"><button class="btn ghost" data-act="addkid">➕ Add a child</button></div>' : "") +
+    '<p class="sync">Each child keeps their own progress on this device. Up to ' + MAXKIDS + ' children can share it.</p>';
 }
+/* A child needs a name and boy or girl. The name lets the other Arabic apps show the same child. */
+const kidReady = e => !!(e && e.kid && e.name.trim());
 function renderEdit(){
   const e = S.edit, first = !profiles.list.length, isNew = !e.id;
   let h = first ? headerHTML() : '<div class="bar"><button class="link" data-act="cancelkid">‹ Back</button></div>';
@@ -1694,7 +1705,7 @@ function renderEdit(){
     '<p style="margin-top:14px">How do you practise?</p><div class="who-btns mode-btns" role="group" aria-label="How do you practise">' +
     '<button data-act="mode" data-v="read" aria-pressed="' + (e.mode !== "echo") + '"><span class="emo" aria-hidden="true">📖</span><b>I read it</b><small>I can read Arabic with vowel marks</small></button>' +
     '<button data-act="mode" data-v="echo" aria-pressed="' + (e.mode === "echo") + '"><span class="emo" aria-hidden="true">👂</span><b>I listen</b><small>Echo: hear it, then say it back</small></button></div></section>' +
-    '<div class="actions"><button class="btn primary" data-act="savekid"' + (e.kid ? "" : " disabled") + '>' + (isNew ? "Let’s go! 🚀" : "Save") + '</button>' +
+    '<div class="actions"><button class="btn primary" data-act="savekid"' + (kidReady(e) ? "" : " disabled") + '>' + (isNew ? "Let’s go! 🚀" : "Save") + '</button>' +
     (!isNew ? '<button class="btn ghost del" data-act="delkid">Remove ' + esc(e.orig) + '</button>' : "") + '</div>';
   return h + (first ? voiceGuideHTML() : "");
 }
@@ -1709,8 +1720,8 @@ function switchTo(id){
   if (window.UA && me()){ UA.setCurrent(me().ua); shareWords(Object.values(WORDS).filter(w => learned(w.id))); }
 }
 function saveKid(){
-  const e = S.edit; if (!e || !e.kid) return;
-  const name = e.name.trim().slice(0, 20) || "Learner " + (profiles.list.length + (e.id ? 0 : 1));
+  const e = S.edit; if (!kidReady(e) || (!e.id && profiles.list.length >= MAXKIDS)) return;
+  const name = e.name.trim().slice(0, 20);
   if (e.id) shareKid(Object.assign(profiles.list.find(x => x.id === e.id), {name, kid:e.kid, avatar:e.avatar, mode:e.mode}));
   else { const p = {id:newId(), name, kid:e.kid, avatar:e.avatar, mode:e.mode}; shareKid(p); profiles.list.push(p); store(progKey(p.id), {items:{}}); switchTo(p.id); }
   saveProfiles(); S.edit = null;
@@ -1903,7 +1914,13 @@ function sayCurrent(){
 }
 function progHTML(i, n){ return '<div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="' + n + '" aria-valuenow="' + i + '"><i style="width:' + Math.round(i / n * 100) + '%"></i></div>'; }
 function herHTML(it){ return it.her ? '<p class="her">For a “her” word: <bdi class="ari" dir="rtl" lang="ar">' + esc(it.her) + '</bdi></p>' : ""; }
-function refHTML(it){ return it.ref ? '<p class="ref">📖 ' + esc(it.ref) + '</p>' : ""; }
+/* Hadith numbers link to the full hadith on sunnah.com. Takes text that is already escaped. */
+const SUNNAH_BOOK = {"Sahih al-Bukhari":"bukhari", "Sahih Muslim":"muslim"};
+function refLinks(html){
+  return html.replace(/(Sahih al-Bukhari|Sahih Muslim) (\d+)(?:-\d+)?/g, (m, book, n) =>
+    '<a class="hadith-link" href="https://sunnah.com/' + SUNNAH_BOOK[book] + ':' + n + '" target="_blank" rel="noopener" title="Read the full hadith on sunnah.com">' + m + '</a>');
+}
+function refHTML(it){ return it.ref ? '<p class="ref">📖 ' + refLinks(esc(it.ref)) + '</p>' : ""; }
 function tipHTML(it){ return it.tip ? '<p class="tip">💡 ' + noteHTML(it.tip) + '</p>' : ""; }
 
 function renderLearn(s){
@@ -1973,7 +1990,7 @@ function renderDone(s){
     (s.kind === "story" ? "You helped Laith! 🦁" : s.first + ' of ' + s.total + ' right the first time.') + '</p>' +
     (s.solid ? '<p class="solid-note">💪 ' + s.solid + (s.solid === 1 ? " more is" : " more are") + ' solid now!</p>' : "");
   if (missed.length) h += '<p class="score" style="margin-bottom:8px">' + (s.kind === "warm" ? "These come back tomorrow:" : s.kind === "build" ? "Listen to these once more:" : "Say these once more:") + '</p><ul class="again-list">' + missed.map(m =>
-      '<li><span class="emo" aria-hidden="true">' + m.pic + '</span><span class="ar" lang="ar">' + esc(m.ar) + (m.ref ? '<small class="ref" lang="en">' + esc(m.ref) + '</small>' : "") + '</span><button data-act="say" data-ar="' + esc(m.ar) + '" aria-label="Listen"><span class="emo">🔊</span></button></li>').join("") + '</ul>';
+      '<li><span class="emo" aria-hidden="true">' + m.pic + '</span><span class="ar" lang="ar">' + esc(m.ar) + (m.ref ? '<small class="ref" lang="en">' + refLinks(esc(m.ref)) + '</small>' : "") + '</span><button data-act="say" data-ar="' + esc(m.ar) + '" aria-label="Listen"><span class="emo">🔊</span></button></li>').join("") + '</ul>';
   if (s.kind === "warm" && !moreDue) h += '<p class="score">Come back tomorrow for your next warm-up.</p>';
   h += '<div class="actions">' + next + (s.kind === "warm" ? "" : '<button class="btn ' + (next ? "ghost" : "primary") + '" data-act="again">Play again 🔁</button>') +
        '<button class="btn ' + (s.kind === "warm" && !moreDue ? "primary" : "ghost") + '" data-act="back">' + (u ? "Back to " + esc(u.en) : "Back home") + '</button></div>' +
@@ -2000,12 +2017,13 @@ function settingsHTML(){
 
 /* ---------- render ---------- */
 const app = document.getElementById("app");
-const about = document.getElementById("about");
+const about = document.getElementById("about"), aboutBody = document.getElementById("about-body");
 function render(){
   const s = S.session;
   let h;
   if (me() && !me().kid && S.view !== "edit"){ S.edit = editState(me().id); S.view = "edit"; }
-  if (!profiles.list.length){ if (!S.edit) S.edit = editState(null); S.view = "edit"; h = renderEdit(); }
+  if (S.view === "about") h = '<div class="bar"><button class="link" data-act="back">‹ Back</button></div><div id="about-slot"></div>';
+  else if (!profiles.list.length){ if (!S.edit) S.edit = editState(null); S.view = "edit"; h = renderEdit(); }
   else if (S.view === "edit") h = renderEdit();
   else if (S.view === "who") h = renderWho();
   else if (S.view === "garden") h = renderGarden();
@@ -2016,7 +2034,11 @@ function render(){
   else if (s.type === "build" || s.mode === "build") h = renderBuild(s);
   else if (s.type === "warm") h = renderPick(s);
   else h = renderSay(s);
+  /* The About page shows the About text and questions, which sit in the page's HTML so search engines can read them. */
+  if (aboutBody.parentNode !== about){ about.prepend(aboutBody); aboutBody.hidden = true; }
   app.innerHTML = h + (S.sheet ? settingsHTML() : "");
+  const slot = document.getElementById("about-slot");
+  if (slot){ slot.replaceWith(aboutBody); aboutBody.hidden = false; }
   about.hidden = !!(s || S.unit || (S.view && profiles.list.length));
   if (window.UA) UA.refreshToday(document.getElementById("ua-today"));
 }
@@ -2085,7 +2107,7 @@ document.addEventListener("click", e => {
       break;
     case "pick": switchTo(v); goBack(); break;
     case "editkid": editKid(v); break;
-    case "addkid": editKid(null); break;
+    case "addkid": if (profiles.list.length < MAXKIDS) editKid(null); break;
     case "cancelkid": S.edit = null; S.view = "who"; render(); break;
     case "savekid": saveKid(); break;
     case "delkid": deleteKid(); break;
@@ -2118,6 +2140,7 @@ document.addEventListener("click", e => {
     case "snext": storyNext(); break;
     case "spick": storyPick(+v); break;
     case "garden": enter(() => { S.view = "garden"; render(); window.scrollTo(0, 0); }); break;
+    case "about": S.sheet = false; enter(() => { S.view = "about"; render(); window.scrollTo(0, 0); }); break;
     case "settings": S.sheet = true; render(); break;
     case "shared": if (window.UA){ const p = me(); UA.openSettings({ua:p && p.ua, name:p ? p.name : "", app:"takallum-kids", onChange:sharedChanged}); } break;
     case "reset":
@@ -2130,7 +2153,10 @@ document.addEventListener("click", e => {
   }
 });
 document.addEventListener("input", e => {
-  if (e.target.dataset && e.target.dataset.field === "name" && S.edit) S.edit.name = e.target.value;
+  if (e.target.dataset && e.target.dataset.field === "name" && S.edit){
+    S.edit.name = e.target.value;
+    const b = document.querySelector('[data-act="savekid"]'); if (b) b.disabled = !kidReady(S.edit);
+  }
 });
 document.addEventListener("submit", e => e.preventDefault());
 document.addEventListener("change", e => {
